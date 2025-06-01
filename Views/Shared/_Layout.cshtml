@@ -1,0 +1,482 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/favicon.ico">
+    <link rel="shortcut icon" href="~/favicon.ico">
+    <meta name="msapplication-TileImage" content="~/favicon.ico">
+    <meta name="msapplication-TileColor" content="#007bff">
+    <meta name="theme-color" content="#007bff">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/Content/style.css" rel="stylesheet">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+    <!-- Render page-specific styles -->
+    @RenderSection("Styles", required: false)
+    
+    <style>
+        /* Navbar aktif link için özel stil */
+        .navbar .nav-link.active {
+            color: #007bff !important;
+            font-weight: 600;
+            background-color: rgba(0, 123, 255, 0.1);
+            border-radius: 4px;
+        }
+        
+        /* Hover durumu için yeşil renk koruyoruz */
+        .navbar .nav-link:hover {
+            color: #1a8917 !important;
+        }
+        
+        /* Aktif link hover durumu */
+        .navbar .nav-link.active:hover {
+            color: #0056b3 !important;
+            background-color: rgba(0, 123, 255, 0.15);
+        }
+        
+        /* Navbar brand için aktif renk */
+        .navbar-brand {
+            font-weight: 700 !important;
+        }
+        
+        /* Top bar sosyal medya linklerinin hover efekti */
+        .top-bar .social-links a:hover {
+            color: #007bff !important;
+        }
+
+        /* Top bar z-index */
+        .top-bar {
+            position: relative;
+            z-index: 1500;
+        }
+
+        /* Navbar z-index */
+        .navbar {
+            z-index: 1400;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .scroll-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+            background: linear-gradient(135deg, #0056b3, #003d82);
+        }
+
+        .scroll-to-top:active {
+            transform: translateY(-1px);
+        }
+
+        /* Mobile responsive */
+        @@media (max-width: 768px) {
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 16px;
+            }
+        }
+
+        /* Search Box Styles */
+        .search-container {
+            position: relative;
+            display: inline-block;
+            z-index: 2000;
+        }
+
+        .search-box {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 35px;
+            background: #fff;
+            border: 2px solid #007bff;
+            border-radius: 20px;
+            padding: 0;
+            opacity: 0;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            z-index: 2001;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+        }
+
+        .search-box.active {
+            width: 250px;
+            opacity: 1;
+            padding: 0 35px 0 15px;
+            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+        }
+
+        .search-input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .search-input::placeholder {
+            color: #999;
+        }
+
+        .search-icon {
+            position: relative;
+            color: #007bff;
+            cursor: pointer;
+            z-index: 2002;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            display: inline-block;
+        }
+
+        .search-icon:hover {
+            color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #007bff;
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            z-index: 2002;
+        }
+
+        .search-box.active .search-btn {
+            opacity: 1;
+        }
+
+        .search-btn:hover {
+            background: #0056b3;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* Top bar search specific styles */
+        .top-bar .search-container {
+            position: relative;
+            z-index: 2100;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .top-bar .search-icon {
+            color: #ffffff !important;
+            font-size: 18px !important;
+            margin-right: 10px;
+        }
+
+        .top-bar .search-icon:hover {
+            color: #007bff !important;
+        }
+
+        /* When search box is active, hide the standalone icon */
+        .top-bar .search-container.search-active .search-icon {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Position search box relative to container */
+        .top-bar .search-box {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        @@media (max-width: 768px) {
+            .search-box.active {
+                width: 200px;
+            }
+            
+            .search-container {
+                z-index: 2200;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar bg-dark text-white py-2">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon" id="searchIcon"></i>
+                        <div class="search-box" id="searchBox">
+                            <form action="@Url.Action("Search", "Home")" method="get" style="display: inline;">
+                                <input type="text" name="query" class="search-input" placeholder="Ara..." id="searchInput" />
+                                <button type="submit" class="search-btn" id="searchBtn">
+                                    <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                Blog
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewBag.NavigationPage == "Index" ? "active" : "")" href="@Url.Action("Index", "Home")">Ana Sayfa</a>
+                    </li>
+                    @{
+                        var navigationCategories = ViewBag.NavigationCategories as List<BlogApp.Models.CategoryViewModel>;
+                    }
+                    @if (navigationCategories != null && navigationCategories.Any())
+                    {
+                        foreach (var category in navigationCategories)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link @(ViewBag.CurrentCategory == category.Slug ? "active" : "")" 
+                                   href="@Url.Action("Category", "Home", new { category = category.Slug })">@category.Name</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @RenderBody()
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" title="Yukarı Git">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h5 class="mb-4">
+                        Yazılım Dünyası'ndaki Gelişmeler
+                    </h5>
+                    <small class="text-white-50">Teknoloji dünyasından en güncel haberler</small>
+                    <div class="social-links mt-4">
+                        <a href="#" class="text-white-50 me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white-50 me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white-50 me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white-50"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="mb-4">Kategoriler</h5>
+                    <ul class="list-unstyled">
+                        @{
+                            var footerCategories = ViewBag.NavigationCategories as List<BlogApp.Models.CategoryViewModel>;
+                        }
+                        @if (footerCategories != null && footerCategories.Any())
+                        {
+                            foreach (var category in footerCategories)
+                            {
+                                <li><a href="@Url.Action("Category", "Home", new { category = category.Slug })" class="text-white-50">@category.Name</a></li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h5 class="mb-4">Hızlı Linkler</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50">Hakkımızda</a></li>
+                        <li><a href="#" class="text-white-50">İletişim</a></li>
+                        <li><a href="#" class="text-white-50">Yazarlar</a></li>
+                        <li><a href="#" class="text-white-50">Gizlilik</a></li>
+                        <li><a href="#" class="text-white-50">Kullanım Şartları</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="mb-4">İletişim</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Ankara, Türkiye</li>
+                        <li><i class="fas fa-phone me-2"></i> +90 505 618 1906</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@berkaykanca.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">Berkay Kanca - Blog - <strong>&copy;</strong> <span id="year"></span> - Tüm Hakları Saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    @Scripts.Render("~/bundles/jquery")
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    
+    <script>
+        document.getElementById("year").innerHTML = new Date().getFullYear();
+        
+        // Scroll to Top Button Functionality
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        
+        // Show/hide button based on scroll position
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+        
+        // Smooth scroll to top when button is clicked
+        scrollToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Search Box Functionality
+        const searchContainer = document.querySelector('.search-container');
+        const searchBox = document.getElementById('searchBox');
+        const searchIcon = document.getElementById('searchIcon');
+        const searchInput = document.getElementById('searchInput');
+        let searchTimeout;
+
+        // Show search box on hover
+        searchContainer.addEventListener('mouseenter', function() {
+            clearTimeout(searchTimeout);
+            searchBox.classList.add('active');
+            searchContainer.classList.add('search-active');
+            setTimeout(() => {
+                searchInput.focus();
+            }, 400);
+        });
+
+        // Hide search box when mouse leaves and no focus
+        searchContainer.addEventListener('mouseleave', function() {
+            if (document.activeElement !== searchInput) {
+                searchTimeout = setTimeout(() => {
+                    searchBox.classList.remove('active');
+                    searchContainer.classList.remove('search-active');
+                }, 300);
+            }
+        });
+
+        // Keep search box open when input is focused
+        searchInput.addEventListener('focus', function() {
+            clearTimeout(searchTimeout);
+            searchBox.classList.add('active');
+            searchContainer.classList.add('search-active');
+        });
+
+        // Hide search box when input loses focus
+        searchInput.addEventListener('blur', function() {
+            searchTimeout = setTimeout(() => {
+                searchBox.classList.remove('active');
+                searchContainer.classList.remove('search-active');
+            }, 300);
+        });
+
+        // Handle Enter key press
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (searchInput.value.trim() !== '') {
+                    searchInput.closest('form').submit();
+                }
+            }
+        });
+
+        // Handle search icon click
+        searchIcon.addEventListener('click', function() {
+            if (searchBox.classList.contains('active')) {
+                if (searchInput.value.trim() !== '') {
+                    searchInput.closest('form').submit();
+                } else {
+                    searchInput.focus();
+                }
+            } else {
+                searchBox.classList.add('active');
+                searchContainer.classList.add('search-active');
+                setTimeout(() => {
+                    searchInput.focus();
+                }, 400);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,492 @@
+﻿@model List<BlogApp.Models.Post>
+@{
+    ViewBag.Title = "Ana Sayfa - Blog";
+    
+    // Get page size from ViewBag or query string, default to 4
+    int pageSize = 4;
+    if (ViewBag.PageSize != null)
+    {
+        int.TryParse(ViewBag.PageSize.ToString(), out pageSize);
+    }
+    else if (Request.QueryString["pageSize"] != null)
+    {
+        int.TryParse(Request.QueryString["pageSize"], out pageSize);
+    }
+    
+    int currentPage = 1;
+    if (ViewBag.CurrentPage != null)
+    {
+        int.TryParse(ViewBag.CurrentPage.ToString(), out currentPage);
+    }
+    else if (Request.QueryString["page"] != null)
+    {
+        int.TryParse(Request.QueryString["page"], out currentPage);
+    }
+    
+    int totalPosts = ViewBag.TotalPosts ?? Model?.Count ?? 0;
+    int totalPages = (int)Math.Ceiling((double)totalPosts / pageSize);
+    int startIndex = (currentPage - 1) * pageSize;
+    int endIndex = Math.Min(startIndex + pageSize, totalPosts);
+}
+
+@section Styles {
+    <link href="~/Content/index.css" rel="stylesheet" />
+}
+
+@{
+    // Helper function for generating URL-friendly slugs
+    Func<string, string> GenerateSlug = (text) => {
+        if (string.IsNullOrEmpty(text))
+            return "genel";
+
+        text = text.ToLower()
+            .Replace("ç", "c")
+            .Replace("ğ", "g")
+            .Replace("ı", "i")
+            .Replace("ö", "o")
+            .Replace("ş", "s")
+            .Replace("ü", "u");
+
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"[^a-z0-9\s-]", "");
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"\s+", "-");
+        text = text.Trim('-');
+        return string.IsNullOrEmpty(text) ? "genel" : text;
+    };
+}
+
+<!-- Main Posts Section -->
+<section class="main-posts py-4">
+    <div class="container">
+        <!-- Section Header with Stats -->
+        <div class="section-header mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h6 class="section-title">
+                        @if (ViewBag.NavigationPage == "Search")
+                        {
+                            @:Arama Sonuçları
+                        }
+                        else if (ViewBag.NavigationPage == "Category")
+                        {
+                            @:@(ViewBag.CategoryName ?? "Kategori") Yazıları
+                        }
+                        else if (ViewBag.NavigationPage == "Archive")
+                        {
+                            @:@(ViewBag.ArchiveInfo ?? "Arşiv") Yazıları
+                        }
+                        else
+                        {
+                            @:Son Yazılar
+                        }
+                    </h6>
+                </div>
+                <!--<div class="col-md-6">
+                    <div class="posts-info text-md-end">
+                        <div class="info-cards d-flex justify-content-md-end gap-3">
+                            <div class="info-card">
+                                <span class="info-number">@totalPosts</span>
+                                <span class="info-label">Toplam Yazı</span>
+                            </div>
+                            <div class="info-card">
+                                <span class="info-number">@totalPages</span>
+                                <span class="info-label">Sayfa</span>
+                            </div>
+                            <div class="info-card">
+                                <span class="info-number">@pageSize</span>
+                                <span class="info-label">Sayfa Başına</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+
+        @if (ViewBag.NavigationPage == "Search")
+        {
+            <div class="search-results-info mb-4">
+                <div class="alert alert-info border-0" style="background: linear-gradient(135deg, #e3f2fd, #f8f9fa);">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            @if (!string.IsNullOrEmpty(ViewBag.SearchQuery as string))
+                            {
+                                <h5 class="mb-1">
+                                    <i class="fas fa-search text-primary me-2"></i>
+                                    "<strong>@ViewBag.SearchQuery</strong>" araması için sonuçlar
+                                </h5>
+                                <p class="mb-0 text-muted">
+                                    <i class="fas fa-info-circle me-1"></i>
+                                    @ViewBag.SearchResults sonuç bulundu
+                                </p>
+                            }
+                            else
+                            {
+                                <h5 class="mb-1">
+                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                    Arama terimi girilmedi
+                                </h5>
+                                <p class="mb-0 text-muted">Lütfen arama yapmak için bir kelime girin.</p>
+                            }
+                        </div>
+                        <div class="col-md-4 text-md-end">
+                            <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-home me-1"></i>
+                                Ana Sayfaya Dön
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <!-- Posts Grid -->
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4 mb-2">
+                @foreach (var post in Model.Skip(startIndex).Take(pageSize))
+                {
+                    <div class="col-lg-3 col-md-6">
+                        <div class="post-card h-100">
+                            <a href="@Url.RouteUrl("DetailWithCategory", new { 
+                                   category = GenerateSlug(post.Category?.Name ?? "genel"), 
+                                   id = post.Id
+                               })" 
+                               class="text-decoration-none">
+                                <div class="post-image">
+                                    <img src="@(string.IsNullOrEmpty(post.Image) ? "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" : post.Image)"
+                                         class="img-fluid rounded-top" alt="@post.Title">
+                                    <span class="badge bg-primary post-badge">@(post.Category?.Name ?? "Genel")</span>
+                                    <div class="post-overlay">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                                <div class="post-content p-3">
+                                    <h5 class="post-title text-dark mb-2">@post.Title</h5>
+                                    <p class="post-excerpt text-muted small mb-3">
+                                        @if (!string.IsNullOrEmpty(post.Summary))
+                                        {
+                                            @(post.Summary.Length > 80 ? post.Summary.Substring(0, 80) + "..." : post.Summary)
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw(post.Content.Length > 80 ? post.Content.Substring(0, 80) + "..." : post.Content)
+                                        }
+                                    </p>
+                                    <div class="post-meta d-flex justify-content-between align-items-center">
+                                        <div class="author-info d-flex align-items-center">
+                                            <img src="https://berkaykanca.com/assets/img/profile-img.png" 
+                                                 alt="@(post.Author ?? "Yazar")" 
+                                                 class="rounded-circle me-2" 
+                                                 width="24" 
+                                                 height="24">
+                                            <span class="author-name small text-muted">@(post.Author ?? "Yazar")</span>
+                                        </div>
+                                        <div class="post-date small text-muted">
+                                            @post.CreatedAt.ToString("dd.MM.yyyy")
+                                        </div>
+                                    </div>
+                                    <div class="post-stats mt-2 pt-2 border-top">
+                                        <div class="row text-center">
+                                            <div class="col-4">
+                                                <small class="text-muted">
+                                                    <i class="far fa-eye me-1"></i>
+                                                    125
+                                                </small>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="text-muted">
+                                                    <i class="far fa-comments me-1"></i>
+                                                    @post.CommentCount
+                                                </small>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="text-muted">
+                                                    <!--<button class="btn btn-link p-0 text-muted post-like-btn-index" data-post-id="@post.Id" style="font-size: 0.875rem; border: none; background: none;" title="Beğen">
+                                                        <i class="far fa-heart me-1"></i>
+                                                        <span class="like-count">@post.LikeCount</span> Beğeni
+                                                    </button>-->
+                                                    <i class="far fa-heart me-1" data-post-id="@post.Id"></i>
+                                                    @post.LikeCount
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-12">
+                    @if (ViewBag.NavigationPage == "Search")
+                    {
+                        <div class="alert alert-warning text-center py-5">
+                            <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                            <h4>Arama sonucu bulunamadı</h4>
+                            @if (!string.IsNullOrEmpty(ViewBag.SearchQuery as string))
+                            {
+                                <p class="mb-3">"<strong>@ViewBag.SearchQuery</strong>" araması için hiçbir yazı bulunamadı.</p>
+                            }
+                            <p class="mb-3">Farklı kelimeler veya daha genel terimler kullanarak tekrar deneyin.</p>
+                            <div class="mt-4">
+                                <a href="@Url.Action("Index", "Home")" class="btn btn-primary me-2">
+                                    <i class="fas fa-home me-1"></i>
+                                    Ana Sayfa
+                                </a>
+                                <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('searchInput').focus(); document.getElementById('searchBox').classList.add('active');">
+                                    <i class="fas fa-search me-1"></i>
+                                    Yeni Arama
+                                </button>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info text-center py-5">
+                            <i class="fas fa-info-circle fa-3x text-muted mb-3"></i>
+                            <h4>Henüz blog yazısı yok</h4>
+                            <p class="mb-0">İlk blog yazınızı eklemek için yönetim paneline gidin.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        
+        <!-- PrimeNG Style Paginator -->
+        @if (totalPages >= 1)
+        {
+            <div class="p-paginator">
+                <div class="p-paginator-content-start">
+                    <div class="p-paginator-current-page-report">
+                        <!--Showing <strong>@(startIndex + 1)</strong> to <strong>@endIndex</strong> of <strong>@totalPosts</strong>-->
+
+                        Toplam <strong>@totalPosts</strong> kayıttan <strong>@(startIndex + 1)</strong> ile <strong>@(startIndex+pageSize) </strong> arasındaki kayıtlar gösteriliyor
+                    </div>
+                </div>
+                
+                <div class="p-paginator-content-end">
+                    <div class="p-paginator-pages">
+                        <!-- First Page Button -->
+                        @if (currentPage > 1)
+                        {
+                            <a href="?page=1&pageSize=@pageSize" class="p-paginator-nav-button p-paginator-first btn-rounded" title="İlk Sayfa" aria-label="First Page">
+                                <i class="fas fa-angle-double-left"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="p-paginator-nav-button p-paginator-first p-disabled btn-rounded" title="İlk Sayfa" aria-label="First Page">
+                                <i class="fas fa-angle-double-left"></i>
+                            </span>
+                        }
+
+                        <!-- Previous Page Button -->
+                        @if (currentPage > 1)
+                        {
+                            <a href="?page=@(currentPage - 1)&pageSize=@pageSize" class="p-paginator-nav-button p-paginator-prev btn-rounded" title="Önceki Sayfa" aria-label="Previous Page">
+                                <i class="fas fa-angle-left"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="p-paginator-nav-button p-paginator-prev p-disabled btn-rounded" title="Önceki Sayfa" aria-label="Previous Page">
+                                <i class="fas fa-angle-left"></i>
+                            </span>
+                        }
+
+                        <!-- Page Numbers -->
+                        @{
+                            int startPage = Math.Max(1, currentPage - 2);
+                            int endPage = Math.Min(totalPages, currentPage + 2);
+                        }
+
+                        @if (startPage > 1)
+                        {
+                            <a href="?page=1&pageSize=@pageSize" class="p-paginator-page btn-rounded">1</a>
+                            if (startPage > 2)
+                            {
+                                <span class="p-paginator-ellipsis">...</span>
+                            }
+                        }
+
+                        @for (int i = startPage; i <= endPage; i++)
+                        {
+                            if (i == currentPage)
+                            {
+                                <span class="p-paginator-page p-paginator-current btn-rounded" aria-current="page">@i</span>
+                            }
+                            else
+                            {
+                                <a href="?page=@i&pageSize=@pageSize" class="p-paginator-page btn-rounded" aria-label="Page @i">@i</a>
+                            }
+                        }
+
+                        @if (endPage < totalPages)
+                        {
+                            if (endPage < totalPages - 1)
+                            {
+                                <span class="p-paginator-ellipsis">...</span>
+                            }
+                            <a href="?page=@totalPages&pageSize=@pageSize" class="p-paginator-page btn-rounded">@totalPages</a>
+                        }
+
+                        <!-- Next Page Button -->
+                        @if (currentPage < totalPages)
+                        {
+                            <a href="?page=@(currentPage + 1)&pageSize=@pageSize" class="p-paginator-nav-button p-paginator-next btn-rounded" title="Sonraki Sayfa" aria-label="Next Page">
+                                <i class="fas fa-angle-right"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="p-paginator-nav-button p-paginator-next p-disabled btn-rounded" title="Sonraki Sayfa" aria-label="Next Page">
+                                <i class="fas fa-angle-right"></i>
+                            </span>
+                        }
+
+                        <!-- Last Page Button -->
+                        @if (currentPage < totalPages)
+                        {
+                            <a href="?page=@totalPages&pageSize=@pageSize" class="p-paginator-nav-button p-paginator-last btn-rounded" title="Son Sayfa" aria-label="Last Page">
+                                <i class="fas fa-angle-double-right"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <span class="p-paginator-nav-button p-paginator-last p-disabled btn-rounded" title="Son Sayfa" aria-label="Last Page">
+                                <i class="fas fa-angle-double-right"></i>
+                            </span>
+                        }
+                    </div>
+                    
+                    <!-- Rows Per Page Dropdown -->
+                    <div class="p-paginator-rpp-dropdown">
+                        <label for="rowsPerPage" class="p-paginator-rpp-label small">Sayfa başına:</label>
+                        <select id="rowsPerPage" class="p-paginator-rpp-select small" onchange="changePageSize(this.value)">
+                            <option value="4" @(pageSize == 4 ? "selected" : "")>4</option>
+                            <option value="8" @(pageSize == 8 ? "selected" : "")>8</option>
+                            <option value="12" @(pageSize == 12 ? "selected" : "")>12</option>
+                            <option value="16" @(pageSize == 16 ? "selected" : "")>16</option>
+                            <option value="20" @(pageSize == 20 ? "selected" : "")>20</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-6">
+                <div class="newsletter-card text-center p-4 p-md-5">
+                    <div class="newsletter-icon mb-4">
+                        <i class="fas fa-envelope-open fa-3x text-primary"></i>
+                    </div>
+                    <h4 class="newsletter-title mb-3">Bültenimize Abone Olun</h4>
+                    <p class="newsletter-description text-muted mb-4" style="font-size: 1rem; line-height: 1.6;">
+                        En son teknoloji haberlerinden ve blog yazılarından haberdar olun!
+                    </p>
+                    <form class="newsletter-form">
+                        <div class="newsletter-input-wrapper">
+                            <div class="row g-3 align-items-end">
+                                <div class="col-12 col-md-8">
+                                    <input type="email" 
+                                           class="form-control border-2" 
+                                           placeholder="E-posta adresinizi girin" 
+                                           style="border-radius: 8px; padding: 12px 16px; font-size: 14px;"
+                                           required>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <button class="btn btn-primary w-100 btn-rounded newsletter-btn shadow-sm" 
+                                            type="submit"
+                                            style="border-radius: 8px; padding: 12px 16px; font-weight: 600; font-size: 14px;">
+                                        <i class="fas fa-paper-plane me-2"></i>
+                                        Abone Ol
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <p class="text-muted mt-3 small">
+                        <i class="fas fa-lock me-1"></i>
+                        E-posta adresiniz güvende, spam göndermiyoruz.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+function changePageSize(size) {
+    // Get current URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Set the new page size
+    urlParams.set('pageSize', size);
+    
+    // Reset to first page when changing page size
+    urlParams.set('page', '1');
+    
+    // Redirect to the new URL
+    window.location.href = window.location.pathname + '?' + urlParams.toString();
+}
+
+// Post Like functionality for Index page
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('click', function(e) {
+        if (e.target.matches('i[data-post-id]')) {
+            e.preventDefault(); // Prevent the card link from being triggered
+            e.stopPropagation(); // Stop event bubbling
+            
+            const icon = e.target;
+            const postId = icon.dataset.postId;
+            const small = icon.closest('small');
+            
+            fetch('@Url.Action("LikePost", "Home")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `postId=${postId}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // İkonu dolu kalp yap
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    
+                    // Metni güncelle
+                    const textNode = icon.nextSibling;
+                    if (textNode) {
+                        textNode.textContent = ` ${data.newLikeCount}`;
+                    }
+                    
+                    // Rengi değiştir
+                    small.classList.remove('text-muted');
+                    small.classList.add('text-danger');
+                    
+                    // Animation - prevent layout shift
+                    icon.style.transform = 'scale(1.3)';
+                    icon.style.color = '#dc3545';
+                    icon.style.zIndex = '10';
+                    setTimeout(() => {
+                        icon.style.transform = 'scale(1)';
+                        icon.style.zIndex = '1';
+                    }, 200);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    });
+});
+</script>

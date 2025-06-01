@@ -1,0 +1,972 @@
+@model BlogApp.Models.Post
+@{
+    ViewBag.Title = (Model?.Title ?? "Detail") + " - Blog";
+}
+
+@section Styles {
+    <link href="~/Content/detail.css" rel="stylesheet" />
+}
+
+@{
+    // Helper function for generating URL-friendly slugs
+    Func<string, string> GenerateSlug = (text) =>
+    {
+        if (string.IsNullOrEmpty(text))
+            return "genel";
+
+        text = text.ToLower()
+            .Replace("ç", "c")
+            .Replace("ğ", "g")
+            .Replace("ı", "i")
+            .Replace("ö", "o")
+            .Replace("ş", "s")
+            .Replace("ü", "u");
+
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"[^a-z0-9\s-]", "");
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"\s+", "-");
+        text = text.Trim('-');
+        return string.IsNullOrEmpty(text) ? "genel" : text;
+    };
+
+    // Helper function for generating initials from name
+    Func<string, string> GetInitials = (name) =>
+    {
+        if (string.IsNullOrWhiteSpace(name))
+            return "?";
+
+        var words = name.Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        var initials = "";
+        
+        foreach (var word in words.Take(2)) // Sadece ilk 2 kelimeyi al
+        {
+            if (!string.IsNullOrEmpty(word))
+            {
+                initials += word[0].ToString().ToUpper();
+            }
+        }
+        
+        return string.IsNullOrEmpty(initials) ? "?" : initials;
+    };
+}
+
+<!-- Article Content -->
+<article class="article-detail py-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <!-- Article Header -->
+                <header class="article-header compact-header">
+                    <div class="article-meta mb-1 compact-text">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <!-- SOL TARAF: Kategori, Tarih, Yorum -->
+                            <div class="meta-left d-flex align-items-center flex-wrap">
+                                <span class="badge bg-primary me-2 mb-1">@(Model.Category?.Name ?? "Genel")</span>
+                                <span class="text-muted me-3 mb-1">
+                                    <i class="far fa-calendar me-1"></i>
+                                    @Model.CreatedAt.ToString("d MMM yyyy", new System.Globalization.CultureInfo("tr-TR"))
+                                </span>
+                                <span class="text-muted me-3 mb-1">
+                                    <i class="far fa-comments me-1"></i>
+                                    @Model.CommentCount Yorum
+                                </span>
+                                <span class="text-muted me-3 mb-1">
+                                    <button class="btn btn-link p-0 text-muted post-like-btn" data-post-id="@Model.Id" title="Beğen">
+                                        <i class="far fa-heart me-1"></i>
+                                        <span class="like-count">@Model.LikeCount</span> Beğeni
+                                    </button>
+                                </span>
+                            </div>
+                            
+                            <!-- SAĞ TARAF: Okuma Süresi ve Sosyal -->
+                            <div class="meta-right d-flex align-items-center">
+                                <div class="reading-time me-3 d-flex align-items-center">
+                                    <span class="text-primary me-1">
+                                        <i class="fas fa-clock"></i>
+                                    </span>
+                                    <span class="text-dark small fw-medium">
+                                        Okuma Süresi : 
+                                    </span>
+                                    <span class="text-primary mx-1">~</span>
+                                    <span class="text-success small fw-bold">
+                                        @(Math.Max(1, (Model.Content?.Length ?? 500) / 1000)) dk
+                                    </span>
+                                </div>
+                                <div class="social-mini d-flex align-items-center">
+                                    <a href="#" class="text-info me-2 social-icon" title="Paylaş" data-bs-toggle="tooltip">
+                                        <i class="fas fa-share-alt"></i>
+                                    </a>
+                                    <a href="#" class="text-danger me-2 social-icon" title="Beğen" data-bs-toggle="tooltip">
+                                        <i class="fas fa-heart"></i>
+                                    </a>
+                                    <a href="#" class="text-warning social-icon" title="Yer İmi Ekle" data-bs-toggle="tooltip">
+                                        <i class="fas fa-bookmark"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h1 class="article-title h3 mb-1">@Model.Title</h1>
+                </header>
+
+                <!-- Featured Image -->
+                @if (!string.IsNullOrEmpty(Model.Image))
+                {
+                    <div class="article-image compact-spacing">
+                        <img src="@Model.Image" class="img-fluid rounded" alt="@Model.Title" style="max-height: 300px; width: 100%; object-fit: cover;">
+                    </div>
+                }
+
+                <!-- Article Content -->
+                <div class="article-content compact-spacing">
+                    @Html.Raw(Model.Content)
+                </div>
+
+                <!-- Article Tags -->
+                @if (!string.IsNullOrEmpty(Model.Tags))
+                {
+                    <div class="article-tags compact-spacing">
+                        <h6 class="mb-2 compact-text">
+                            <i class="fas fa-tags me-1"></i>
+                            Etiketler
+                        </h6>
+                        <div class="tags-container">
+                            @foreach (var tag in Model.Tags.Split(','))
+                            {
+                                if (!string.IsNullOrWhiteSpace(tag))
+                                {
+                                    <a href="#" class="tag-button me-2 mb-2 d-inline-block">
+                                        <i class="fas fa-tag me-1"></i>@tag.Trim()
+                                    </a>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <!-- Demo tags when no tags are set -->
+                    <div class="article-tags compact-spacing">
+                        <h6 class="mb-2 compact-text">
+                            <i class="fas fa-tags me-1"></i>
+                            Etiketler
+                        </h6>
+                        <div class="tags-container">
+                            <a href="#" class="tag-button me-2 mb-2 d-inline-block">
+                                <i class="fas fa-tag me-1"></i>Yapay Zeka
+                            </a>
+                            <a href="#" class="tag-button me-2 mb-2 d-inline-block">
+                                <i class="fas fa-tag me-1"></i>Teknoloji
+                            </a>
+                            <a href="#" class="tag-button me-2 mb-2 d-inline-block">
+                                <i class="fas fa-tag me-1"></i>Gelecek
+                            </a>
+                            <a href="#" class="tag-button me-2 mb-2 d-inline-block">
+                                <i class="fas fa-tag me-1"></i>Machine Learning
+                            </a>
+                        </div>
+                    </div>
+                }
+
+                <!-- Social Share -->
+                <div class="article-share compact-section compact-padding bg-light rounded">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0 compact-text">
+                            <i class="fas fa-share-alt me-1"></i>
+                            Paylaş
+                        </h6>
+                        <div class="social-share d-flex">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=@Request.Url.AbsoluteUri"
+                               target="_blank" class="btn btn-facebook btn-sm me-1" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://twitter.com/intent/tweet?url=@Request.Url.AbsoluteUri&text=@Html.AttributeEncode(Model.Title)"
+                               target="_blank" class="btn btn-twitter btn-sm me-1" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=@Request.Url.AbsoluteUri"
+                               target="_blank" class="btn btn-linkedin btn-sm me-1" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <button onclick="copyToClipboard('@Request.Url.AbsoluteUri')"
+                                    class="btn btn-outline-secondary btn-sm" title="Kopyala">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Author Bio -->
+                <div class="author-bio compact-section compact-padding bg-light rounded">
+                    <div class="d-flex align-items-center">
+                        <img src="https://berkaykanca.com/assets/img/profile-img.png"
+                             alt="@(Model.Author ?? "Yazar")"
+                             class="rounded-circle me-2"
+                             width="40"
+                             height="40">
+                        <div>
+                            <h6 class="mb-0 compact-text">@(Model.Author ?? "Yazar")</h6>
+                            <p class="text-muted mb-0 small">
+                                Teknoloji ve yazılım uzmanı.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Posts -->
+                @if (ViewBag.RelatedPosts != null && ((List<BlogApp.Models.Post>)ViewBag.RelatedPosts).Any())
+                {
+                    <div class="related-posts compact-section">
+                        <h5 class="mb-2 compact-text">İlgili Yazılar</h5>
+                        <div class="row">
+                            @foreach (var relatedPost in (List<BlogApp.Models.Post>)ViewBag.RelatedPosts)
+                            {
+                                <div class="col-md-4 mb-2">
+                                    <div class="card border-0 shadow-sm h-100">
+                                        <img src="@(string.IsNullOrEmpty(relatedPost.Image) ? "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" : relatedPost.Image)"
+                                             class="card-img-top"
+                                             alt="@relatedPost.Title"
+                                             style="height: 120px; object-fit: cover;">
+                                        <div class="card-body p-2">
+                                            <h6 class="card-title small mb-1">@relatedPost.Title</h6>
+                                            <p class="card-text small mb-2">
+                                                @if (!string.IsNullOrEmpty(relatedPost.Summary))
+                                                {
+                                                    @(relatedPost.Summary.Length > 50 ? relatedPost.Summary.Substring(0, 50) + "..." : relatedPost.Summary)
+                                                }
+                                                else
+                                                {
+                                                    @Html.Raw(relatedPost.Content.Length > 50 ? relatedPost.Content.Substring(0, 50) + "..." : relatedPost.Content)
+                                                }
+                                            </p>
+                                            <a href="@Url.RouteUrl("DetailWithCategory", new { 
+                                                   category = GenerateSlug(relatedPost.Category?.Name ?? "genel"), 
+                                                   id = relatedPost.Id, 
+                                                   title = GenerateSlug(relatedPost.Title) 
+                                               })"
+                                               class="btn btn-outline-primary btn-sm">Oku</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+
+                <!-- Comments Section -->
+                <div class="comments-section mt-4">
+                    <!-- Comments Header -->
+                    <div class="comments-header mb-3">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h5 class="mb-0 d-flex align-items-center">
+                                <i class="fas fa-comments text-primary me-2"></i>
+                                <span>Yorumlar</span>
+                                <span class="badge bg-light text-dark ms-2">@((ViewBag.Comments as List<BlogApp.Models.Comment>)?.Count ?? 0)</span>
+                            </h5>
+                            <button class="btn btn-outline-primary btn-sm" data-bs-toggle="collapse" data-bs-target="#commentForm" aria-expanded="false">
+                                <i class="fas fa-plus me-1"></i>Yorum Yaz
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Compact Comment Form -->
+                    <div class="collapse" id="commentForm">
+                        <div class="comment-form-compact bg-light rounded-3 p-4 mb-4 shadow-sm">
+                            <div class="mb-3">
+                                <h6 class="text-dark mb-1">
+                                    <i class="fas fa-edit text-primary me-2"></i>
+                                    Yorum Yaz
+                                </h6>
+                                <p class="text-muted small mb-0">Düşüncelerinizi bizimle paylaşın</p>
+                            </div>
+                            <form class="row g-3" id="commentSubmitForm">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" id="postId" value="@ViewBag.PostId" />
+                                <div class="col-12">
+                                    <label for="commentName" class="form-label small fw-medium text-dark">Adınız</label>
+                                    <input type="text" class="form-control w-100" id="commentName" name="name" placeholder="Adınızı girin" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="commentEmail" class="form-label small fw-medium text-dark">E-posta</label>
+                                    <input type="email" class="form-control w-100" id="commentEmail" name="email" placeholder="E-posta adresinizi girin" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="commentMessage" class="form-label small fw-medium text-dark">Yorumunuz</label>
+                                    <textarea class="form-control w-100" id="commentMessage" name="content" rows="4" placeholder="Yorumunuzu yazın..." required></textarea>
+                                    <div class="form-text small">
+                                        <span id="charCount">0</span>/500 karakter
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <div class="form-check flex-grow-1">
+                                            <input class="form-check-input" type="checkbox" id="privacyCheck" required>
+                                            <label class="form-check-label small text-muted" for="privacyCheck">
+                                                Gizlilik politikasını kabul ediyorum
+                                            </label>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button type="button" class="btn btn-light btn-sm" data-bs-toggle="collapse" data-bs-target="#commentForm">
+                                                <i class="fas fa-times me-1"></i>İptal
+                                            </button>
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <span class="btn-text">
+                                                    <i class="fas fa-paper-plane me-1"></i>Gönder
+                                                </span>
+                                                <span class="btn-loading d-none">
+                                                    <i class="fas fa-spinner fa-spin me-1"></i>Gönderiliyor...
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div class="alert alert-success d-none" id="commentSuccess">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <span id="successMessage">Yorumunuz başarıyla gönderildi! Onaylandıktan sonra yayınlanacaktır.</span>
+                    </div>
+
+                    <!-- Error Message -->
+                    <div class="alert alert-danger d-none" id="commentError">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        <span id="errorMessage">Bir hata oluştu.</span>
+                    </div>
+
+                    <!-- Comments List -->
+                    <div class="comments-list">
+                        @if (ViewBag.Comments != null && ((List<BlogApp.Models.Comment>)ViewBag.Comments).Any())
+                        {
+                            foreach (var comment in (List<BlogApp.Models.Comment>)ViewBag.Comments)
+                            {
+                                <div class="comment-item bg-white rounded-3 p-3 mb-2 shadow-sm" data-comment-id="@comment.Id">
+                                    <div class="d-flex">
+                                        <div class="comment-avatar me-2">
+                                            <div class="avatar-circle bg-gradient-primary">
+                                                <span class="text-white fw-bold">@GetInitials(comment.Name)</span>
+                                            </div>
+                                        </div>
+                                        <div class="comment-body flex-grow-1">
+                                            <div class="d-flex justify-content-between align-items-start mb-1">
+                                                <div>
+                                                    <h6 class="mb-0 fw-medium">@comment.Name</h6>
+                                                    <small class="text-muted">
+                                                        <i class="far fa-clock me-1"></i>@comment.CreatedAt.ToString("dd MMM yyyy HH:mm", new System.Globalization.CultureInfo("tr-TR"))
+                                                    </small>
+                                                </div>
+                                                <div class="comment-actions">
+                                                    <button class="btn btn-link btn-sm text-muted p-0 me-2 comment-like-btn" data-comment-id="@comment.Id" title="Beğen">
+                                                        <i class="far fa-thumbs-up"></i> <span class="like-count">@comment.LikeCount</span>
+                                                    </button>
+                                                    <button class="btn btn-link btn-sm text-muted p-0 reply-btn" data-comment-id="@comment.Id" title="Yanıtla">
+                                                        <i class="fas fa-reply"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <p class="mb-0 small text-dark">
+                                                @comment.Content
+                                            </p>
+                                            
+                                            <!-- Replies -->
+                                            @if (comment.Replies != null && comment.Replies.Any())
+                                            {
+                                                <div class="replies ms-4 mt-3">
+                                                    @foreach (var reply in comment.Replies.OrderBy(r => r.CreatedAt))
+                                                    {
+                                                        <div class="comment-item bg-light rounded-3 p-2 mb-2" data-comment-id="@reply.Id">
+                                                            <div class="d-flex">
+                                                                <div class="comment-avatar me-2">
+                                                                    <div class="avatar-circle bg-gradient-danger" style="width: 30px; height: 30px; font-size: 10px;">
+                                                                        <span class="text-white fw-bold">@GetInitials(reply.Name)</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="comment-body flex-grow-1">
+                                                                    <div class="d-flex justify-content-between align-items-start mb-1">
+                                                                        <div>
+                                                                            <h6 class="mb-0 fw-medium small">@reply.Name</h6>
+                                                                            <small class="text-muted" style="font-size: 11px;">
+                                                                                <i class="far fa-clock me-1"></i>@reply.CreatedAt.ToString("dd MMM yyyy HH:mm", new System.Globalization.CultureInfo("tr-TR"))
+                                                                            </small>
+                                                                        </div>
+                                                                        <div class="comment-actions">
+                                                                            <button class="btn btn-link btn-sm text-muted p-0 comment-like-btn" data-comment-id="@reply.Id" title="Beğen" style="font-size: 11px;">
+                                                                                <i class="far fa-thumbs-up"></i> <span class="like-count">@reply.LikeCount</span>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <p class="mb-0 small text-dark">
+                                                                        @reply.Content
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            }
+                                            
+                                            <!-- Reply Form (Hidden by default) -->
+                                            <div class="reply-form mt-2 d-none">
+                                                <div class="row g-2">
+                                                    <div class="col-md-4">
+                                                        <input type="text" class="form-control form-control-sm" placeholder="Adınız" name="replyName">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <input type="email" class="form-control form-control-sm" placeholder="E-posta" name="replyEmail">
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <textarea class="form-control form-control-sm" rows="2" placeholder="Yanıtınızı yazın..." name="replyContent"></textarea>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <button type="button" class="btn btn-primary btn-sm me-1 submit-reply-btn">Yanıtla</button>
+                                                        <button type="button" class="btn btn-secondary btn-sm cancel-reply-btn">İptal</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-center py-4">
+                                <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                                <h6 class="text-muted">Henüz yorum yapılmamış</h6>
+                                <p class="text-muted small mb-0">İlk yorumu yapmak için yukarıdaki butona tıklayın.</p>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Load More Comments (sadece 10'dan fazla yorum varsa göster) -->
+                    @if (ViewBag.Comments != null && ((List<BlogApp.Models.Comment>)ViewBag.Comments).Count > 10)
+                    {
+                        <div class="text-center mt-3">
+                            <button class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-plus me-1"></i>Daha Fazla Yorum Yükle
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<script>
+    function copyToClipboard(text) {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text).then(function () {
+                const btn = event.target.closest('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i>';
+                btn.classList.remove('btn-outline-secondary');
+                btn.classList.add('btn-success');
+
+                setTimeout(function () {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('btn-success');
+                    btn.classList.add('btn-outline-secondary');
+                }, 2000);
+            });
+        } else {
+            alert('Link kopyalandı!');
+        }
+    }
+
+    // Comment Form Functionality
+    document.addEventListener('DOMContentLoaded', function () {
+        const commentForm = document.querySelector('#commentForm form');
+        const commentMessage = document.getElementById('commentMessage');
+        const charCount = document.getElementById('charCount');
+        const submitBtn = commentForm?.querySelector('.btn-primary');
+        const btnText = submitBtn?.querySelector('.btn-text');
+        const btnLoading = submitBtn?.querySelector('.btn-loading');
+        const successAlert = document.getElementById('commentSuccess');
+
+        // Character count
+        if (commentMessage && charCount) {
+            commentMessage.addEventListener('input', function () {
+                const currentLength = this.value.length;
+                const maxLength = 500;
+                charCount.textContent = currentLength;
+
+                if (currentLength > maxLength) {
+                    this.value = this.value.substring(0, maxLength);
+                    charCount.textContent = maxLength;
+                }
+
+                // Update color based on character count
+                if (currentLength > 450) {
+                    charCount.style.color = '#dc3545';
+                } else if (currentLength > 350) {
+                    charCount.style.color = '#fd7e14';
+                } else {
+                    charCount.style.color = '#6c757d';
+                }
+            });
+        }
+
+        // Form submission
+        if (commentForm) {
+            commentForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                commentForm.classList.add('was-validated');
+
+                if (commentForm.checkValidity()) {
+                    const formData = new FormData();
+                    const postId = document.getElementById('postId').value;
+                    const name = document.getElementById('commentName').value;
+                    const email = document.getElementById('commentEmail').value;
+                    const content = document.getElementById('commentMessage').value;
+                    const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+
+                    formData.append('postId', postId);
+                    formData.append('name', name);
+                    formData.append('email', email);
+                    formData.append('content', content);
+                    formData.append('__RequestVerificationToken', token);
+
+                    btnText?.classList.add('d-none');
+                    btnLoading?.classList.remove('d-none');
+                    if (submitBtn) submitBtn.disabled = true;
+
+                    // Hide previous alerts
+                    document.getElementById('commentSuccess')?.classList.add('d-none');
+                    document.getElementById('commentError')?.classList.add('d-none');
+
+                    fetch('@Url.Action("AddComment", "Home")', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        btnText?.classList.remove('d-none');
+                        btnLoading?.classList.add('d-none');
+                        if (submitBtn) submitBtn.disabled = false;
+
+                        if (data.success) {
+                            const successAlert = document.getElementById('commentSuccess');
+                            const successMessage = document.getElementById('successMessage');
+                            if (successMessage) successMessage.textContent = data.message;
+                            successAlert?.classList.remove('d-none');
+
+                            // Yeni yorumu listeye ekle
+                            addCommentToList(name, content);
+
+                            // Yorum sayısını güncelle
+                            updateCommentCount();
+
+                            commentForm.reset();
+                            commentForm.classList.remove('was-validated');
+                            if (charCount) charCount.textContent = '0';
+
+                            // Hide comment form
+                            const commentFormCollapse = document.getElementById('commentForm');
+                            if (commentFormCollapse) {
+                                const collapse = new bootstrap.Collapse(commentFormCollapse, { toggle: false });
+                                collapse.hide();
+                            }
+
+                            setTimeout(function () {
+                                successAlert?.classList.add('d-none');
+                            }, 6000);
+                        } else {
+                            const errorAlert = document.getElementById('commentError');
+                            const errorMessage = document.getElementById('errorMessage');
+                            if (errorMessage) errorMessage.textContent = data.message;
+                            errorAlert?.classList.remove('d-none');
+
+                            setTimeout(function () {
+                                errorAlert?.classList.add('d-none');
+                            }, 6000);
+                        }
+                    })
+                    .catch(error => {
+                        btnText?.classList.remove('d-none');
+                        btnLoading?.classList.add('d-none');
+                        if (submitBtn) submitBtn.disabled = false;
+
+                        const errorAlert = document.getElementById('commentError');
+                        const errorMessage = document.getElementById('errorMessage');
+                        if (errorMessage) errorMessage.textContent = 'Bir hata oluştu. Lütfen tekrar deneyin.';
+                        errorAlert?.classList.remove('d-none');
+
+                        setTimeout(function () {
+                            errorAlert?.classList.add('d-none');
+                        }, 6000);
+                    });
+                }
+            });
+        }
+
+        // Cancel button functionality
+        const cancelBtn = document.querySelector('button[data-bs-target="#commentForm"]');
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', function() {
+                // Form temizle
+                if (commentForm) {
+                    commentForm.reset();
+                    commentForm.classList.remove('was-validated');
+                    if (charCount) charCount.textContent = '0';
+                }
+                
+                // Hata/başarı mesajlarını gizle
+                document.getElementById('commentSuccess')?.classList.add('d-none');
+                document.getElementById('commentError')?.classList.add('d-none');
+            });
+        }
+
+        // Post Like functionality
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.post-like-btn')) {
+                const btn = e.target.closest('.post-like-btn');
+                const postId = btn.dataset.postId;
+                const likeCountSpan = btn.querySelector('.like-count');
+                const icon = btn.querySelector('i');
+                
+                fetch('@Url.Action("LikePost", "Home")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `postId=${postId}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        likeCountSpan.textContent = data.newLikeCount;
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        btn.classList.add('text-danger');
+                        
+                        // Animation
+                        btn.style.transform = 'scale(1.2)';
+                        setTimeout(() => {
+                            btn.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+            
+            // Comment Like functionality
+            if (e.target.closest('.comment-like-btn')) {
+                const btn = e.target.closest('.comment-like-btn');
+                const commentId = btn.dataset.commentId;
+                const likeCountSpan = btn.querySelector('.like-count');
+                const icon = btn.querySelector('i');
+                
+                fetch('@Url.Action("LikeComment", "Home")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `commentId=${commentId}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        likeCountSpan.textContent = data.newLikeCount;
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        btn.classList.add('text-primary');
+                        
+                        // Animation
+                        btn.style.transform = 'scale(1.2)';
+                        setTimeout(() => {
+                            btn.style.transform = 'scale(1)';
+                        }, 200);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+            
+            // Reply button functionality
+            if (e.target.closest('.reply-btn')) {
+                const btn = e.target.closest('.reply-btn');
+                const commentItem = btn.closest('.comment-item');
+                const replyForm = commentItem.querySelector('.reply-form');
+                
+                // Hide all other reply forms
+                document.querySelectorAll('.reply-form').forEach(form => {
+                    if (form !== replyForm) {
+                        form.classList.add('d-none');
+                    }
+                });
+                
+                // Toggle current reply form
+                replyForm.classList.toggle('d-none');
+                
+                if (!replyForm.classList.contains('d-none')) {
+                    replyForm.querySelector('input[name="replyName"]').focus();
+                }
+            }
+            
+            // Cancel reply functionality
+            if (e.target.closest('.cancel-reply-btn')) {
+                const btn = e.target.closest('.cancel-reply-btn');
+                const replyForm = btn.closest('.reply-form');
+                replyForm.classList.add('d-none');
+                
+                // Clear form
+                replyForm.querySelectorAll('input, textarea').forEach(input => {
+                    input.value = '';
+                });
+            }
+            
+            // Submit reply functionality
+            if (e.target.closest('.submit-reply-btn')) {
+                const btn = e.target.closest('.submit-reply-btn');
+                const replyForm = btn.closest('.reply-form');
+                const commentItem = btn.closest('.comment-item');
+                const parentCommentId = commentItem.dataset.commentId;
+                const postId = document.getElementById('postId').value;
+                
+                const name = replyForm.querySelector('input[name="replyName"]').value.trim();
+                const email = replyForm.querySelector('input[name="replyEmail"]').value.trim();
+                const content = replyForm.querySelector('textarea[name="replyContent"]').value.trim();
+                const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+                
+                if (!name || !email || !content) {
+                    alert('Lütfen tüm alanları doldurun.');
+                    return;
+                }
+                
+                const formData = new FormData();
+                formData.append('postId', postId);
+                formData.append('name', name);
+                formData.append('email', email);
+                formData.append('content', content);
+                formData.append('parentCommentId', parentCommentId);
+                formData.append('__RequestVerificationToken', token);
+                
+                btn.disabled = true;
+                btn.textContent = 'Gönderiliyor...';
+                
+                fetch('@Url.Action("AddComment", "Home")', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    btn.disabled = false;
+                    btn.textContent = 'Yanıtla';
+                    
+                    if (data.success) {
+                        // Add reply to the DOM
+                        addReplyToComment(parentCommentId, name, content);
+                        
+                        // Hide and clear form
+                        replyForm.classList.add('d-none');
+                        replyForm.querySelectorAll('input, textarea').forEach(input => {
+                            input.value = '';
+                        });
+                        
+                        // Show success message briefly
+                        const successAlert = document.getElementById('commentSuccess');
+                        const successMessage = document.getElementById('successMessage');
+                        if (successMessage) successMessage.textContent = data.message;
+                        successAlert?.classList.remove('d-none');
+                        
+                        setTimeout(() => {
+                            successAlert?.classList.add('d-none');
+                        }, 3000);
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    btn.disabled = false;
+                    btn.textContent = 'Yanıtla';
+                    alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+                });
+            }
+        });
+
+        // Newsletter Form Functionality
+        const newsletterForm = document.querySelector('.newsletter-form');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                
+                // Show loading state
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Abone Olunuyor...';
+                submitBtn.disabled = true;
+                
+                setTimeout(function () {
+                    // Show success state
+                    submitBtn.innerHTML = '<i class="fas fa-check me-2"></i>Başarılı!';
+                    submitBtn.classList.remove('btn-warning');
+                    submitBtn.classList.add('btn-success');
+                    
+                    // Reset form
+                    newsletterForm.reset();
+                    
+                    setTimeout(function () {
+                        // Reset button
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.classList.remove('btn-success');
+                        submitBtn.classList.add('btn-warning');
+                        submitBtn.disabled = false;
+                    }, 3000);
+                }, 1500);
+            });
+        }
+    });
+
+    // Helper function to add comment to list
+    function addCommentToList(name, content) {
+        const commentsList = document.querySelector('.comments-list');
+        const noCommentsMessage = commentsList?.querySelector('.text-center.py-4');
+        
+        // Eğer "henüz yorum yok" mesajı varsa kaldır
+        if (noCommentsMessage) {
+            noCommentsMessage.remove();
+        }
+
+        const now = new Date();
+        const timeString = now.toLocaleDateString('tr-TR', { 
+            day: '2-digit', 
+            month: 'short', 
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        // İsimden initials oluştur
+        const initials = getInitials(name);
+
+        const commentHtml = `
+            <div class="comment-item bg-white rounded-3 p-3 mb-2 shadow-sm">
+                <div class="d-flex">
+                    <div class="comment-avatar me-2">
+                        <div class="avatar-circle bg-gradient-primary">
+                            <span class="text-white fw-bold">${initials}</span>
+                        </div>
+                    </div>
+                    <div class="comment-body flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start mb-1">
+                            <div>
+                                <h6 class="mb-0 fw-medium">${name}</h6>
+                                <small class="text-muted">
+                                    <i class="far fa-clock me-1"></i>${timeString}
+                                </small>
+                            </div>
+                            <div class="comment-actions">
+                                <button class="btn btn-link btn-sm text-muted p-0 me-1" title="Beğen">
+                                    <i class="far fa-thumbs-up"></i> 0
+                                </button>
+                                <button class="btn btn-link btn-sm text-muted p-0" title="Yanıtla">
+                                    <i class="fas fa-reply"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mb-0 small text-dark">
+                            ${content}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        if (commentsList) {
+            commentsList.insertAdjacentHTML('afterbegin', commentHtml);
+        }
+    }
+
+    // Helper function to generate initials from name
+    function getInitials(name) {
+        if (!name || name.trim() === '') {
+            return '?';
+        }
+
+        const words = name.trim().split(/\s+/);
+        let initials = '';
+        
+        // Sadece ilk 2 kelimeyi al
+        for (let i = 0; i < Math.min(words.length, 2); i++) {
+            if (words[i].length > 0) {
+                initials += words[i][0].toUpperCase();
+            }
+        }
+        
+        return initials || '?';
+    }
+
+    // Helper function to update comment count
+    function updateCommentCount() {
+        const commentBadge = document.querySelector('.comments-header .badge');
+        if (commentBadge) {
+            const currentCount = parseInt(commentBadge.textContent) || 0;
+            commentBadge.textContent = currentCount + 1;
+        }
+    }
+
+    // Helper function to add reply to comment
+    function addReplyToComment(parentCommentId, name, content) {
+        const parentComment = document.querySelector(`[data-comment-id="${parentCommentId}"]`);
+        if (!parentComment) return;
+        
+        let repliesContainer = parentComment.querySelector('.replies');
+        if (!repliesContainer) {
+            // Create replies container if it doesn't exist
+            repliesContainer = document.createElement('div');
+            repliesContainer.className = 'replies ms-4 mt-3';
+            
+            const replyForm = parentComment.querySelector('.reply-form');
+            replyForm.parentNode.insertBefore(repliesContainer, replyForm);
+        }
+        
+        const now = new Date();
+        const timeString = now.toLocaleDateString('tr-TR', { 
+            day: '2-digit', 
+            month: 'short', 
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+        const initials = getInitials(name);
+        
+        const replyHtml = `
+            <div class="comment-item bg-light rounded-3 p-2 mb-2" data-comment-id="new-reply">
+                <div class="d-flex">
+                    <div class="comment-avatar me-2">
+                        <div class="avatar-circle bg-gradient-secondary" style="width: 30px; height: 30px; font-size: 10px;">
+                            <span class="text-white fw-bold">${initials}</span>
+                        </div>
+                    </div>
+                    <div class="comment-body flex-grow-1">
+                        <div class="d-flex justify-content-between align-items-start mb-1">
+                            <div>
+                                <h6 class="mb-0 fw-medium small">${name}</h6>
+                                <small class="text-muted" style="font-size: 11px;">
+                                    <i class="far fa-clock me-1"></i>${timeString}
+                                </small>
+                            </div>
+                            <div class="comment-actions">
+                                <button class="btn btn-link btn-sm text-muted p-0 comment-like-btn" data-comment-id="new-reply" title="Beğen" style="font-size: 11px;">
+                                    <i class="far fa-thumbs-up"></i> <span class="like-count">0</span>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="mb-0 small text-dark">
+                            ${content}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        repliesContainer.insertAdjacentHTML('beforeend', replyHtml);
+    }
+</script> 
