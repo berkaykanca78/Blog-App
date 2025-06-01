@@ -201,6 +201,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Detail.cshtml" />
+    <None Include="Web.Yedek.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -35,9 +35,70 @@
     @RenderSection("Styles", required: false)
     
     <style>
+        /* CSS Variables for Theme Colors */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-dark: #343a40;
+            --text-primary: #242424;
+            --text-secondary: #6c757d;
+            --text-white: #ffffff;
+            --border-color: #e9ecef;
+            --navbar-bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --footer-bg: #ffffff;
+            --search-bg: #ffffff;
+            --search-border: #007bff;
+            --theme-primary: #007bff;
+            --theme-success: #1a8917;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Dark Theme Variables */
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-dark: #000000;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-white: #ffffff;
+            --border-color: #404040;
+            --navbar-bg: #2d2d2d;
+            --card-bg: #2d2d2d;
+            --footer-bg: #1a1a1a;
+            --search-bg: #2d2d2d;
+            --search-border: #007bff;
+            --theme-primary: #4fa8ff;
+            --theme-success: #28a745;
+            --shadow-light: rgba(255, 255, 255, 0.1);
+            --shadow-medium: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Apply theme variables to body and main elements */
+        body {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-primary) !important;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
         /* Navbar aktif link için özel stil */
+        .navbar {
+            background-color: var(--navbar-bg) !important;
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .navbar .navbar-brand {
+            color: var(--text-primary) !important;
+        }
+
+        .navbar .nav-link {
+            color: var(--text-primary) !important;
+        }
+
         .navbar .nav-link.active {
-            color: #007bff !important;
+            color: var(--theme-primary) !important;
             font-weight: 600;
             background-color: rgba(0, 123, 255, 0.1);
             border-radius: 4px;
@@ -45,7 +106,7 @@
         
         /* Hover durumu için yeşil renk koruyoruz */
         .navbar .nav-link:hover {
-            color: #1a8917 !important;
+            color: var(--theme-success) !important;
         }
         
         /* Aktif link hover durumu */
@@ -60,19 +121,85 @@
         }
         
         /* Top bar sosyal medya linklerinin hover efekti */
-        .top-bar .social-links a:hover {
-            color: #007bff !important;
-        }
-
-        /* Top bar z-index */
         .top-bar {
+            background-color: var(--bg-dark) !important;
+            color: var(--text-white) !important;
             position: relative;
             z-index: 1500;
+        }
+
+        .top-bar .social-links a {
+            color: var(--text-white) !important;
+        }
+
+        .top-bar .social-links a:hover {
+            color: var(--theme-primary) !important;
         }
 
         /* Navbar z-index */
         .navbar {
             z-index: 1400;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: var(--footer-bg) !important;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer h5, footer .text-white {
+            color: var(--text-primary) !important;
+        }
+
+        footer .text-white-50 {
+            color: var(--text-secondary) !important;
+        }
+
+        /* Card styling */
+        .card, .post-card {
+            background-color: var(--card-bg) !important;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary) !important;
+        }
+
+        /* Theme Toggle Button Styles */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-white);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--theme-primary);
+            transform: scale(1.1);
+        }
+
+        .theme-toggle .fa-sun {
+            display: none;
+        }
+
+        .theme-toggle .fa-moon {
+            display: inline;
+        }
+
+        [data-theme="dark"] .theme-toggle .fa-sun {
+            display: inline;
+        }
+
+        [data-theme="dark"] .theme-toggle .fa-moon {
+            display: none;
         }
 
         /* Scroll to Top Button */
@@ -82,7 +209,7 @@
             right: 30px;
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #007bff, #0056b3);
+            background: linear-gradient(135deg, var(--theme-primary), #0056b3);
             color: white;
             border: none;
             border-radius: 50%;
@@ -92,7 +219,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+            box-shadow: 0 4px 15px var(--shadow-medium);
         }
 
         .scroll-to-top.show {
@@ -102,7 +229,7 @@
 
         .scroll-to-top:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+            box-shadow: 0 6px 20px var(--shadow-medium);
             background: linear-gradient(135deg, #0056b3, #003d82);
         }
 
@@ -135,22 +262,22 @@
             transform: translateY(-50%);
             width: 0;
             height: 35px;
-            background: #fff;
-            border: 2px solid #007bff;
+            background: var(--search-bg);
+            border: 2px solid var(--search-border);
             border-radius: 20px;
             padding: 0;
             opacity: 0;
             transition: all 0.4s ease;
             overflow: hidden;
             z-index: 2001;
-            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+            box-shadow: 0 4px 15px var(--shadow-light);
         }
 
         .search-box.active {
             width: 250px;
             opacity: 1;
             padding: 0 35px 0 15px;
-            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+            box-shadow: 0 8px 25px var(--shadow-medium);
         }
 
         .search-input {
@@ -159,17 +286,17 @@
             border: none;
             outline: none;
             background: transparent;
-            color: #333;
+            color: var(--text-primary);
             font-size: 14px;
         }
 
         .search-input::placeholder {
-            color: #999;
+            color: var(--text-secondary);
         }
 
         .search-icon {
             position: relative;
-            color: #007bff;
+            color: var(--text-white);
             cursor: pointer;
             z-index: 2002;
             transition: all 0.3s ease;
@@ -178,7 +305,7 @@
         }
 
         .search-icon:hover {
-            color: #0056b3;
+            color: var(--theme-primary);
             transform: scale(1.1);
         }
 
@@ -187,7 +314,7 @@
             right: 5px;
             top: 50%;
             transform: translateY(-50%);
-            background: #007bff;
+            background: var(--theme-primary);
             color: white;
             border: none;
             width: 25px;
@@ -219,13 +346,13 @@
         }
 
         .top-bar .search-icon {
-            color: #ffffff !important;
+            color: var(--text-white) !important;
             font-size: 18px !important;
             margin-right: 10px;
         }
 
         .top-bar .search-icon:hover {
-            color: #007bff !important;
+            color: var(--theme-primary) !important;
         }
 
         /* When search box is active, hide the standalone icon */
@@ -250,6 +377,34 @@
             .search-container {
                 z-index: 2200;
             }
+            
+            .theme-toggle {
+                margin-right: 10px;
+                font-size: 16px;
+                width: 32px;
+                height: 32px;
+            }
+        }
+
+        /* Additional dark theme styles for form elements */
+        [data-theme="dark"] input, 
+        [data-theme="dark"] textarea, 
+        [data-theme="dark"] select {
+            background-color: var(--bg-secondary) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--border-color) !important;
+        }
+
+        [data-theme="dark"] .bg-light {
+            background-color: var(--bg-secondary) !important;
+        }
+
+        [data-theme="dark"] .text-dark {
+            color: var(--text-primary) !important;
+        }
+
+        [data-theme="dark"] .border {
+            border-color: var(--border-color) !important;
         }
     </style>
 </head>
@@ -267,15 +422,24 @@
                     </div>
                 </div>
                 <div class="col-md-6 text-end">
-                    <div class="search-container">
-                        <i class="fas fa-search search-icon" id="searchIcon"></i>
-                        <div class="search-box" id="searchBox">
-                            <form action="@Url.Action("Search", "Home")" method="get" style="display: inline;">
-                                <input type="text" name="query" class="search-input" placeholder="Ara..." id="searchInput" />
-                                <button type="submit" class="search-btn" id="searchBtn">
-                                    <i class="fas fa-arrow-right"></i>
-                                </button>
-                            </form>
+                    <div class="d-flex align-items-center justify-content-end">
+                        <!-- Theme Toggle Button -->
+                        <button class="theme-toggle" id="themeToggle" title="Tema Değiştir">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                        </button>
+                        
+                        <!-- Search Container -->
+                        <div class="search-container">
+                            <i class="fas fa-search search-icon" id="searchIcon"></i>
+                            <div class="search-box" id="searchBox">
+                                <form action="@Url.Action("Search", "Home")" method="get" style="display: inline;">
+                                    <input type="text" name="query" class="search-input" placeholder="Ara..." id="searchInput" />
+                                    <button type="submit" class="search-btn" id="searchBtn">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -388,6 +552,29 @@
     
     <script>
         document.getElementById("year").innerHTML = new Date().getFullYear();
+        
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Load saved theme from localStorage or default to light theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
+        
+        // Theme toggle event listener
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Optional: Add a small animation effect
+            themeToggle.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                themeToggle.style.transform = 'scale(1)';
+            }, 150);
+        });
         
         // Scroll to Top Button Functionality
         const scrollToTopBtn = document.getElementById('scrollToTop');

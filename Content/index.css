@@ -681,3 +681,101 @@
         font-size: 0.9rem;
     }
 } 
+
+.newsletter-card {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    text-align: center;
+}
+
+.newsletter-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+.project-item, .post-item {
+    background: rgba(255,255,255,0.8);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.project-item:hover, .post-item:hover {
+    background: rgba(255,255,255,1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.projects-list, .posts-list {
+    /* Scroll kaldırıldı - max-height ve overflow kaldırıldı */
+}
+
+.newsletter-input-wrapper {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.newsletter-input-wrapper .mb-3 {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.newsletter-input-wrapper input,
+.newsletter-input-wrapper button {
+    width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+}
+
+/* Tüm çözünürlükler için zorla genişlik eşitleme */
+.newsletter-input-wrapper input {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 !important;
+}
+
+.newsletter-input-wrapper button {
+    min-width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 !important;
+}
+
+/* Responsive çözünürlükler için özel kurallar */
+/* Küçük ekranlar (576px ve altı) */
+.newsletter-input-wrapper input,
+.newsletter-input-wrapper button {
+    width: calc(100% - 0px) !important;
+}
+
+/* Orta ekranlar (768px ve üstü) */
+.newsletter-input-wrapper input,
+.newsletter-input-wrapper button {
+    width: calc(100% - 0px) !important;
+    min-width: calc(100% - 0px) !important;
+}
+
+/* Büyük ekranlar (992px ve üstü) */
+.newsletter-input-wrapper input,
+.newsletter-input-wrapper button {
+    width: calc(100% - 0px) !important;
+    min-width: calc(100% - 0px) !important;
+    max-width: calc(100% - 0px) !important;
+}
+
+/* Çok büyük ekranlar (1200px ve üstü) */
+.newsletter-input-wrapper input,
+.newsletter-input-wrapper button {
+    width: calc(100vw * 0.33 - 80px) !important;
+    min-width: calc(100vw * 0.33 - 80px) !important;
+    max-width: calc(100vw * 0.33 - 80px) !important;
+}
