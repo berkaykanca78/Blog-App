@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="xml:space" type="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="HomePage" xml:space="preserve">
+    <value>Ana Sayfa</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="Turkish" xml:space="preserve">
+    <value>Türkçe</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>İngilizce</value>
+  </data>
+  <data name="LatestPosts" xml:space="preserve">
+    <value>Son Yazılar</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>Arama Sonuçları</value>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>İletişim</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Hakkımızda</value>
+  </data>
+  <data name="QuickLinks" xml:space="preserve">
+    <value>Hızlı Linkler</value>
+  </data>
+  <data name="Authors" xml:space="preserve">
+    <value>Yazarlar</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Gizlilik</value>
+  </data>
+  <data name="TermsOfUse" xml:space="preserve">
+    <value>Kullanım Şartları</value>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>Tüm Hakları Saklıdır</value>
+  </data>
+  <data name="SoftwareDevelopments" xml:space="preserve">
+    <value>Yazılım Dünyası'ndaki Gelişmeler</value>
+  </data>
+  <data name="TechNews" xml:space="preserve">
+    <value>Teknoloji dünyasından en güncel haberler</value>
+  </data>
+  <data name="Posts" xml:space="preserve">
+    <value>Yazıları</value>
+  </data>
+  <data name="CategoryPosts" xml:space="preserve">
+    <value>Yazıları</value>
+  </data>
+  <data name="ArchivePosts" xml:space="preserve">
+    <value>Yazıları</value>
+  </data>
+  <data name="SearchFor" xml:space="preserve">
+    <value>araması için sonuçlar</value>
+  </data>
+  <data name="ResultsFound" xml:space="preserve">
+    <value>sonuç bulundu</value>
+  </data>
+  <data name="NoSearchTerm" xml:space="preserve">
+    <value>Arama terimi girilmedi</value>
+  </data>
+  <data name="PleaseEnterSearch" xml:space="preserve">
+    <value>Lütfen arama yapmak için bir kelime girin.</value>
+  </data>
+  <data name="BackToHome" xml:space="preserve">
+    <value>Ana Sayfaya Dön</value>
+  </data>
+  <data name="GoUp" xml:space="preserve">
+    <value>Yukarı Git</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Ara</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Ara...</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Yorumlar</value>
+  </data>
+  <data name="Like" xml:space="preserve">
+    <value>Beğen</value>
+  </data>
+  <data name="Likes" xml:space="preserve">
+    <value>Beğeni</value>
+  </data>
+  <data name="ReadingTime" xml:space="preserve">
+    <value>Okuma Süresi</value>
+  </data>
+  <data name="Tags" xml:space="preserve">
+    <value>Etiketler</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Paylaş</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Kopyala</value>
+  </data>
+  <data name="WriteComment" xml:space="preserve">
+    <value>Yorum Yaz</value>
+  </data>
+  <data name="YourName" xml:space="preserve">
+    <value>Adınız</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-posta</value>
+  </data>
+  <data name="YourComment" xml:space="preserve">
+    <value>Yorumunuz</value>
+  </data>
+  <data name="Characters" xml:space="preserve">
+    <value>karakter</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Gizlilik politikasını kabul ediyorum</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>İptal</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Gönder</value>
+  </data>
+  <data name="Sending" xml:space="preserve">
+    <value>Gönderiliyor...</value>
+  </data>
+  <data name="CommentSuccess" xml:space="preserve">
+    <value>Yorumunuz başarıyla gönderildi! Onaylandıktan sonra yayınlanacaktır.</value>
+  </data>
+  <data name="CommentError" xml:space="preserve">
+    <value>Bir hata oluştu.</value>
+  </data>
+  <data name="Reply" xml:space="preserve">
+    <value>Yanıtla</value>
+  </data>
+  <data name="NoCommentsYet" xml:space="preserve">
+    <value>Henüz yorum yapılmamış</value>
+  </data>
+  <data name="FirstComment" xml:space="preserve">
+    <value>İlk yorumu yapmak için yukarıdaki butona tıklayın.</value>
+  </data>
+  <data name="LoadMoreComments" xml:space="preserve">
+    <value>Daha Fazla Yorum Yükle</value>
+  </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>Adınızı girin</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>E-posta adresinizi girin</value>
+  </data>
+  <data name="WriteYourComment" xml:space="preserve">
+    <value>Yorumunuzu yazın...</value>
+  </data>
+  <data name="WriteYourReply" xml:space="preserve">
+    <value>Yanıtınızı yazın...</value>
+  </data>
+  <data name="ShareThoughts" xml:space="preserve">
+    <value>Düşüncelerinizi bizimle paylaşın</value>
+  </data>
+</root> 

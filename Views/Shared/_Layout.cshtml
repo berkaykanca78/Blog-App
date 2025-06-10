@@ -281,6 +281,37 @@
         transition: color 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
+    /* Language Toggle Button Styles */
+    .language-toggle {
+        background: none;
+        border: none;
+        color: var(--text-white);
+        font-size: 24px;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 50%;
+        transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        margin-right: 10px;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .language-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .language-toggle .lang-text {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
     /* Theme Toggle Button Styles */
     .theme-toggle {
         background: none;
@@ -671,8 +702,23 @@
                 </div>
                 <div class="col-md-6 text-end">
                     <div class="d-flex align-items-center justify-content-end">
+                        <!-- Language Toggle Button -->
+                        <button class="language-toggle me-3" id="languageToggle" title="@HttpContext.GetGlobalResourceObject("Resources", "Language")">
+                            @{
+                                var currentCulture = ViewBag.CurrentCulture as string ?? "tr-TR";
+                            }
+                            @if (currentCulture == "en-US")
+                            {
+                                <span class="lang-text">EN</span>
+                            }
+                            else
+                            {
+                                <span class="lang-text">TR</span>
+                            }
+                        </button>
+                        
                         <!-- Theme Toggle Button -->
-                        <button class="theme-toggle" id="themeToggle" title="Tema Değiştir">
+                        <button class="theme-toggle" id="themeToggle" title="@HttpContext.GetGlobalResourceObject("Resources", "Theme")">
                             <i class="fas fa-sun"></i>
                             <i class="fas fa-moon"></i>
                         </button>
@@ -682,7 +728,7 @@
                             <i class="fas fa-search search-icon" id="searchIcon"></i>
                             <div class="search-box" id="searchBox">
                                 <form action="@Url.Action("Search", "Home")" method="get" style="display: inline;">
-                                    <input type="text" name="query" class="search-input" placeholder="Ara..." id="searchInput" />
+                                    <input type="text" name="query" class="search-input" placeholder="@HttpContext.GetGlobalResourceObject("Resources", "SearchPlaceholder")" id="searchInput" />
                                     <button type="submit" class="search-btn" id="searchBtn">
                                         <i class="fas fa-arrow-right"></i>
                                     </button>
@@ -707,7 +753,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link @(ViewBag.NavigationPage == "Index" ? "active" : "")" href="@Url.Action("Index", "Home")">Ana Sayfa</a>
+                        <a class="nav-link @(ViewBag.NavigationPage == "Index" ? "active" : "")" href="@Url.Action("Index", "Home")">@HttpContext.GetGlobalResourceObject("Resources", "HomePage")</a>
                     </li>
                     @{
                         var navigationCategories = ViewBag.NavigationCategories as List<BlogApp.Models.CategoryViewModel>;
@@ -730,7 +776,7 @@
     @RenderBody()
 
     <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" id="scrollToTop" title="Yukarı Git">
+    <button class="scroll-to-top" id="scrollToTop" title="@HttpContext.GetGlobalResourceObject("Resources", "GoUp")">
         <i class="fas fa-chevron-up"></i>
     </button>
 
@@ -740,9 +786,9 @@
             <div class="row">
                 <div class="col-lg-4">
                     <h5 class="mb-4">
-                        Yazılım Dünyası'ndaki Gelişmeler
+                        @HttpContext.GetGlobalResourceObject("Resources", "SoftwareDevelopments")
                     </h5>
-                    <small class="text-white-50">Teknoloji dünyasından en güncel haberler</small>
+                    <small class="text-white-50">@HttpContext.GetGlobalResourceObject("Resources", "TechNews")</small>
                     <div class="social-links mt-4">
                         <a href="#" class="text-white-50 me-3"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="text-white-50 me-3"><i class="fab fa-twitter"></i></a>
@@ -751,7 +797,7 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-                    <h5 class="mb-4">Kategoriler</h5>
+                    <h5 class="mb-4">@HttpContext.GetGlobalResourceObject("Resources", "Categories")</h5>
                     <ul class="list-unstyled">
                         @{
                             var footerCategories = ViewBag.NavigationCategories as List<BlogApp.Models.CategoryViewModel>;
@@ -766,17 +812,17 @@
                     </ul>
                 </div>
                 <div class="col-lg-2">
-                    <h5 class="mb-4">Hızlı Linkler</h5>
+                    <h5 class="mb-4">@HttpContext.GetGlobalResourceObject("Resources", "QuickLinks")</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white-50">Hakkımızda</a></li>
-                        <li><a href="#" class="text-white-50">İletişim</a></li>
-                        <li><a href="#" class="text-white-50">Yazarlar</a></li>
-                        <li><a href="#" class="text-white-50">Gizlilik</a></li>
-                        <li><a href="#" class="text-white-50">Kullanım Şartları</a></li>
+                        <li><a href="#" class="text-white-50">@HttpContext.GetGlobalResourceObject("Resources", "About")</a></li>
+                        <li><a href="#" class="text-white-50">@HttpContext.GetGlobalResourceObject("Resources", "Contact")</a></li>
+                        <li><a href="#" class="text-white-50">@HttpContext.GetGlobalResourceObject("Resources", "Authors")</a></li>
+                        <li><a href="#" class="text-white-50">@HttpContext.GetGlobalResourceObject("Resources", "Privacy")</a></li>
+                        <li><a href="#" class="text-white-50">@HttpContext.GetGlobalResourceObject("Resources", "TermsOfUse")</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4">
-                    <h5 class="mb-4">İletişim</h5>
+                    <h5 class="mb-4">@HttpContext.GetGlobalResourceObject("Resources", "Contact")</h5>
                     <ul class="list-unstyled">
                         <li><i class="fas fa-map-marker-alt me-2"></i> Ankara, Türkiye</li>
                         <li><i class="fas fa-phone me-2"></i> +90 505 618 1906</li>
@@ -786,7 +832,7 @@
             </div>
             <hr class="my-4">
             <div class="text-center">
-                <p class="mb-0">Berkay Kanca - Blog - <strong>&copy;</strong> <span id="year"></span> - Tüm Hakları Saklıdır.</p>
+                <p class="mb-0">Berkay Kanca - Blog - <strong>&copy;</strong> <span id="year"></span> - @HttpContext.GetGlobalResourceObject("Resources", "AllRightsReserved").</p>
             </div>
         </div>
     </footer>
@@ -800,6 +846,50 @@
     
     <script>
         document.getElementById("year").innerHTML = new Date().getFullYear();
+        
+        // Language functionality - Initialize and load saved language
+        const savedLanguage = localStorage.getItem('language') || 'tr-TR';
+        
+        // Set language on page load if not already set in session and different from saved
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentLang = urlParams.get('lang');
+        
+        if (!currentLang && savedLanguage !== 'tr-TR') {
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('lang', savedLanguage);
+            window.location.href = currentUrl.href;
+        } else {
+        
+        // Language Toggle Functionality
+        const languageToggle = document.getElementById('languageToggle');
+        
+        if (languageToggle) {
+            languageToggle.addEventListener('click', function() {
+                // Get current culture from ViewBag or determine from text
+                const currentLang = this.querySelector('.lang-text').textContent;
+                const newCulture = currentLang === 'TR' ? 'en-US' : 'tr-TR';
+                
+                // Save to localStorage
+                localStorage.setItem('language', newCulture);
+                
+                // Add animation effect
+                this.style.transform = 'scale(0.9) rotate(180deg)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                }, 150);
+                
+                // Create URL for language change with proper return URL
+                const currentUrl = window.location.href;
+                const url = '@Url.Action("ChangeLanguage", "Home")' + '?' + 
+                    'culture=' + encodeURIComponent(newCulture) + '&' +
+                    'returnUrl=' + encodeURIComponent(currentUrl);
+                
+                // Redirect to language change action
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 200);
+            });
+        }
         
         // Theme Toggle Functionality
         const themeToggle = document.getElementById('themeToggle');
@@ -912,6 +1002,8 @@
                 }, 400);
             }
         });
+        
+        } // Language initialization else bloğunu kapatıyoruz
     </script>
 </body>
 </html>

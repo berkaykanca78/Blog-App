@@ -321,5 +321,21 @@ namespace BlogApp.Controllers
 
             return month >= 1 && month <= 12 ? monthNames[month - 1] : "";
         }
+
+        // Language switching
+        public ActionResult ChangeLanguage(string culture, string returnUrl)
+        {
+            if (!string.IsNullOrEmpty(culture))
+            {
+                Session["Culture"] = culture;
+            }
+
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

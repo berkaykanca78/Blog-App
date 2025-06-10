@@ -66,19 +66,19 @@
                     <h6 class="section-title">
                         @if (ViewBag.NavigationPage == "Search")
                         {
-                            @:Arama Sonuçları
+                            @:@HttpContext.GetGlobalResourceObject("Resources", "SearchResults")
                         }
                         else if (ViewBag.NavigationPage == "Category")
                         {
-                            @:@(ViewBag.CategoryName ?? "Kategori") Yazıları
+                            @:@(ViewBag.CategoryName ?? "Kategori") @HttpContext.GetGlobalResourceObject("Resources", "CategoryPosts")
                         }
                         else if (ViewBag.NavigationPage == "Archive")
                         {
-                            @:@(ViewBag.ArchiveInfo ?? "Arşiv") Yazıları
+                            @:@(ViewBag.ArchiveInfo ?? "Arşiv") @HttpContext.GetGlobalResourceObject("Resources", "ArchivePosts")
                         }
                         else
                         {
-                            @:Son Yazılar
+                            @:@HttpContext.GetGlobalResourceObject("Resources", "LatestPosts")
                         }
                     </h6>
                 </div>
@@ -113,26 +113,26 @@
                             {
                                 <h5 class="mb-1">
                                     <i class="fas fa-search text-primary me-2"></i>
-                                    "<strong>@ViewBag.SearchQuery</strong>" araması için sonuçlar
+                                    "<strong>@ViewBag.SearchQuery</strong>" @HttpContext.GetGlobalResourceObject("Resources", "SearchFor")
                                 </h5>
                                 <p class="mb-0 text-muted">
                                     <i class="fas fa-info-circle me-1"></i>
-                                    @ViewBag.SearchResults sonuç bulundu
+                                    @ViewBag.SearchResults @HttpContext.GetGlobalResourceObject("Resources", "ResultsFound")
                                 </p>
                             }
                             else
                             {
                                 <h5 class="mb-1">
                                     <i class="fas fa-exclamation-triangle text-warning me-2"></i>
-                                    Arama terimi girilmedi
+                                    @HttpContext.GetGlobalResourceObject("Resources", "NoSearchTerm")
                                 </h5>
-                                <p class="mb-0 text-muted">Lütfen arama yapmak için bir kelime girin.</p>
+                                <p class="mb-0 text-muted">@HttpContext.GetGlobalResourceObject("Resources", "PleaseEnterSearch")</p>
                             }
                         </div>
                         <div class="col-md-4 text-md-end">
                             <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary btn-sm">
                                 <i class="fas fa-home me-1"></i>
-                                Ana Sayfaya Dön
+                                @HttpContext.GetGlobalResourceObject("Resources", "BackToHome")
                             </a>
                         </div>
                     </div>
