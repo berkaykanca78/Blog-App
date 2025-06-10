@@ -69,9 +69,53 @@ $(document).ready(function() {
         }
     );
 
-    // Mobile menu toggle animation
-    $('.navbar-toggler').click(function() {
-        $(this).toggleClass('active');
+    // Mobile menu toggle - Tamamen özel çözüm
+    let isMenuOpen = false;
+    
+    $('.navbar-toggler').off('click').on('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        console.log('Toggler tıklandı, mevcut durum:', isMenuOpen);
+        
+        const $toggler = $(this);
+        const $collapse = $('#navbarNav');
+        
+        if (isMenuOpen) {
+            // Menüyü kapat
+            $collapse.removeClass('show');
+            $toggler.removeClass('active');
+            $toggler.attr('aria-expanded', 'false');
+            isMenuOpen = false;
+            console.log('Menü kapatıldı');
+        } else {
+            // Menüyü aç
+            $collapse.addClass('show');
+            $toggler.addClass('active');
+            $toggler.attr('aria-expanded', 'true');
+            isMenuOpen = true;
+            console.log('Menü açıldı');
+        }
+    });
+    
+    // Menü dışında tıklandığında kapat
+    $(document).off('click.navbar').on('click.navbar', function(e) {
+        if (isMenuOpen && !$(e.target).closest('.navbar').length) {
+            console.log('Dışarı tıklandı, menü kapatılıyor');
+            $('#navbarNav').removeClass('show');
+            $('.navbar-toggler').removeClass('active').attr('aria-expanded', 'false');
+            isMenuOpen = false;
+        }
+    });
+    
+    // Nav linklerine tıklandığında menüyü kapat
+    $('.navbar-nav .nav-link').off('click.navbar').on('click.navbar', function() {
+        if (isMenuOpen && $(window).width() < 992) {
+            console.log('Nav link tıklandı, menü kapatılıyor');
+            $('#navbarNav').removeClass('show');
+            $('.navbar-toggler').removeClass('active').attr('aria-expanded', 'false');
+            isMenuOpen = false;
+        }
     });
 
     // Add loading animation to images

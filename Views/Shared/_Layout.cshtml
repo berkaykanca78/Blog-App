@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    string currentCulture = ViewBag.CurrentCulture as string ?? "tr-TR";
+    List<BlogApp.Models.CategoryViewModel> navigationCategories = ViewBag.NavigationCategories as List<BlogApp.Models.CategoryViewModel>;
+    List<BlogApp.Models.CategoryViewModel> footerCategories = ViewBag.NavigationCategories as List<BlogApp.Models.CategoryViewModel>;
+}
+
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="utf-8" />
@@ -560,6 +566,7 @@
         color: var(--text-primary) !important;
     }
 
+
     [data-theme="dark"] .text-muted {
         color: var(--text-secondary) !important;
     }
@@ -704,9 +711,6 @@
                     <div class="d-flex align-items-center justify-content-end">
                         <!-- Language Toggle Button -->
                         <button class="language-toggle me-3" id="languageToggle" title="@HttpContext.GetGlobalResourceObject("Resources", "Language")">
-                            @{
-                                var currentCulture = ViewBag.CurrentCulture as string ?? "tr-TR";
-                            }
                             @if (currentCulture == "en-US")
                             {
                                 <span class="lang-text">EN</span>
@@ -747,7 +751,7 @@
             <a class="navbar-brand" href="@Url.Action("Index", "Home")">
                 Blog
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" aria-expanded="false" aria-controls="navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -755,9 +759,6 @@
                     <li class="nav-item">
                         <a class="nav-link @(ViewBag.NavigationPage == "Index" ? "active" : "")" href="@Url.Action("Index", "Home")">@HttpContext.GetGlobalResourceObject("Resources", "HomePage")</a>
                     </li>
-                    @{
-                        var navigationCategories = ViewBag.NavigationCategories as List<BlogApp.Models.CategoryViewModel>;
-                    }
                     @if (navigationCategories != null && navigationCategories.Any())
                     {
                         foreach (var category in navigationCategories)
@@ -799,9 +800,6 @@
                 <div class="col-lg-2">
                     <h5 class="mb-4">@HttpContext.GetGlobalResourceObject("Resources", "Categories")</h5>
                     <ul class="list-unstyled">
-                        @{
-                            var footerCategories = ViewBag.NavigationCategories as List<BlogApp.Models.CategoryViewModel>;
-                        }
                         @if (footerCategories != null && footerCategories.Any())
                         {
                             foreach (var category in footerCategories)
@@ -825,7 +823,7 @@
                     <h5 class="mb-4">@HttpContext.GetGlobalResourceObject("Resources", "Contact")</h5>
                     <ul class="list-unstyled">
                         <li><i class="fas fa-map-marker-alt me-2"></i> Ankara, Türkiye</li>
-                        <li><i class="fas fa-phone me-2"></i> +90 505 618 1906</li>
+                        <li><i class="fas fa-phone me-2"></i> +90 (505) 618 1906</li>
                         <li><i class="fas fa-envelope me-2"></i> info@berkaykanca.com</li>
                     </ul>
                 </div>

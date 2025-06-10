@@ -12,7 +12,7 @@ namespace BlogApp
             // Blog detail with category and title (SEO-friendly)
             routes.MapRoute(
                 name: "DetailWithCategory",
-                url: "detay/{category}/{id}",
+                url: "detail/{category}/{id}",
                 defaults: new { controller = "Home", action = "Detail" },
                 constraints: new { id = @"\d+" }
             );
@@ -20,14 +20,14 @@ namespace BlogApp
             // Category posts listing
             routes.MapRoute(
                 name: "CategoryPosts",
-                url: "kategori/{category}",
+                url: "category/{category}",
                 defaults: new { controller = "Home", action = "Category" }
             );
 
             // Blog detail with id only (fallback)
             routes.MapRoute(
                 name: "DetailById",
-                url: "detay/{id}",
+                url: "detail/{id}",
                 defaults: new { controller = "Home", action = "Detail" },
                 constraints: new { id = @"\d+" }
             );
@@ -35,21 +35,21 @@ namespace BlogApp
             // Search results
             routes.MapRoute(
                 name: "Search",
-                url: "ara/{query}",
+                url: "search/{query}",
                 defaults: new { controller = "Home", action = "Search" }
             );
 
             // Tag posts
             routes.MapRoute(
                 name: "TagPosts",
-                url: "etiket/{tag}",
+                url: "tag/{tag}",
                 defaults: new { controller = "Home", action = "Tag" }
             );
 
             // Archive by year and month
             routes.MapRoute(
                 name: "Archive",
-                url: "arsiv/{year}/{month}",
+                url: "archive/{year}/{month}",
                 defaults: new { controller = "Home", action = "Archive", month = UrlParameter.Optional },
                 constraints: new { year = @"\d{4}", month = @"\d{1,2}" }
             );
@@ -71,14 +71,14 @@ namespace BlogApp
             // About page
             routes.MapRoute(
                 name: "About",
-                url: "hakkinda",
+                url: "about",
                 defaults: new { controller = "Home", action = "About" }
             );
 
             // Contact page
             routes.MapRoute(
                 name: "Contact",
-                url: "iletisim",
+                url: "contact",
                 defaults: new { controller = "Home", action = "Contact" }
             );
 

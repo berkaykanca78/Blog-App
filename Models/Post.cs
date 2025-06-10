@@ -14,10 +14,17 @@ namespace BlogApp.Models
         [StringLength(200)]
         public string Title { get; set; }
 
+        [StringLength(200)]
+        public string EnglishTitle { get; set; }
+
         [Required]
         public string Content { get; set; }
 
+        public string EnglishContent { get; set; }
+
         public string Summary { get; set; }
+
+        public string EnglishSummary { get; set; }
 
         public string Image { get; set; }
 

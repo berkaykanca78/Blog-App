@@ -1,9 +1,8 @@
 using BlogApp.Models;
-using System.Linq;
-using System.Web.Mvc;
-using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
+using System.Web.Mvc;
 
 namespace BlogApp.Controllers
 {
@@ -30,8 +29,8 @@ namespace BlogApp.Controllers
                 .Select(c => new CategoryViewModel 
                 { 
                     Id = c.Id, 
-                    Name = c.Name, 
-                    Slug = c.Slug 
+                    Name = culture == "tr-TR" ? c.Name : c.EnglishName, 
+                    Slug = culture == "tr-TR" ? c.Slug : c.EnglishSlug
                 })
                 .ToList();
 

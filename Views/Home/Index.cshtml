@@ -3,7 +3,7 @@
     ViewBag.Title = "Ana Sayfa - Blog";
     ViewBag.MediumUrl = "https://medium.com/@berkaykanca78";
     ViewBag.MediumRssUrl = "https://medium.com/feed/@berkaykanca78";
-    
+
     // Get page size from ViewBag or query string, default to 4
     int pageSize = 4;
     if (ViewBag.PageSize != null)
@@ -14,7 +14,7 @@
     {
         int.TryParse(Request.QueryString["pageSize"], out pageSize);
     }
-    
+
     int currentPage = 1;
     if (ViewBag.CurrentPage != null)
     {
@@ -24,11 +24,12 @@
     {
         int.TryParse(Request.QueryString["page"], out currentPage);
     }
-    
+
     int totalPosts = ViewBag.TotalPosts ?? Model?.Count ?? 0;
     int totalPages = (int)Math.Ceiling((double)totalPosts / pageSize);
     int startIndex = (currentPage - 1) * pageSize;
     int endIndex = Math.Min(startIndex + pageSize, totalPosts);
+    string currentCulture = ViewBag.CurrentCulture as string ?? "tr-TR";
 }
 
 @section Styles {
@@ -70,7 +71,7 @@
                         }
                         else if (ViewBag.NavigationPage == "Category")
                         {
-                            @:@(ViewBag.CategoryName ?? "Kategori") @HttpContext.GetGlobalResourceObject("Resources", "CategoryPosts")
+                            @:@(ViewBag.CategoryName ?? "Category") @HttpContext.GetGlobalResourceObject("Resources", "CategoryPosts")
                         }
                         else if (ViewBag.NavigationPage == "Archive")
                         {
@@ -156,7 +157,7 @@
                                 <div class="post-image">
                                     <img src="@(string.IsNullOrEmpty(post.Image) ? "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" : post.Image)"
                                          class="img-fluid rounded-top" alt="@post.Title">
-                                    <span class="badge bg-primary post-badge">@(post.Category?.Name ?? "Genel")</span>
+                                    <span class="badge bg-primary post-badge">@(currentCulture == "tr-TR" ? (post.Category?.Name ?? "Genel") : (post.Category?.EnglishName ?? "General"))</span>
                                     <div class="post-overlay">
                                         <i class="fas fa-arrow-right"></i>
                                     </div>

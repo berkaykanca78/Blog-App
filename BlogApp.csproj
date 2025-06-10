@@ -145,6 +145,14 @@
     <Compile Include="Migrations\202505312245257_AddLikeAndReplies.Designer.cs">
       <DependentUpon>202505312245257_AddLikeAndReplies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506102212041_EnglishCultureForTables.cs" />
+    <Compile Include="Migrations\202506102212041_EnglishCultureForTables.Designer.cs">
+      <DependentUpon>202506102212041_EnglishCultureForTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506102217284_EnglishSlug.cs" />
+    <Compile Include="Migrations\202506102217284_EnglishSlug.Designer.cs">
+      <DependentUpon>202506102217284_EnglishSlug.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Category.cs" />
@@ -294,6 +302,12 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Resources.tr.designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506102212041_EnglishCultureForTables.resx">
+      <DependentUpon>202506102212041_EnglishCultureForTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506102217284_EnglishSlug.resx">
+      <DependentUpon>202506102217284_EnglishSlug.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\Resources.resx">
@@ -301,6 +315,7 @@
     </Content>
     <Content Include="App_GlobalResources\Resources.tr.resx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

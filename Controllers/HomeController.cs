@@ -1,9 +1,9 @@
 ﻿using BlogApp.Models;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
-using System;
-using System.Collections.Generic;
 
 namespace BlogApp.Controllers
 {
@@ -72,10 +72,12 @@ namespace BlogApp.Controllers
                 .OrderByDescending(c => c.CreatedAt)
                 .ToList();
 
+            var culture = Session["Culture"] as string ?? "tr-TR";
+
             ViewBag.RelatedPosts = relatedPosts;
             ViewBag.Comments = comments;
             ViewBag.CurrentPage = "Detail";
-            ViewBag.CurrentCategory = post.Category?.Slug;
+            ViewBag.CurrentCategory = culture == "tr-TR" ? post.Category?.Slug : post.Category?.EnglishSlug;
             ViewBag.Title = $"{post.Title} - Blog";
             ViewBag.PostId = id;
 
@@ -192,7 +194,7 @@ namespace BlogApp.Controllers
 
         public ActionResult Category(string category, int page = 1, int pageSize = 8)
         {
-            var categoryEntity = db.Categories.FirstOrDefault(c => c.Slug.ToLower() == category.ToLower());
+            var categoryEntity = db.Categories.FirstOrDefault(c => c.Slug.ToLower() == category.ToLower() || c.EnglishSlug.ToLower() == category.ToLower());
 
             if (categoryEntity == null)
             {
@@ -205,12 +207,14 @@ namespace BlogApp.Controllers
                 .OrderByDescending(p => p.CreatedAt)
                 .ToList();
 
-            ViewBag.CategoryName = categoryEntity.Name;
+            var culture = Session["Culture"] as string ?? "tr-TR";
+
+            ViewBag.CategoryName = culture == "tr-TR" ? categoryEntity.Name : categoryEntity.EnglishName;
             ViewBag.Title = $"{categoryEntity.Name} - Kategori";
             ViewBag.CurrentPage = page;
             ViewBag.PageSize = pageSize;
             ViewBag.TotalPosts = posts.Count;
-            ViewBag.CurrentCategory = categoryEntity.Slug;
+            ViewBag.CurrentCategory = culture == "tr-TR" ? categoryEntity.Slug : categoryEntity.EnglishSlug;
             ViewBag.NavigationPage = "Category";
 
             return View("Index", posts);
@@ -332,6 +336,31 @@ namespace BlogApp.Controllers
 
             if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
             {
+                // Check if the return URL is a category page and update the category slug based on new culture
+                var uri = new Uri(Request.Url, returnUrl);
+                var segments = uri.Segments;
+                
+                // Check if this is a category URL pattern (/Home/Category/{categorySlug})
+                if (segments.Length >= 4 && segments[1].Equals("Home/", StringComparison.OrdinalIgnoreCase) && 
+                    segments[2].Equals("Category/", StringComparison.OrdinalIgnoreCase))
+                {
+                    var currentCategorySlug = segments[3].TrimEnd('/');
+                    
+                    // Find the category by either Turkish or English slug
+                    var categoryEntity = db.Categories.FirstOrDefault(c => 
+                        c.Slug.ToLower() == currentCategorySlug.ToLower() || 
+                        c.EnglishSlug.ToLower() == currentCategorySlug.ToLower());
+                    
+                    if (categoryEntity != null)
+                    {
+                        // Get the appropriate slug for the new culture
+                        var newCategorySlug = culture == "tr-TR" ? categoryEntity.Slug : categoryEntity.EnglishSlug;
+                        
+                        // Redirect to the category page with the new slug
+                        return RedirectToAction("Category", "Home", new { category = newCategorySlug });
+                    }
+                }
+                
                 return Redirect(returnUrl);
             }
 
