@@ -189,6 +189,16 @@
         transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
+    /* Light theme top-bar */
+    :root .top-bar {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+    }
+
+    /* Dark theme top-bar */
+    [data-theme="dark"] .top-bar {
+        background: linear-gradient(135deg, #0d1117 0%, #161b22 100%) !important;
+    }
+
         .top-bar .social-links a {
             color: var(--text-white) !important;
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -209,6 +219,16 @@
         background-color: var(--footer-bg) !important;
         border-top: 1px solid var(--border-color);
         transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* Light theme footer */
+    :root footer {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
+    }
+
+    /* Dark theme footer */
+    [data-theme="dark"] footer {
+        background: linear-gradient(135deg, #0d1117 0%, #161b22 100%) !important;
     }
 
         /* Footer headings - Fixed for both themes */
@@ -380,6 +400,26 @@
         visibility: hidden;
         transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         box-shadow: 0 4px 15px var(--shadow-medium);
+    }
+
+    /* Light theme scroll-to-top */
+    :root .scroll-to-top {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    :root .scroll-to-top:hover {
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Dark theme scroll-to-top */
+    [data-theme="dark"] .scroll-to-top {
+        background: linear-gradient(135deg, #58a6ff 0%, #3fb950 100%);
+        box-shadow: 0 4px 15px rgba(88, 166, 255, 0.3);
+    }
+
+    [data-theme="dark"] .scroll-to-top:hover {
+        box-shadow: 0 8px 25px rgba(88, 166, 255, 0.4);
     }
 
         .scroll-to-top.show {
@@ -833,6 +873,8 @@
             <hr class="my-4">
             <div class="text-center">
                 <p class="mb-0">Berkay Kanca - Blog - <strong>&copy;</strong> <span id="year"></span> - @HttpContext.GetGlobalResourceObject("Resources", "AllRightsReserved").</p>
+                <!-- Mobile spacing for scroll-to-top button -->
+                <div class="d-block d-md-none" style="height: 60px;"></div>
             </div>
         </div>
     </footer>

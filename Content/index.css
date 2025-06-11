@@ -212,6 +212,27 @@
     overflow: hidden;
 }
 
+/* Heart icon animation styles for index page */
+.post-stats i[data-post-id] {
+    cursor: pointer;
+    transition: color 0.3s ease;
+    display: inline-block;
+    transform-origin: center;
+}
+
+.post-stats i[data-post-id]:hover {
+    color: #dc3545 !important;
+    animation: heartBeat 0.6s ease-in-out;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
 /* PrimeNG Style Paginator */
 .p-paginator {
     display: flex;
@@ -1009,4 +1030,84 @@
     color: #0d1117;
     background-color: #3fb950;
     border-color: #3fb950;
+}
+
+/* Theme-aware primary button styles - btn-outline-primary automatically adapts to theme */
+.btn-outline-primary {
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+    border-color: var(--theme-primary);
+}
+
+/* Light theme specific - traditional blue */
+:root .btn-outline-primary {
+    color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+:root .btn-outline-primary:hover,
+:root .btn-outline-primary:focus,
+:root .btn-outline-primary:active {
+    color: #ffffff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+/* Dark theme specific - brighter blue for better contrast */
+[data-theme="dark"] .btn-outline-primary {
+    color: #58a6ff;
+    border-color: #58a6ff;
+}
+
+[data-theme="dark"] .btn-outline-primary:hover,
+[data-theme="dark"] .btn-outline-primary:focus,
+[data-theme="dark"] .btn-outline-primary:active {
+    color: #0d1117;
+    background-color: #58a6ff;
+    border-color: #58a6ff;
+}
+
+/* Theme-aware secondary button styles - btn-outline-secondary automatically adapts to theme */
+.btn-outline-secondary {
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus,
+.btn-outline-secondary:active {
+    border-color: var(--text-secondary);
+}
+
+/* Light theme specific - traditional gray */
+:root .btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+}
+
+:root .btn-outline-secondary:hover,
+:root .btn-outline-secondary:focus,
+:root .btn-outline-secondary:active {
+    color: #ffffff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* Dark theme specific - brighter gray for better contrast */
+[data-theme="dark"] .btn-outline-secondary {
+    color: #8b949e;
+    border-color: #8b949e;
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover,
+[data-theme="dark"] .btn-outline-secondary:focus,
+[data-theme="dark"] .btn-outline-secondary:active {
+    color: #0d1117;
+    background-color: #8b949e;
+    border-color: #8b949e;
 }
