@@ -219,7 +219,7 @@ a:hover {
 .reading-time, .post-date, .post-author, .meta-info {
     color: var(--text-secondary) !important;
     font-weight: 500 !important;
-    font-size: 0.85rem !important;
+    font-size: 0.75rem !important;
     transition: color 0.3s ease-in-out;
 }
 

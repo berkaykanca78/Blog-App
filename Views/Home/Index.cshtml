@@ -163,53 +163,53 @@
                                     </div>
                                 </div>
                                 <div class="post-content p-3">
-                                    <h5 class="post-title text-dark mb-2">@post.Title</h5>
-                                    <p class="post-excerpt text-muted small mb-3">
-                                        @if (!string.IsNullOrEmpty(post.Summary))
-                                        {
-                                            @(post.Summary.Length > 80 ? post.Summary.Substring(0, 80) + "..." : post.Summary)
-                                        }
-                                        else
-                                        {
-                                            @Html.Raw(post.Content.Length > 80 ? post.Content.Substring(0, 80) + "..." : post.Content)
-                                        }
-                                    </p>
-                                    <div class="post-meta d-flex justify-content-between align-items-center">
-                                        <div class="author-info d-flex align-items-center">
-                                            <img src="https://berkaykanca.com/assets/img/profile-img.png" 
-                                                 alt="@(post.Author ?? "Yazar")" 
-                                                 class="rounded-circle me-2" 
-                                                 width="24" 
-                                                 height="24">
-                                            <span class="author-name small text-muted">@(post.Author ?? "Yazar")</span>
-                                        </div>
-                                        <div class="post-date small text-muted">
-                                            @post.CreatedAt.ToString("dd.MM.yyyy")
-                                        </div>
+                                    <div class="post-body flex-grow-1">
+                                        <h6 class="post-title text-dark mb-2"><i>@post.Title</i></h6>
+                                        <p class="post-excerpt text-muted small mb-3">
+                                            @if (!string.IsNullOrEmpty(post.Summary))
+                                            {
+                                                @(post.Summary.Length > 120 ? post.Summary.Substring(0, 120) + "..." : post.Summary)
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw(post.Content.Length > 80 ? post.Content.Substring(0, 80) + "..." : post.Content)
+                                            }
+                                        </p>
                                     </div>
-                                    <div class="post-stats mt-2 pt-2 border-top">
-                                        <div class="row text-center">
-                                            <div class="col-4">
-                                                <small class="text-muted">
-                                                    <i class="far fa-eye me-1"></i>
-                                                    125
-                                                </small>
+                                    <div class="post-footer">
+                                        <div class="post-meta d-flex justify-content-between align-items-center mb-2">
+                                            <div class="author-info d-flex align-items-center">
+                                                <img src="https://berkaykanca.com/assets/img/profile-img.png" 
+                                                     alt="@(post.Author ?? "Yazar")" 
+                                                     class="rounded-circle me-2" 
+                                                     width="20" 
+                                                     height="20">
+                                                <span class="author-name text-muted" style="font-size: 0.75rem;">@(post.Author ?? "Yazar")</span>
                                             </div>
-                                            <div class="col-4">
-                                                <small class="text-muted">
-                                                    <i class="far fa-comments me-1"></i>
-                                                    @post.CommentCount
-                                                </small>
+                                            <div class="post-date text-muted">
+                                                @post.CreatedAt.ToString("dd.MM.yyyy")
                                             </div>
-                                            <div class="col-4">
-                                                <small class="text-muted">
-                                                    <!--<button class="btn btn-link p-0 text-muted post-like-btn-index" data-post-id="@post.Id" style="font-size: 0.875rem; border: none; background: none;" title="Beğen">
-                                                        <i class="far fa-heart me-1"></i>
-                                                        <span class="like-count">@post.LikeCount</span> Beğeni
-                                                    </button>-->
-                                                    <i class="far fa-heart me-1" data-post-id="@post.Id"></i>
-                                                    @post.LikeCount
-                                                </small>
+                                        </div>
+                                        <div class="post-stats pt-2 border-top">
+                                            <div class="row text-center">
+                                                <div class="col-4">
+                                                    <small class="text-muted">
+                                                        <i class="far fa-eye me-1"></i>
+                                                        125
+                                                    </small>
+                                                </div>
+                                                <div class="col-4">
+                                                    <small class="text-muted">
+                                                        <i class="far fa-comments me-1"></i>
+                                                        @post.CommentCount
+                                                    </small>
+                                                </div>
+                                                <div class="col-4">
+                                                    <small class="text-muted">
+                                                        <i class="far fa-heart me-1" data-post-id="@post.Id"></i>
+                                                        @post.LikeCount
+                                                    </small>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

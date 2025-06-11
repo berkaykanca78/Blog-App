@@ -87,7 +87,7 @@
                                         @HttpContext.GetGlobalResourceObject("Resources", "ReadingTime") : 
                                     </span>
                                     <span class="text-primary mx-1">~</span>
-                                    <span class="text-success small fw-bold">
+                                    <span class="text-success small fw-bold text-dark">
                                         @(Math.Max(1, (Model.Content?.Length ?? 500) / 1000)) dk
                                     </span>
                                 </div>
@@ -188,7 +188,7 @@
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
                             <button onclick="copyToClipboard('@Request.Url.AbsoluteUri')"
-                                    class="btn btn-outline-secondary btn-sm" title="@HttpContext.GetGlobalResourceObject("Resources", "Copy")"
+                                    class="btn btn-outline-secondary btn-sm" title="@HttpContext.GetGlobalResourceObject("Resources", "Copy")">
                                 <i class="fas fa-copy"></i>
                             </button>
                         </div>
