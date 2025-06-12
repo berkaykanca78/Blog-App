@@ -72,13 +72,14 @@ namespace BlogApp.Controllers
                 .OrderByDescending(c => c.CreatedAt)
                 .ToList();
 
-            var culture = Session["Culture"] as string ?? "tr-TR";
+            string culture = Session["Culture"] as string ?? "tr-TR";
 
             ViewBag.RelatedPosts = relatedPosts;
             ViewBag.Comments = comments;
             ViewBag.CurrentPage = "Detail";
             ViewBag.CurrentCategory = culture == "tr-TR" ? post.Category?.Slug : post.Category?.EnglishSlug;
             ViewBag.Title = $"{post.Title} - Blog";
+            ViewBag.Title = culture == "tr-TR" ? $"{post.Title} - Blog" : $"{post.EnglishTitle} - Blog";
             ViewBag.PostId = id;
 
             return View(post);
@@ -207,10 +208,10 @@ namespace BlogApp.Controllers
                 .OrderByDescending(p => p.CreatedAt)
                 .ToList();
 
-            var culture = Session["Culture"] as string ?? "tr-TR";
+            string culture = Session["Culture"] as string ?? "tr-TR";
 
             ViewBag.CategoryName = culture == "tr-TR" ? categoryEntity.Name : categoryEntity.EnglishName;
-            ViewBag.Title = $"{categoryEntity.Name} - Kategori";
+            ViewBag.Title = culture == "tr-TR" ? $"{categoryEntity.Name} - Kategori" : $"{categoryEntity.EnglishName} - Category";
             ViewBag.CurrentPage = page;
             ViewBag.PageSize = pageSize;
             ViewBag.TotalPosts = posts.Count;
@@ -262,11 +263,14 @@ namespace BlogApp.Controllers
         // Search functionality
         public ActionResult Search(string query, int page = 1, int pageSize = 8)
         {
+            string culture = Session["Culture"] as string ?? "tr-TR";
+
             if (string.IsNullOrWhiteSpace(query))
             {
                 ViewBag.SearchQuery = "";
                 ViewBag.SearchResults = 0;
                 ViewBag.Title = "Arama Sonuçları";
+                ViewBag.Title = culture == "tr-TR" ? "Arama Sonuçları" : "Search Results";
                 ViewBag.NavigationPage = "Search";
                 return View("Index", new List<Post>());
             }
@@ -284,6 +288,7 @@ namespace BlogApp.Controllers
             ViewBag.SearchQuery = query;
             ViewBag.SearchResults = posts.Count;
             ViewBag.Title = $"'{query}' için Arama Sonuçları";
+            ViewBag.Title = culture == "tr-TR" ? $"'{query}' için Arama Sonuçları" : $"Search Results for '{query}'";
             ViewBag.CurrentPage = page;
             ViewBag.PageSize = pageSize;
             ViewBag.TotalPosts = posts.Count;

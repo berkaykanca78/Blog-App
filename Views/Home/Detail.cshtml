@@ -36,7 +36,7 @@
 
         var words = name.Trim().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         var initials = "";
-        
+
         foreach (var word in words.Take(2)) // Sadece ilk 2 kelimeyi al
         {
             if (!string.IsNullOrEmpty(word))
@@ -44,9 +44,11 @@
                 initials += word[0].ToString().ToUpper();
             }
         }
-        
+
         return string.IsNullOrEmpty(initials) ? "?" : initials;
     };
+
+    string currentCulture = ViewBag.CurrentCulture as string ?? "tr-TR";
 }
 
 <!-- Article Content -->
@@ -105,20 +107,20 @@
                             </div>
                         </div>
                     </div>
-                    <h1 class="article-title h3 mb-1">@Model.Title</h1>
+                    <h1 class="article-title h3 mb-1">@(currentCulture == "tr-TR" ? Model.Title : Model.EnglishTitle)</h1>
                 </header>
 
                 <!-- Featured Image -->
                 @if (!string.IsNullOrEmpty(Model.Image))
                 {
                     <div class="article-image compact-spacing">
-                        <img src="@Model.Image" class="img-fluid rounded" alt="@Model.Title" style="max-height: 300px; width: 100%; object-fit: cover;">
+                        <img src="@Model.Image" class="img-fluid rounded" alt="@(currentCulture == "tr-TR" ? Model.Title : Model.EnglishTitle)" style="max-height: 300px; width: 100%; object-fit: cover;">
                     </div>
                 }
 
                 <!-- Article Content -->
                 <div class="article-content compact-spacing">
-                    @Html.Raw(Model.Content)
+                    @Html.Raw(currentCulture == "tr-TR" ? Model.Content : Model.EnglishContent)
                 </div>
 
                 <!-- Article Tags -->
@@ -224,18 +226,32 @@
                                     <div class="card border-0 shadow-sm h-100">
                                         <img src="@(string.IsNullOrEmpty(relatedPost.Image) ? "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" : relatedPost.Image)"
                                              class="card-img-top"
-                                             alt="@relatedPost.Title"
+                                             alt="@(currentCulture == "tr-TR" ? relatedPost.Title : relatedPost.EnglishTitle)"
                                              style="height: 120px; object-fit: cover;">
                                         <div class="card-body p-2">
-                                            <h6 class="card-title small mb-1">@relatedPost.Title</h6>
+                                            <h6 class="card-title small mb-1">@(currentCulture == "tr-TR" ? relatedPost.Title : relatedPost.EnglishTitle)</h6>
                                             <p class="card-text small mb-2">
-                                                @if (!string.IsNullOrEmpty(relatedPost.Summary))
+                                                @if (currentCulture == "tr-TR")
                                                 {
-                                                    @(relatedPost.Summary.Length > 50 ? relatedPost.Summary.Substring(0, 50) + "..." : relatedPost.Summary)
+                                                    if (!string.IsNullOrEmpty(relatedPost.Summary))
+                                                    {
+                                                        @(relatedPost.Summary.Length > 50 ? relatedPost.Summary.Substring(0, 50) + "..." : relatedPost.Summary)
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.Raw(relatedPost.Content.Length > 50 ? relatedPost.Content.Substring(0, 50) + "..." : relatedPost.Content)
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    @Html.Raw(relatedPost.Content.Length > 50 ? relatedPost.Content.Substring(0, 50) + "..." : relatedPost.Content)
+                                                    if (!string.IsNullOrEmpty(relatedPost.EnglishSummary))
+                                                    {
+                                                        @(relatedPost.EnglishSummary.Length > 50 ? relatedPost.EnglishSummary.Substring(0, 50) + "..." : relatedPost.EnglishSummary)
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.Raw(relatedPost.EnglishContent.Length > 50 ? relatedPost.EnglishContent.Substring(0, 50) + "..." : relatedPost.EnglishContent)
+                                                    }
                                                 }
                                             </p>
                                             <a href="@Url.RouteUrl("DetailWithCategory", new { 

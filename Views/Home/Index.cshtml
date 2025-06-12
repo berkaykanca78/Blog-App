@@ -156,7 +156,7 @@
                                class="text-decoration-none">
                                 <div class="post-image">
                                     <img src="@(string.IsNullOrEmpty(post.Image) ? "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" : post.Image)"
-                                         class="img-fluid rounded-top" alt="@post.Title">
+                                         class="img-fluid rounded-top" alt="@(currentCulture == "tr-TR" ? post.Title : post.EnglishTitle)">
                                     <span class="badge bg-primary post-badge">@(currentCulture == "tr-TR" ? (post.Category?.Name ?? "Genel") : (post.Category?.EnglishName ?? "General"))</span>
                                     <div class="post-overlay">
                                         <i class="fas fa-arrow-right"></i>
@@ -164,15 +164,29 @@
                                 </div>
                                 <div class="post-content p-3">
                                     <div class="post-body flex-grow-1">
-                                        <h6 class="post-title text-dark mb-2"><i>@post.Title</i></h6>
+                                        <h6 class="post-title text-dark mb-2"><i>@(currentCulture == "tr-TR" ? post.Title : post.EnglishTitle)</i></h6>
                                         <p class="post-excerpt text-muted small mb-3">
-                                            @if (!string.IsNullOrEmpty(post.Summary))
+                                            @if (currentCulture == "tr-TR")
                                             {
-                                                @(post.Summary.Length > 120 ? post.Summary.Substring(0, 120) + "..." : post.Summary)
+                                                if (!string.IsNullOrEmpty(post.Summary))
+                                                {
+                                                    @(post.Summary.Length > 120 ? post.Summary.Substring(0, 120) + "..." : post.Summary)
+                                                }
+                                                else
+                                                {
+                                                    @Html.Raw(post.Content.Length > 80 ? post.Content.Substring(0, 80) + "..." : post.Content)
+                                                }
                                             }
                                             else
                                             {
-                                                @Html.Raw(post.Content.Length > 80 ? post.Content.Substring(0, 80) + "..." : post.Content)
+                                                if (!string.IsNullOrEmpty(post.EnglishSummary))
+                                                {
+                                                    @(post.EnglishSummary.Length > 120 ? post.EnglishSummary.Substring(0, 120) + "..." : post.EnglishSummary)
+                                                }
+                                                else
+                                                {
+                                                    @Html.Raw(post.EnglishContent.Length > 80 ? post.EnglishContent.Substring(0, 80) + "..." : post.EnglishContent)
+                                                }
                                             }
                                         </p>
                                     </div>
