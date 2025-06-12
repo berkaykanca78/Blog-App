@@ -185,7 +185,7 @@
                                                 }
                                                 else
                                                 {
-                                                    @Html.Raw(post.EnglishContent.Length > 80 ? post.EnglishContent.Substring(0, 80) + "..." : post.EnglishContent)
+                                                    @Html.Raw(post.EnglishContent?.Length > 80 ? post.EnglishContent?.Substring(0, 80) + "..." : (post.EnglishContent ?? ""))
                                                 }
                                             }
                                         </p>

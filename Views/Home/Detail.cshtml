@@ -250,7 +250,7 @@
                                                     }
                                                     else
                                                     {
-                                                        @Html.Raw(relatedPost.EnglishContent.Length > 50 ? relatedPost.EnglishContent.Substring(0, 50) + "..." : relatedPost.EnglishContent)
+                                                        @Html.Raw(relatedPost.EnglishContent?.Length > 50 ? relatedPost.EnglishContent?.Substring(0, 50) + "..." : (relatedPost.EnglishContent ?? ""))
                                                     }
                                                 }
                                             </p>

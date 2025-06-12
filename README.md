@@ -177,6 +177,21 @@ Uygulama ayarları `Web.config` dosyasında yapılandırılır:
 
 Bu proje açık kaynak kodlu olarak geliştirilmiştir.
 
+## 👨‍💻 Geliştirici
+
+**Berkay Kanca**
+- GitHub: [@berkaykanca](https://github.com/berkaykanca78)
+- Website: [berkaykanca.com](https://berkaykanca.com)
+- Demo: [blog.berkaykanca.com](https://blog.berkaykanca.com)
+
+## 📞 İletişim
+
+Proje hakkında sorularınız için:
+- Email: [berkaykanca@hotmail.com](mailto:berkaykanca@hotmail.com)
+- LinkedIn: [Berkay Kanca](https://linkedin.com/in/berkay-kanca)
+
 ---
+
+⭐ Bu projeyi beğendiyseniz, lütfen yıldız vermeyi unutmayın! 
 
 **Not**: Bu uygulama, modern blog platformlarının temel ihtiyaçlarını karşılamak için tasarlanmış, genişletilebilir ve sürdürülebilir bir ASP.NET MVC uygulamasıdır. 
