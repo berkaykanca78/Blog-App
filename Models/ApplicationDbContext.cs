@@ -4,8 +4,17 @@ namespace BlogApp.Models
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext() : base("DefaultConnection")
+        public ApplicationDbContext() : base(GetConnectionStringName())
         {
+        }
+
+        private static string GetConnectionStringName()
+        {
+#if DEBUG
+            return "DebugConnection"; // Web.Debug.config connection string
+#else
+            return "ReleaseConnection"; // Web.Release.config connection string
+#endif
         }
 
         public DbSet<Post> Posts { get; set; }
