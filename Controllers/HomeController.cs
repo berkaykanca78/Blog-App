@@ -1,4 +1,5 @@
-﻿using BlogApp.Models;
+﻿using BlogApp.Entities;
+using BlogApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

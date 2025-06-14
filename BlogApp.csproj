@@ -136,44 +136,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202505311324417_InitialCreate.cs" />
-    <Compile Include="Migrations\202505311324417_InitialCreate.Designer.cs">
-      <DependentUpon>202505311324417_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505311339578_UpdatePostModel.cs" />
-    <Compile Include="Migrations\202505311339578_UpdatePostModel.Designer.cs">
-      <DependentUpon>202505311339578_UpdatePostModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505311447027_AddCategory.cs" />
-    <Compile Include="Migrations\202505311447027_AddCategory.Designer.cs">
-      <DependentUpon>202505311447027_AddCategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505311526523_AddTagsToPost.cs" />
-    <Compile Include="Migrations\202505311526523_AddTagsToPost.Designer.cs">
-      <DependentUpon>202505311526523_AddTagsToPost.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505312146469_AddComments.cs" />
-    <Compile Include="Migrations\202505312146469_AddComments.Designer.cs">
-      <DependentUpon>202505312146469_AddComments.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202505312245257_AddLikeAndReplies.cs" />
-    <Compile Include="Migrations\202505312245257_AddLikeAndReplies.Designer.cs">
-      <DependentUpon>202505312245257_AddLikeAndReplies.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506102212041_EnglishCultureForTables.cs" />
-    <Compile Include="Migrations\202506102212041_EnglishCultureForTables.Designer.cs">
-      <DependentUpon>202506102212041_EnglishCultureForTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202506102217284_EnglishSlug.cs" />
-    <Compile Include="Migrations\202506102217284_EnglishSlug.Designer.cs">
-      <DependentUpon>202506102217284_EnglishSlug.cs</DependentUpon>
+    <Compile Include="Migrations\202506142251059_InitialCreateForBlog.cs" />
+    <Compile Include="Migrations\202506142251059_InitialCreateForBlog.Designer.cs">
+      <DependentUpon>202506142251059_InitialCreateForBlog.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ApplicationDbContext.cs" />
-    <Compile Include="Models\Category.cs" />
+    <Compile Include="Contexts\ApplicationDbContext.cs" />
+    <Compile Include="Entities\Category.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
-    <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\Post.cs" />
+    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\Post.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -296,24 +268,6 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202505311324417_InitialCreate.resx">
-      <DependentUpon>202505311324417_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505311339578_UpdatePostModel.resx">
-      <DependentUpon>202505311339578_UpdatePostModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505311447027_AddCategory.resx">
-      <DependentUpon>202505311447027_AddCategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505311526523_AddTagsToPost.resx">
-      <DependentUpon>202505311526523_AddTagsToPost.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505312146469_AddComments.resx">
-      <DependentUpon>202505312146469_AddComments.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202505312245257_AddLikeAndReplies.resx">
-      <DependentUpon>202505312245257_AddLikeAndReplies.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="App_GlobalResources\Resources.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Resources.designer.cs</LastGenOutput>
@@ -322,11 +276,8 @@
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Resources.tr.designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506102212041_EnglishCultureForTables.resx">
-      <DependentUpon>202506102212041_EnglishCultureForTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506102217284_EnglishSlug.resx">
-      <DependentUpon>202506102217284_EnglishSlug.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202506142251059_InitialCreateForBlog.resx">
+      <DependentUpon>202506142251059_InitialCreateForBlog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

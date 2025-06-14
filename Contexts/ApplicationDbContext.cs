@@ -1,6 +1,8 @@
+using BlogApp.Entities;
 using System.Data.Entity;
+using System.Data.Entity.Migrations.History;
 
-namespace BlogApp.Models
+namespace BlogApp.Contexts
 {
     public class ApplicationDbContext : DbContext
     {
@@ -23,6 +25,9 @@ namespace BlogApp.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Set default schema to Blog for all entities
+            modelBuilder.HasDefaultSchema("Blog");
+
             // Configure Post-Category relationship
             modelBuilder.Entity<Post>()
                 .HasOptional(p => p.Category)
@@ -77,4 +82,19 @@ namespace BlogApp.Models
             base.OnModelCreating(modelBuilder);
         }
     }
-} 
+
+    // Custom HistoryContext to use Blog schema
+    public class BlogHistoryContext : HistoryContext
+    {
+        public BlogHistoryContext(System.Data.Common.DbConnection existingConnection, string defaultSchema)
+            : base(existingConnection, defaultSchema)
+        {
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<HistoryRow>().ToTable("__MigrationHistory", "Blog");
+        }
+    }
+}

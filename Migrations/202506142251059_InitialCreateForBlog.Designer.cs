@@ -7,13 +7,13 @@ namespace BlogApp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class EnglishCultureForTables : IMigrationMetadata
+    public sealed partial class InitialCreateForBlog : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(EnglishCultureForTables));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreateForBlog));
         
         string IMigrationMetadata.Id
         {
-            get { return "202506102212041_EnglishCultureForTables"; }
+            get { return "202506142251059_InitialCreateForBlog"; }
         }
         
         string IMigrationMetadata.Source

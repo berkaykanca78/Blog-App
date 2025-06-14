@@ -1,4 +1,4 @@
-@model BlogApp.Models.Post
+@model BlogApp.Entities.Post
 @{
     ViewBag.Title = (Model?.Title ?? "Detail") + " - Blog";
 }
@@ -215,12 +215,12 @@
                 </div>
 
                 <!-- Related Posts -->
-                @if (ViewBag.RelatedPosts != null && ((List<BlogApp.Models.Post>)ViewBag.RelatedPosts).Any())
+                @if (ViewBag.RelatedPosts != null && ((List<BlogApp.Entities.Post>)ViewBag.RelatedPosts).Any())
                 {
                     <div class="related-posts compact-section">
                         <h5 class="mb-2 compact-text">İlgili Yazılar</h5>
                         <div class="row">
-                            @foreach (var relatedPost in (List<BlogApp.Models.Post>)ViewBag.RelatedPosts)
+                            @foreach (var relatedPost in (List<BlogApp.Entities.Post>)ViewBag.RelatedPosts)
                             {
                                 <div class="col-md-4 mb-2">
                                     <div class="card border-0 shadow-sm h-100">
@@ -276,7 +276,7 @@
                             <h5 class="mb-0 d-flex align-items-center">
                                 <i class="fas fa-comments text-primary me-2"></i>
                                 <span>@HttpContext.GetGlobalResourceObject("Resources", "Comments")</span>
-                                <span class="badge bg-light text-dark ms-2">@((ViewBag.Comments as List<BlogApp.Models.Comment>)?.Count ?? 0)</span>
+                                <span class="badge bg-light text-dark ms-2">@((ViewBag.Comments as List<BlogApp.Entities.Comment>)?.Count ?? 0)</span>
                             </h5>
                             <button class="btn btn-outline-primary btn-sm" data-bs-toggle="collapse" data-bs-target="#commentForm" aria-expanded="false">
                                 <i class="fas fa-plus me-1"></i>@HttpContext.GetGlobalResourceObject("Resources", "WriteComment")
@@ -360,9 +360,9 @@
 
                     <!-- Comments List -->
                     <div class="comments-list">
-                        @if (ViewBag.Comments != null && ((List<BlogApp.Models.Comment>)ViewBag.Comments).Any())
+                        @if (ViewBag.Comments != null && ((List<BlogApp.Entities.Comment>)ViewBag.Comments).Any())
                         {
-                            foreach (var comment in (List<BlogApp.Models.Comment>)ViewBag.Comments)
+                            foreach (var comment in (List<BlogApp.Entities.Comment>)ViewBag.Comments)
                             {
                                 <div class="comment-item bg-white rounded-3 p-3 mb-2 shadow-sm" data-comment-id="@comment.Id">
                                     <div class="d-flex">
@@ -477,7 +477,7 @@
                     </div>
 
                     <!-- Load More Comments (sadece 10'dan fazla yorum varsa göster) -->
-                    @if (ViewBag.Comments != null && ((List<BlogApp.Models.Comment>)ViewBag.Comments).Count > 10)
+                    @if (ViewBag.Comments != null && ((List<BlogApp.Entities.Comment>)ViewBag.Comments).Count > 10)
                     {
                         <div class="text-center mt-3">
                             <button class="btn btn-outline-secondary btn-sm">
