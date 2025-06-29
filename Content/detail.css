@@ -1585,3 +1585,546 @@ i[data-post-id]:hover {
         border-radius: 8px 8px 0 0;
     }
 }
+
+/* Code Section Styles */
+.code-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.code-section.collapsed pre {
+    height: 35px !important;
+    min-height: 35px !important;
+    max-height: 35px !important;
+    padding: 0 1.5rem !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease;
+}
+
+.code-section.collapsed pre::before {
+    height: 35px !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+.code-section.collapsed .mac-buttons {
+    position: absolute !important;
+    top: 8px !important;
+    left: 15px !important;
+    z-index: 20 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
+.code-section.collapsed pre code {
+    opacity: 0 !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    display: none !important;
+    transition: all 0.3s ease;
+}
+
+.code-section pre {
+    height: auto;
+    min-height: auto;
+    max-height: none;
+    transition: all 0.3s ease;
+}
+
+.code-section:not(.collapsed) pre {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+}
+
+.code-section:not(.collapsed) pre code {
+    opacity: 1 !important;
+    height: auto !important;
+    max-height: none !important;
+    display: block !important;
+}
+
+.code-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.code-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    border-radius: 12px 12px 0 0;
+}
+
+.code-section h3, .code-section h4 {
+    color: #495057;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.code-section h3 {
+    font-size: 1.25rem;
+}
+
+.code-section h4 {
+    font-size: 1.1rem;
+}
+
+.code-section pre {
+    background: #f8f9fa !important;
+    background-color: #f8f9fa !important;
+    border: none !important;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0 0 0;
+    overflow-x: auto;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.code-section pre::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 35px;
+    background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%);
+    border-radius: 8px 8px 0 0;
+    border-bottom: none;
+}
+
+.code-section pre::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 15px;
+    z-index: 1;
+    width: 50px;
+    height: 20px;
+}
+
+.code-section .mac-buttons {
+    position: absolute;
+    top: 8px;
+    left: 15px;
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+    opacity: 1;
+    visibility: visible;
+    transition: all 0.3s ease;
+}
+
+.code-section .mac-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none !important;
+    outline: none !important;
+}
+
+.code-section .mac-button.close {
+    background: #ff5f57;
+    box-shadow: 0 1px 2px rgba(255, 95, 87, 0.3);
+}
+
+.code-section .mac-button.minimize {
+    background: #ffbd2e;
+    box-shadow: 0 1px 2px rgba(255, 189, 46, 0.3);
+}
+
+.code-section .mac-button.maximize {
+    background: #28ca42;
+    box-shadow: 0 1px 2px rgba(40, 202, 66, 0.3);
+}
+
+.code-section .mac-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.code-section .mac-button:active {
+    transform: scale(0.95);
+}
+
+.code-section code {
+    color: #2d3748;
+    font-family: 'Fira Code', 'Monaco', 'Consolas', 'Ubuntu Mono', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    display: block;
+    padding-top: 1rem;
+    white-space: pre;
+    overflow-x: auto;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+    border: none !important;
+    outline: none !important;
+}
+
+/* Syntax highlighting colors - Light theme */
+.code-section code .keyword {
+    color: #d63384;
+    font-weight: bold;
+}
+
+.code-section code .string {
+    color: #198754;
+}
+
+.code-section code .comment {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.code-section code .number {
+    color: #fd7e14;
+}
+
+.code-section code .function {
+    color: #0985d0;
+}
+
+.code-section code .class {
+    color: #6f42c1;
+}
+
+/* Default text color for light theme */
+.code-section pre code {
+    color: #2d3748 !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Dark theme code section */
+[data-theme="dark"] .code-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%) !important;
+    background-color: #000000 !important;
+}
+
+[data-theme="dark"] .code-section h3,
+[data-theme="dark"] .code-section h4 {
+    color: #f0f6fc;
+}
+
+[data-theme="dark"] .code-section pre {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    border: none !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] .code-section .mac-button.close {
+    background: #ff5f57;
+    box-shadow: 0 1px 2px rgba(255, 95, 87, 0.4);
+}
+
+[data-theme="dark"] .code-section .mac-button.minimize {
+    background: #ffbd2e;
+    box-shadow: 0 1px 2px rgba(255, 189, 46, 0.4);
+}
+
+[data-theme="dark"] .code-section .mac-button.maximize {
+    background: #28ca42;
+    box-shadow: 0 1px 2px rgba(40, 202, 66, 0.4);
+}
+
+[data-theme="dark"] .code-section code {
+    color: #f0f6fc;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    border: none !important;
+    outline: none !important;
+}
+
+[data-theme="dark"] .code-section pre code {
+    color: #f0f6fc !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    border: none !important;
+    outline: none !important;
+}
+
+/* Dark theme syntax highlighting colors */
+[data-theme="dark"] .code-section code .keyword {
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+[data-theme="dark"] .code-section code .string {
+    color: #51cf66;
+}
+
+[data-theme="dark"] .code-section code .comment {
+    color: #74c0fc;
+    font-style: italic;
+}
+
+[data-theme="dark"] .code-section code .number {
+    color: #ffd43b;
+}
+
+[data-theme="dark"] .code-section code .function {
+    color: #4ecdc4;
+}
+
+[data-theme="dark"] .code-section code .class {
+    color: #d770ad;
+}
+
+[data-theme="dark"] .code-section pre::before {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%) !important;
+    background-color: #000000 !important;
+    border-bottom: none !important;
+}
+
+[data-theme="dark"] .code-section.collapsed pre {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+[data-theme="dark"] .code-section.collapsed pre::before {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%) !important;
+    background-color: #000000 !important;
+}
+
+/* Feature section styles */
+.feature-section {
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-left: 4px solid #667eea;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.feature-section:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
+}
+
+.feature-section h3 {
+    color: #495057;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.feature-section ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.feature-section li {
+    margin-bottom: 0.75rem;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+.feature-section li strong {
+    color: #495057;
+    font-weight: 600;
+}
+
+/* Dark theme feature section */
+[data-theme="dark"] .feature-section {
+    background: linear-gradient(135deg, #161b22 0%, #21262d 100%);
+    border-left-color: #58a6ff;
+    color: #f0f6fc;
+}
+
+[data-theme="dark"] .feature-section h3 {
+    color: #f0f6fc;
+}
+
+[data-theme="dark"] .feature-section li {
+    color: #8b949e;
+}
+
+[data-theme="dark"] .feature-section li strong {
+    color: #f0f6fc;
+}
+
+/* Conclusion section styles */
+.conclusion {
+    background: linear-gradient(135deg, #e8f5e8 0%, #f0f8ff 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border: 1px solid #d4edda;
+    position: relative;
+    overflow: hidden;
+}
+
+.conclusion::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+}
+
+.conclusion h3 {
+    color: #155724;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.conclusion p {
+    color: #155724;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Dark theme conclusion */
+[data-theme="dark"] .conclusion {
+    background: linear-gradient(135deg, #0f2419 0%, #0d1d2b 100%);
+    border-color: #1a472a;
+}
+
+[data-theme="dark"] .conclusion h3,
+[data-theme="dark"] .conclusion p {
+    color: #7dcea0;
+}
+
+/* Post content general styles */
+.post-content {
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.post-content h2 {
+    color: #495057;
+    font-weight: 700;
+    margin: 2rem 0 1.5rem 0;
+    font-size: 1.75rem;
+    line-height: 1.3;
+}
+
+.post-content p {
+    margin-bottom: 1.5rem;
+    color: #6c757d;
+    text-align: justify;
+}
+
+/* Dark theme post content */
+[data-theme="dark"] .post-content h2 {
+    color: #f0f6fc;
+}
+
+[data-theme="dark"] .post-content p {
+    color: #8b949e;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .code-section,
+    .feature-section,
+    .conclusion {
+        margin: 1.5rem 0;
+        padding: 1rem;
+    }
+    
+    .code-section pre {
+        padding: 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .code-section code {
+        font-size: 0.8rem;
+        line-height: 1.5;
+    }
+    
+    .code-section h3,
+    .feature-section h3,
+    .conclusion h3 {
+        font-size: 1.1rem;
+    }
+    
+    .post-content h2 {
+        font-size: 1.5rem;
+        margin: 1.5rem 0 1rem 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .code-section pre {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        border-radius: 0;
+    }
+    
+    .code-section pre::before {
+        border-radius: 0;
+    }
+    
+    .feature-section:hover,
+    .code-section:hover {
+        transform: none;
+    }
+}
+
+/* Force dark mode black background with highest specificity */
+html[data-theme="dark"] body .code-section,
+html[data-theme="dark"] .code-section,
+[data-theme="dark"] body .code-section,
+body[data-theme="dark"] .code-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%) !important;
+    background-color: #000000 !important;
+}
+
+html[data-theme="dark"] body .code-section pre,
+html[data-theme="dark"] .code-section pre,
+[data-theme="dark"] body .code-section pre,
+body[data-theme="dark"] .code-section pre {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+html[data-theme="dark"] body .code-section pre::before,
+html[data-theme="dark"] .code-section pre::before,
+[data-theme="dark"] body .code-section pre::before,
+body[data-theme="dark"] .code-section pre::before {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%) !important;
+    background-color: #000000 !important;
+}
+
+html[data-theme="dark"] body .code-section.collapsed pre,
+html[data-theme="dark"] .code-section.collapsed pre,
+[data-theme="dark"] body .code-section.collapsed pre,
+body[data-theme="dark"] .code-section.collapsed pre {
+    background: #000000 !important;
+    background-color: #000000 !important;
+}
+
+html[data-theme="dark"] body .code-section.collapsed pre::before,
+html[data-theme="dark"] .code-section.collapsed pre::before,
+[data-theme="dark"] body .code-section.collapsed pre::before,
+body[data-theme="dark"] .code-section.collapsed pre::before {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%) !important;
+    background-color: #000000 !important;
+}

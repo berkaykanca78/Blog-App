@@ -261,6 +261,24 @@ namespace BlogApp.Controllers
             return View();
         }
 
+        public ActionResult Authors()
+        {
+            ViewBag.CurrentPage = "Authors";
+            return View();
+        }
+
+        public ActionResult Privacy()
+        {
+            ViewBag.CurrentPage = "Privacy";
+            return View();
+        }
+
+        public ActionResult TermsOfUse()
+        {
+            ViewBag.CurrentPage = "TermsOfUse";
+            return View();
+        }
+
         // Search functionality
         public ActionResult Search(string query, int page = 1, int pageSize = 8)
         {

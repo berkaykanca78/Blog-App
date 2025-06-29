@@ -1,0 +1,342 @@
+@{
+    ViewBag.Title = "Gizlilik Politikası";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-primary mb-3">Gizlilik Politikası</h1>
+                <p class="lead text-muted">Kişisel verilerinizin güvenliği önceliğimiz</p>
+                <div class="divider mb-3"></div>
+                <small class="text-muted">Son güncelleme: @DateTime.Now.ToString("dd.MM.yyyy")</small>
+            </div>
+
+            <!-- Main Content -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <!-- Introduction -->
+                    <div class="section-item mb-4">
+                        <div class="section-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="section-content">
+                            <h5>Giriş</h5>
+                            <p class="text-muted">
+                                Bu politika, sitemizi kullanırken kişisel bilgilerinizin nasıl toplandığını, 
+                                kullanıldığını ve korunduğunu açıklar.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Data Collection -->
+                    <div class="section-item mb-4">
+                        <div class="section-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="section-content">
+                            <h5>Topladığımız Bilgiler</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="info-card">
+                                        <h6>Otomatik Bilgiler</h6>
+                                        <ul class="simple-list">
+                                            <li>IP adresi</li>
+                                            <li>Tarayıcı bilgisi</li>
+                                            <li>Ziyaret saatleri</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-card">
+                                        <h6>Gönüllü Bilgiler</h6>
+                                        <ul class="simple-list">
+                                            <li>Ad ve e-posta</li>
+                                            <li>İletişim bilgileri</li>
+                                            <li>Yorum içerikleri</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Usage -->
+                    <div class="section-item mb-4">
+                        <div class="section-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="section-content">
+                            <h5>Bilgilerin Kullanımı</h5>
+                            <div class="usage-list">
+                                <div class="usage-item">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Site işlevselliğini sağlamak</span>
+                                </div>
+                                <div class="usage-item">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Kullanıcı deneyimini iyileştirmek</span>
+                                </div>
+                                <div class="usage-item">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>İletişim ve destek sağlamak</span>
+                                </div>
+                                <div class="usage-item">
+                                    <i class="fas fa-check text-success"></i>
+                                    <span>Güvenlik sağlamak</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Rights -->
+                    <div class="section-item mb-4">
+                        <div class="section-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div class="section-content">
+                            <h5>Kullanıcı Hakları</h5>
+                            <p class="text-muted mb-3">KVKK kapsamında sahip olduğunuz haklar:</p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="right-item">
+                                        <i class="fas fa-eye text-info"></i>
+                                        <span>Verilerinizi görme hakkı</span>
+                                    </div>
+                                    <div class="right-item">
+                                        <i class="fas fa-edit text-warning"></i>
+                                        <span>Düzeltme hakkı</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="right-item">
+                                        <i class="fas fa-trash text-danger"></i>
+                                        <span>Silme hakkı</span>
+                                    </div>
+                                    <div class="right-item">
+                                        <i class="fas fa-ban text-secondary"></i>
+                                        <span>İşlemeyi durdurma hakkı</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="section-item">
+                        <div class="section-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="section-content">
+                            <h5>İletişim</h5>
+                            <p class="text-muted mb-3">Sorularınız için bizimle iletişime geçin:</p>
+                            <div class="contact-simple">
+                                <span><strong>E-posta:</strong> info@berkaykanca.com</span>
+                                <span><strong>Telefon:</strong> +90 (505) 618 19 06</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="text-center mt-4">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-primary rounded-pill px-4 me-2">
+                    <i class="fas fa-home me-2"></i>Ana Sayfa
+                </a>
+                <a href="@Url.Action("Contact", "Home")" class="btn btn-outline-primary rounded-pill px-4">
+                    <i class="fas fa-envelope me-2"></i>İletişim
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .divider {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        margin: 0 auto;
+        border-radius: 2px;
+    }
+    
+    .card {
+        border-radius: 20px;
+    }
+    
+    .section-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+    
+    .section-item:last-child {
+        border-bottom: none;
+    }
+    
+    .section-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .section-icon i {
+        color: white;
+        font-size: 1.2rem;
+    }
+    
+    .section-content {
+        flex: 1;
+    }
+    
+    .section-content h5 {
+        margin-bottom: 15px;
+        color: #333;
+        font-weight: 600;
+    }
+    
+    .info-card {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .info-card h6 {
+        color: #667eea;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+    
+    .simple-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .simple-list li {
+        padding: 5px 0;
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    .simple-list li::before {
+        content: "•";
+        color: #667eea;
+        margin-right: 8px;
+    }
+    
+    .usage-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .usage-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+    }
+    
+    .usage-item span {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    .right-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+    }
+    
+    .right-item span {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    .contact-simple {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .contact-simple span {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-outline-primary {
+        border: 2px solid #667eea;
+        color: #667eea;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-primary:hover {
+        background: #667eea;
+        border-color: #667eea;
+        transform: translateY(-2px);
+    }
+
+    /* Dark Mode Styles */
+    [data-theme="dark"] .card {
+        background: #2d2d2d;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .section-item {
+        border-bottom-color: #495057;
+    }
+    
+    [data-theme="dark"] .section-content h5 {
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .section-content p {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .info-card {
+        background: #343a40;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .info-card h6 {
+        color: #667eea;
+    }
+    
+    [data-theme="dark"] .simple-list li {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .usage-item span,
+    [data-theme="dark"] .right-item span {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .contact-simple span {
+        color: #adb5bd;
+    }
+</style> 

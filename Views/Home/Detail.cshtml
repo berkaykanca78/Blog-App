@@ -1006,4 +1006,148 @@
         
         repliesContainer.insertAdjacentHTML('beforeend', replyHtml);
     }
+
+    // Mac Buttons Collapseable Functionality
+    function initializeMacButtons() {
+        // Add Mac buttons to all code sections after page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeSections = document.querySelectorAll('.code-section');
+            
+            codeSections.forEach(function(section) {
+                // Check if buttons already exist
+                if (!section.querySelector('.mac-buttons')) {
+                    const macButtons = document.createElement('div');
+                    macButtons.className = 'mac-buttons';
+                    macButtons.innerHTML = `
+                        <button class="mac-button close" title="Close" onclick="toggleCodeSection(this, 'close')"></button>
+                        <button class="mac-button minimize" title="Minimize" onclick="toggleCodeSection(this, 'minimize')"></button>
+                        <button class="mac-button maximize" title="Maximize" onclick="toggleCodeSection(this, 'maximize')"></button>
+                    `;
+                    
+                    const pre = section.querySelector('pre');
+                    if (pre) {
+                        pre.appendChild(macButtons);
+                    }
+                }
+            });
+        });
+    }
+
+    // Toggle code section visibility
+    function toggleCodeSection(button, action) {
+        const codeSection = button.closest('.code-section');
+        const pre = codeSection.querySelector('pre');
+        const macButtons = codeSection.querySelector('.mac-buttons');
+        const isCollapsed = codeSection.classList.contains('collapsed');
+        
+        if (action === 'minimize' || action === 'close') {
+            if (isCollapsed) {
+                // Expand the code section
+                codeSection.classList.remove('collapsed');
+                button.title = action === 'minimize' ? 'Minimize' : 'Close';
+                if (action === 'minimize') {
+                    button.style.transform = 'rotate(0deg)';
+                }
+            } else {
+                // Collapse the code section
+                codeSection.classList.add('collapsed');
+                button.title = 'Expand';
+                if (action === 'minimize') {
+                    button.style.transform = 'rotate(45deg)';
+                }
+            }
+            
+            // Mac buttons always stay visible
+            if (macButtons) {
+                macButtons.style.opacity = '1';
+                macButtons.style.visibility = 'visible';
+                macButtons.style.zIndex = '20';
+                macButtons.style.display = 'flex';
+            }
+            
+        } else if (action === 'maximize') {
+            // Toggle fullscreen-like behavior
+            codeSection.classList.toggle('maximized');
+            
+            if (codeSection.classList.contains('maximized')) {
+                codeSection.style.position = 'fixed';
+                codeSection.style.top = '20px';
+                codeSection.style.left = '20px';
+                codeSection.style.right = '20px';
+                codeSection.style.bottom = '20px';
+                codeSection.style.zIndex = '9999';
+                codeSection.style.maxWidth = 'none';
+                codeSection.style.margin = '0';
+                document.body.style.overflow = 'hidden';
+                button.title = 'Restore';
+            } else {
+                codeSection.style.position = 'relative';
+                codeSection.style.top = 'auto';
+                codeSection.style.left = 'auto';
+                codeSection.style.right = 'auto';
+                codeSection.style.bottom = 'auto';
+                codeSection.style.zIndex = 'auto';
+                codeSection.style.maxWidth = '';
+                codeSection.style.margin = '2rem 0';
+                document.body.style.overflow = 'auto';
+                button.title = 'Maximize';
+            }
+        }
+        
+        // Add ripple effect
+        const ripple = document.createElement('div');
+        ripple.style.position = 'absolute';
+        ripple.style.width = '20px';
+        ripple.style.height = '20px';
+        ripple.style.borderRadius = '50%';
+        ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.animation = 'ripple 0.3s ease-out';
+        ripple.style.top = '-4px';
+        ripple.style.left = '-4px';
+        ripple.style.pointerEvents = 'none';
+        
+        button.style.position = 'relative';
+        button.appendChild(ripple);
+        
+        setTimeout(() => {
+            if (ripple.parentNode) {
+                ripple.parentNode.removeChild(ripple);
+            }
+        }, 300);
+    }
+
+    // Initialize Mac buttons
+    initializeMacButtons();
+
+    // Add CSS for ripple animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @@keyframes ripple {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        .code-section.maximized {
+            animation: zoomIn 0.3s ease-out;
+        }
+        
+        @@keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .code-section .mac-button.minimize {
+            transition: transform 0.3s ease;
+        }
+    `;
+    document.head.appendChild(style);
 </script> 

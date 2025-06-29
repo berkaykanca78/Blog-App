@@ -1,0 +1,475 @@
+@{
+    ViewBag.Title = "Kullanım Şartları";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-primary mb-3">Kullanım Şartları</h1>
+                <p class="lead text-muted">Sitemizi kullanmadan önce lütfen okuyun</p>
+                <div class="divider mb-3"></div>
+                <small class="text-muted">Son güncelleme: @DateTime.Now.ToString("dd.MM.yyyy")</small>
+            </div>
+
+            <!-- Main Content -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <!-- Introduction -->
+                    <div class="section-item mb-4">
+                        <div class="section-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="section-content">
+                            <h5>Giriş</h5>
+                            <p class="text-muted">
+                                Bu şartlar, Berkay Kanca Blog sitesini kullanımınızı düzenler. 
+                                Siteyi kullanarak bu şartları kabul etmiş sayılırsınız.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Allowed Use -->
+                    <div class="section-item mb-4">
+                        <div class="section-icon">
+                            <i class="fas fa-thumbs-up"></i>
+                        </div>
+                        <div class="section-content">
+                            <h5>İzin Verilen Kullanım</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="usage-card allowed">
+                                        <h6><i class="fas fa-check text-success me-2"></i>Yapabilecekleriniz</h6>
+                                        <ul class="simple-list">
+                                            <li>Blog yazılarını okuma</li>
+                                            <li>Yorum yapma</li>
+                                            <li>İçeriği paylaşma</li>
+                                            <li>Kişisel kullanım</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="usage-card forbidden">
+                                        <h6><i class="fas fa-times text-danger me-2"></i>Yapamayacaklarınız</h6>
+                                        <ul class="simple-list">
+                                            <li>İzinsiz kopyalama</li>
+                                            <li>Spam gönderme</li>
+                                            <li>Telif hakkı ihlali</li>
+                                            <li>Sistem saldırısı</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Rules -->
+                    <div class="section-item mb-4">
+                        <div class="section-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="section-content">
+                            <h5>İçerik Kuralları</h5>
+                            <div class="rules-list">
+                                <div class="rule-item">
+                                    <i class="fas fa-ban text-danger"></i>
+                                    <div>
+                                        <strong>Yasak İçerikler:</strong>
+                                        <span class="text-muted">Hakaret, nefret söylemi, spam, yasa dışı içerik</span>
+                                    </div>
+                                </div>
+                                <div class="rule-item">
+                                    <i class="fas fa-heart text-success"></i>
+                                    <div>
+                                        <strong>Saygılı Olun:</strong>
+                                        <span class="text-muted">Diğer kullanıcılara ve yazarlara saygılı davranın</span>
+                                    </div>
+                                </div>
+                                <div class="rule-item">
+                                    <i class="fas fa-lightbulb text-info"></i>
+                                    <div>
+                                        <strong>Yapıcı Olun:</strong>
+                                        <span class="text-muted">Eleştirilerinizin yapıcı olmasına dikkat edin</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Intellectual Property -->
+                    <div class="section-item mb-4">
+                        <div class="section-icon">
+                            <i class="fas fa-copyright"></i>
+                        </div>
+                        <div class="section-content">
+                            <h5>Telif Hakları</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="copyright-card">
+                                        <h6>Site İçeriği</h6>
+                                        <p class="text-muted small">
+                                            Tüm içerikler telif hakkı ile korunmaktadır. İzinsiz kullanım yasaktır.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="copyright-card">
+                                        <h6>Kullanıcı İçeriği</h6>
+                                        <p class="text-muted small">
+                                            Paylaştığınız içeriklerden siz sorumlusunuz.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Limitation -->
+                    <div class="section-item mb-4">
+                        <div class="section-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="section-content">
+                            <h5>Sorumluluk Sınırı</h5>
+                            <div class="limitation-notice">
+                                <p class="text-muted mb-3">
+                                    Site sahibi, içeriklerin doğruluğu konusunda sorumluluk kabul etmez.
+                                </p>
+                                <div class="limitation-list">
+                                    <div class="limitation-item">
+                                        <i class="fas fa-info-circle text-info"></i>
+                                        <span>İçerikler bilgilendirme amaçlıdır</span>
+                                    </div>
+                                    <div class="limitation-item">
+                                        <i class="fas fa-info-circle text-info"></i>
+                                        <span>Profesyonel tavsiye yerine geçmez</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="section-item">
+                        <div class="section-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="section-content">
+                            <h5>İletişim</h5>
+                            <p class="text-muted mb-3">Sorularınız için bizimle iletişime geçin:</p>
+                            <div class="contact-simple">
+                                <span><strong>E-posta:</strong> info@berkaykanca.com</span>
+                                <span><strong>Telefon:</strong> +90 (505) 618 19 06</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acceptance Notice -->
+            <div class="text-center mt-4">
+                <div class="acceptance-notice">
+                    <i class="fas fa-check-circle text-success"></i>
+                    <span>Bu şartları okuyup anladığınızı ve kabul ettiğinizi beyan edersiniz.</span>
+                </div>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="text-center mt-4">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-primary rounded-pill px-4 me-2">
+                    <i class="fas fa-home me-2"></i>Ana Sayfa
+                </a>
+                <a href="@Url.Action("Contact", "Home")" class="btn btn-outline-primary rounded-pill px-4">
+                    <i class="fas fa-envelope me-2"></i>İletişim
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .divider {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        margin: 0 auto;
+        border-radius: 2px;
+    }
+    
+    .card {
+        border-radius: 20px;
+    }
+    
+    .section-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px 0;
+        border-bottom: 1px solid #f8f9fa;
+    }
+    
+    .section-item:last-child {
+        border-bottom: none;
+    }
+    
+    .section-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .section-icon i {
+        color: white;
+        font-size: 1.2rem;
+    }
+    
+    .section-content {
+        flex: 1;
+    }
+    
+    .section-content h5 {
+        margin-bottom: 15px;
+        color: #333;
+        font-weight: 600;
+    }
+    
+    .usage-card {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        height: 100%;
+    }
+    
+    .usage-card h6 {
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+    
+    .simple-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .simple-list li {
+        padding: 5px 0;
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    .simple-list li::before {
+        content: "•";
+        color: #667eea;
+        margin-right: 8px;
+    }
+    
+    .rules-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .rule-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 10px;
+    }
+    
+    .rule-item i {
+        margin-top: 2px;
+        font-size: 1.1rem;
+    }
+    
+    .rule-item strong {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+    
+    .copyright-card {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        height: 100%;
+    }
+    
+    .copyright-card h6 {
+        color: #667eea;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+    
+    .limitation-notice {
+        background: #fff3cd;
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 4px solid #ffc107;
+    }
+    
+    .limitation-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .limitation-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .limitation-item span {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    .contact-simple {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .contact-simple span {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    .acceptance-notice {
+        background: #d4edda;
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 4px solid #28a745;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .acceptance-notice i {
+        font-size: 1.5rem;
+    }
+    
+    .acceptance-notice span {
+        color: #155724;
+        font-weight: 500;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-outline-primary {
+        border: 2px solid #667eea;
+        color: #667eea;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-primary:hover {
+        background: #667eea;
+        border-color: #667eea;
+        transform: translateY(-2px);
+    }
+
+    /* Dark Mode Styles */
+    [data-theme="dark"] .card {
+        background: #2d2d2d;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .section-item {
+        border-bottom-color: #495057;
+    }
+    
+    [data-theme="dark"] .section-content h5 {
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .section-content p {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .usage-card {
+        background: #343a40;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .usage-card h6 {
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .simple-list li {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .rule-item {
+        background: #343a40;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .rule-item strong {
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .rule-item span {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .copyright-card {
+        background: #343a40;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .copyright-card h6 {
+        color: #667eea;
+    }
+    
+    [data-theme="dark"] .copyright-card p {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .limitation-notice {
+        background: #523900;
+        border-left-color: #ffc107;
+        color: #f8d7da;
+    }
+    
+    [data-theme="dark"] .limitation-notice p {
+        color: #f8d7da;
+    }
+    
+    [data-theme="dark"] .limitation-item span {
+        color: #f8d7da;
+    }
+    
+    [data-theme="dark"] .contact-simple span {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .acceptance-notice {
+        background: #155724;
+        border-left-color: #28a745;
+        color: #d4edda;
+    }
+    
+    [data-theme="dark"] .acceptance-notice span {
+        color: #d4edda;
+    }
+</style> 

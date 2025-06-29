@@ -1,0 +1,317 @@
+@{
+    ViewBag.Title = "İletişim";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-primary mb-3">İletişim</h1>
+                <p class="lead text-muted">Sorularınız ve önerileriniz için</p>
+                <div class="divider"></div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Contact Form -->
+                <div class="col-lg-7">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <form id="contactForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Adınız" required>
+                                            <label for="name">Adınız</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="E-posta" required>
+                                            <label for="email">E-posta</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Konu" required>
+                                            <label for="subject">Konu</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" id="message" name="message" placeholder="Mesajınız" style="height: 120px" required></textarea>
+                                            <label for="message">Mesajınız</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill">
+                                            <i class="fas fa-paper-plane me-2"></i>Gönder
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col-lg-5">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h6>E-posta</h6>
+                                <p>info@berkaykanca.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h6>Telefon</h6>
+                                <p>+90 (505) 618 19 06</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h6>Konum</h6>
+                                <p>Ankara, Türkiye</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h6>Çalışma Saatleri</h6>
+                                <p>Pazartesi - Cuma<br>09:00 - 18:00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="social-section mt-4">
+                        <h6 class="text-center mb-3">Sosyal Medya</h6>
+                        <div class="social-links text-center">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const button = this.querySelector('button[type="submit"]');
+    const originalText = button.innerHTML;
+    
+    button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Gönderiliyor...';
+    button.disabled = true;
+    
+    setTimeout(() => {
+        alert('Mesajınız başarıyla gönderildi!');
+        this.reset();
+        button.innerHTML = originalText;
+        button.disabled = false;
+    }, 2000);
+});
+</script>
+
+<style>
+    .divider {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        margin: 0 auto;
+        border-radius: 2px;
+    }
+    
+    .card {
+        border-radius: 20px;
+    }
+    
+    .form-control {
+        border: 2px solid #f8f9fa;
+        border-radius: 12px;
+        padding: 12px 16px;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+    
+    .form-floating > label {
+        color: #6c757d;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+        padding: 15px 30px;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    .contact-info {
+        padding: 20px 0;
+    }
+    
+    .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        padding: 15px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+    }
+    
+    .contact-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+    
+    .contact-icon i {
+        color: white;
+        font-size: 1.2rem;
+    }
+    
+    .contact-details h6 {
+        margin: 0 0 5px 0;
+        color: #333;
+        font-weight: 600;
+    }
+    
+    .contact-details p {
+        margin: 0;
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .social-link {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #667eea;
+        text-decoration: none;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        color: #764ba2;
+    }
+    
+    .social-link i {
+        font-size: 1.2rem;
+    }
+
+    /* Dark Mode Styles */
+    [data-theme="dark"] .card {
+        background: #2d2d2d;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .form-control {
+        background: #343a40;
+        border-color: #495057;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .form-control:focus {
+        background: #343a40;
+        border-color: #667eea;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .form-floating > label {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .contact-item {
+        background: #343a40;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .contact-item:hover {
+        box-shadow: 0 5px 20px rgba(255,255,255,0.1);
+    }
+    
+    [data-theme="dark"] .contact-details h6 {
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .contact-details p {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .social-link {
+        background: #343a40;
+        color: #667eea;
+    }
+    
+    [data-theme="dark"] .social-link:hover {
+        box-shadow: 0 6px 20px rgba(255,255,255,0.1);
+        background: #495057;
+    }
+    
+    [data-theme="dark"] .social-section h6 {
+        color: #e9ecef;
+    }
+</style> 

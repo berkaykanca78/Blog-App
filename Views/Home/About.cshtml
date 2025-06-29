@@ -1,0 +1,191 @@
+@{
+    ViewBag.Title = "Hakkımızda";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Hero Section -->
+            <div class="text-center mb-5">
+                <div class="avatar-container mb-4">
+                    <div class="avatar-circle">
+                        <i class="fas fa-user-circle text-primary"></i>
+                    </div>
+                </div>
+                <h1 class="display-5 fw-bold text-primary mb-3">Berkay Kanca</h1>
+                <p class="lead text-muted">Yazılım Geliştirici & Blog Yazarı</p>
+                <div class="divider"></div>
+            </div>
+
+            <!-- About Content -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-5">
+                    <p class="fs-5 text-center mb-4 text-muted">
+                        Teknoloji dünyasında öğrendiklerimi paylaşarak, geliştiricilere faydalı olmayı hedefliyorum.
+                    </p>
+                    
+                    <!-- Skills -->
+                    <div class="row text-center g-4">
+                        <div class="col-md-3">
+                            <div class="skill-item">
+                                <i class="fas fa-code fa-2x text-primary mb-3"></i>
+                                <h6>Web Geliştirme</h6>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="skill-item">
+                                <i class="fas fa-database fa-2x text-success mb-3"></i>
+                                <h6>Veritabanı</h6>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="skill-item">
+                                <i class="fas fa-mobile-alt fa-2x text-info mb-3"></i>
+                                <h6>Mobil</h6>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="skill-item">
+                                <i class="fas fa-cloud fa-2x text-warning mb-3"></i>
+                                <h6>Cloud</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="stat-card text-center">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Makale</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card text-center">
+                        <div class="stat-number">10K+</div>
+                        <div class="stat-label">Okuyucu</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="stat-card text-center">
+                        <div class="stat-number">2+</div>
+                        <div class="stat-label">Yıl</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact CTA -->
+            <div class="text-center">
+                <a href="@Url.Action("Contact", "Home")" class="btn btn-primary btn-lg px-5 rounded-pill">
+                    <i class="fas fa-envelope me-2"></i>İletişime Geç
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .avatar-container {
+        position: relative;
+    }
+    
+    .avatar-circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+    
+    .avatar-circle i {
+        font-size: 4rem;
+        color: white;
+    }
+    
+    .divider {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        margin: 0 auto;
+        border-radius: 2px;
+    }
+    
+    .skill-item {
+        padding: 20px;
+        transition: transform 0.3s ease;
+    }
+    
+    .skill-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .stat-card {
+        background: white;
+        padding: 25px 15px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #667eea;
+        margin-bottom: 5px;
+    }
+    
+    .stat-label {
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+    
+    .card {
+        border-radius: 20px;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Dark Mode Styles */
+    [data-theme="dark"] .card {
+        background: #2d2d2d;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .stat-card {
+        background: #343a40;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .stat-card:hover {
+        box-shadow: 0 10px 25px rgba(255,255,255,0.1);
+    }
+    
+    [data-theme="dark"] .stat-label {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .skill-item h6 {
+        color: #e9ecef;
+    }
+</style> 

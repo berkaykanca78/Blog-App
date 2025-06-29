@@ -1,0 +1,332 @@
+@{
+    ViewBag.Title = "Yazarlar";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Header -->
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold text-primary mb-3">Yazarlar</h1>
+                <p class="lead text-muted">Bu blogda içerik üreten yazarlar</p>
+                <div class="divider"></div>
+            </div>
+
+            <!-- Main Author -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-3 text-center mb-4 mb-md-0">
+                            <div class="author-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="author-badge mb-2">
+                                <i class="fas fa-crown me-1"></i>Kurucu & Baş Yazar
+                            </div>
+                            <h3 class="fw-bold mb-2">Berkay Kanca</h3>
+                            <p class="text-muted mb-3">Senior Yazılım Geliştirici</p>
+                            <p class="mb-4">
+                                10+ yıllık deneyim ile web teknolojileri, mobil uygulama geliştirme ve 
+                                veritabanı yönetimi konularında uzman.
+                            </p>
+                            <div class="author-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">50+</span>
+                                    <span class="stat-label">Makale</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">10K+</span>
+                                    <span class="stat-label">Okuyucu</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">2+</span>
+                                    <span class="stat-label">Yıl</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h5 class="text-center mb-4">Uzmanlık Alanları</h5>
+                    <div class="row text-center g-4">
+                        <div class="col-md-3">
+                            <div class="skill-item">
+                                <i class="fas fa-laptop-code fa-2x text-primary mb-2"></i>
+                                <h6>Web Geliştirme</h6>
+                                <small class="text-muted">C#, .NET, JavaScript</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="skill-item">
+                                <i class="fas fa-database fa-2x text-success mb-2"></i>
+                                <h6>Veritabanı</h6>
+                                <small class="text-muted">SQL Server, MySQL</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="skill-item">
+                                <i class="fas fa-cloud fa-2x text-info mb-2"></i>
+                                <h6>Cloud</h6>
+                                <small class="text-muted">Azure, AWS</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="skill-item">
+                                <i class="fas fa-mobile-alt fa-2x text-warning mb-2"></i>
+                                <h6>Mobil</h6>
+                                <small class="text-muted">Cross-platform</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Popular Articles -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <h5 class="text-center mb-4">Popüler Makaleler</h5>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="article-preview">
+                                <div class="article-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h6>Web API Geliştirme</h6>
+                                <span class="badge bg-light text-dark">API</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="article-preview">
+                                <div class="article-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <h6>Entity Framework</h6>
+                                <span class="badge bg-light text-dark">Database</span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="article-preview">
+                                <div class="article-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <h6>Responsive Tasarım</h6>
+                                <span class="badge bg-light text-dark">Frontend</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center">
+                <h5 class="mb-3">İş Birliği Yapmak İster misiniz?</h5>
+                <p class="text-muted mb-4">Yazar olmak veya iş birliği teklifleriniz için</p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="@Url.Action("Contact", "Home")" class="btn btn-primary rounded-pill px-4">
+                        <i class="fas fa-envelope me-2"></i>İletişim
+                    </a>
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-outline-primary rounded-pill px-4">
+                        <i class="fas fa-home me-2"></i>Ana Sayfa
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .divider {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        margin: 0 auto;
+        border-radius: 2px;
+    }
+    
+    .card {
+        border-radius: 20px;
+        transition: transform 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-2px);
+    }
+    
+    .author-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .author-avatar i {
+        font-size: 3rem;
+        color: white;
+    }
+    
+    .author-badge {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: inline-block;
+    }
+    
+    .author-stats {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+    }
+    
+    .stat-item {
+        text-align: center;
+    }
+    
+    .stat-number {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #667eea;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+    
+    .skill-item {
+        padding: 20px 10px;
+        transition: transform 0.3s ease;
+    }
+    
+    .skill-item:hover {
+        transform: translateY(-5px);
+    }
+    
+    .article-preview {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    
+    .article-preview:hover {
+        background: white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transform: translateY(-3px);
+    }
+    
+    .article-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+    }
+    
+    .article-icon i {
+        color: white;
+        font-size: 1.2rem;
+    }
+    
+    .article-preview h6 {
+        margin-bottom: 10px;
+        color: #333;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-outline-primary {
+        border: 2px solid #667eea;
+        color: #667eea;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-primary:hover {
+        background: #667eea;
+        border-color: #667eea;
+        transform: translateY(-2px);
+    }
+
+    /* Dark Mode Styles */
+    [data-theme="dark"] .card {
+        background: #2d2d2d;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .card h3,
+    [data-theme="dark"] .card h5 {
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .card p {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .stat-label {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .skill-item h6 {
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .skill-item small {
+        color: #adb5bd;
+    }
+    
+    [data-theme="dark"] .article-preview {
+        background: #343a40;
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .article-preview:hover {
+        background: #495057;
+        box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+    }
+    
+    [data-theme="dark"] .article-preview h6 {
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .badge.bg-light {
+        background: #495057 !important;
+        color: #e9ecef !important;
+    }
+    
+    [data-theme="dark"] .text-center h5 {
+        color: #e9ecef;
+    }
+    
+    [data-theme="dark"] .text-center p {
+        color: #adb5bd;
+    }
+</style> 
