@@ -82,6 +82,62 @@ namespace BlogApp
                 defaults: new { controller = "Home", action = "Contact" }
             );
 
+            // Dashboard
+            routes.MapRoute(
+                name: "Dashboard",
+                url: "dashboard",
+                defaults: new { controller = "Dashboard", action = "Index" }
+            );
+
+            // Dashboard Posts
+            routes.MapRoute(
+                name: "DashboardPosts",
+                url: "dashboard/posts",
+                defaults: new { controller = "Dashboard", action = "Posts" }
+            );
+
+            // Dashboard Categories
+            routes.MapRoute(
+                name: "DashboardCategories",
+                url: "dashboard/categories",
+                defaults: new { controller = "Dashboard", action = "Categories" }
+            );
+
+            // Dashboard Tags
+            routes.MapRoute(
+                name: "DashboardTags",
+                url: "dashboard/tags",
+                defaults: new { controller = "Dashboard", action = "Tags" }
+            );
+
+            // Dashboard Comments
+            routes.MapRoute(
+                name: "DashboardComments",
+                url: "dashboard/comments",
+                defaults: new { controller = "Dashboard", action = "Comments" }
+            );
+
+            // Dashboard Users
+            routes.MapRoute(
+                name: "DashboardUsers",
+                url: "dashboard/users",
+                defaults: new { controller = "Dashboard", action = "Users" }
+            );
+
+            // Dashboard Statistics
+            routes.MapRoute(
+                name: "DashboardStatistics",
+                url: "dashboard/statistics",
+                defaults: new { controller = "Dashboard", action = "Statistics" }
+            );
+
+            // Dashboard Settings
+            routes.MapRoute(
+                name: "DashboardSettings",
+                url: "dashboard/settings",
+                defaults: new { controller = "Dashboard", action = "Settings" }
+            );
+
             // Default route (en son)
             routes.MapRoute(
                 name: "Default",

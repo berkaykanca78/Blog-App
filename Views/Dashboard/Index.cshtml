@@ -1,0 +1,222 @@
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="dashboard-header mb-4">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1 class="dashboard-title">Dashboard</h1>
+            <p class="text-muted">Hoşgeldiniz! İşte genel durumunuz.</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Yeni Ekle
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- İstatistik Kartları -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-primary">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>152</h3>
+                    <p>Toplam Blog</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-success">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>24.5K</h3>
+                    <p>Toplam Görüntüleme</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-warning">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>1.2K</h3>
+                    <p>Toplam Yorum</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-info">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>856</h3>
+                    <p>Toplam Kullanıcı</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ana İçerik Alanı -->
+<div class="row">
+    <!-- Son Bloglar -->
+    <div class="col-lg-8 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h5 class="card-title mb-0">Son Bloglar</h5>
+                <a href="#" class="btn btn-sm btn-outline-primary">Tümünü Gör</a>
+            </div>
+            <div class="dashboard-card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Başlık</th>
+                                <th>Kategori</th>
+                                <th>Tarih</th>
+                                <th>Durum</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://picsum.photos/40/40?random=1" alt="" class="rounded me-3" style="width: 40px; height: 40px; object-fit: cover;">
+                                        <div>
+                                            <h6 class="mb-0">ASP.NET Core ile Web Geliştirme</h6>
+                                            <small class="text-muted">Modern web uygulamaları geliştirme...</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-primary">Teknoloji</span></td>
+                                <td>15 Aralık 2024</td>
+                                <td><span class="badge bg-success">Yayında</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://picsum.photos/40/40?random=2" alt="" class="rounded me-3" style="width: 40px; height: 40px; object-fit: cover;">
+                                        <div>
+                                            <h6 class="mb-0">JavaScript ES6+ Özellikleri</h6>
+                                            <small class="text-muted">Yeni JavaScript özelliklerini keşfedin...</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-warning">Frontend</span></td>
+                                <td>14 Aralık 2024</td>
+                                <td><span class="badge bg-warning">Taslak</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://picsum.photos/40/40?random=3" alt="" class="rounded me-3" style="width: 40px; height: 40px; object-fit: cover;">
+                                        <div>
+                                            <h6 class="mb-0">React Hooks Kullanım Kılavuzu</h6>
+                                            <small class="text-muted">React Hooks ile modern geliştirme...</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge bg-info">React</span></td>
+                                <td>13 Aralık 2024</td>
+                                <td><span class="badge bg-success">Yayında</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sağ Sidebar -->
+    <div class="col-lg-4">
+        <!-- Hızlı İşlemler -->
+        <div class="dashboard-card mb-4">
+            <div class="dashboard-card-header">
+                <h5 class="card-title mb-0">Hızlı İşlemler</h5>
+            </div>
+            <div class="dashboard-card-body">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Yeni Blog Ekle
+                    </button>
+                    <button class="btn btn-success">
+                        <i class="fas fa-folder-plus me-2"></i>Kategori Ekle
+                    </button>
+                    <button class="btn btn-info">
+                        <i class="fas fa-tags me-2"></i>Etiket Yönet
+                    </button>
+                    <button class="btn btn-warning">
+                        <i class="fas fa-comments me-2"></i>Yorumları Görüntüle
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Son Aktiviteler -->
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h5 class="card-title mb-0">Son Aktiviteler</h5>
+            </div>
+            <div class="dashboard-card-body">
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon bg-primary">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p class="mb-1"><strong>Yeni blog eklendi</strong></p>
+                            <small class="text-muted">2 saat önce</small>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon bg-success">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p class="mb-1"><strong>Yeni yorum geldi</strong></p>
+                            <small class="text-muted">5 saat önce</small>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon bg-warning">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p class="mb-1"><strong>Blog güncellendi</strong></p>
+                            <small class="text-muted">1 gün önce</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

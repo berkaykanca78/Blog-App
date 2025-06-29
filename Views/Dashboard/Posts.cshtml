@@ -1,0 +1,347 @@
+@{
+    ViewBag.Title = "Yazılar";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="dashboard-header mb-4">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1 class="dashboard-title">Yazılar</h1>
+            <p class="text-muted">Blog yazılarınızı yönetin</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Yeni Yazı Ekle
+            </button>
+            <button class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-filter me-2"></i>Filtrele
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- İstatistik Kartları -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-primary">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>152</h3>
+                    <p>Toplam Yazı</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-success">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>128</h3>
+                    <p>Yayında</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-warning">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-edit"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>18</h3>
+                    <p>Taslak</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-danger">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-archive"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>6</h3>
+                    <p>Arşiv</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Arama ve Filtre -->
+<div class="dashboard-card mb-4">
+    <div class="dashboard-card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Yazı başlığı ara...">
+            </div>
+            <div class="col-md-3">
+                <select class="form-select">
+                    <option>Tüm Kategoriler</option>
+                    <option>Teknoloji</option>
+                    <option>Frontend</option>
+                    <option>Backend</option>
+                    <option>Mobil</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select">
+                    <option>Tüm Durumlar</option>
+                    <option>Yayında</option>
+                    <option>Taslak</option>
+                    <option>Arşiv</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary w-100">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Yazılar Tablosu -->
+<div class="dashboard-card">
+    <div class="dashboard-card-header">
+        <h5 class="card-title mb-0">Yazılar</h5>
+        <div class="d-flex align-items-center">
+            <span class="text-muted me-3">152 yazı</span>
+            <select class="form-select form-select-sm" style="width: auto;">
+                <option>10 satır</option>
+                <option>25 satır</option>
+                <option>50 satır</option>
+            </select>
+        </div>
+    </div>
+    <div class="dashboard-card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">
+                            <input type="checkbox" class="form-check-input">
+                        </th>
+                        <th>Başlık</th>
+                        <th>Kategori</th>
+                        <th>Yazar</th>
+                        <th>Görüntüleme</th>
+                        <th>Tarih</th>
+                        <th>Durum</th>
+                        <th style="width: 120px;">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://picsum.photos/50/50?random=1" alt="" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-1">ASP.NET Core ile Web Geliştirme</h6>
+                                    <small class="text-muted">Modern web uygulamaları geliştirme rehberi...</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-primary">Teknoloji</span></td>
+                        <td>Berkay Kanca</td>
+                        <td>2.5K</td>
+                        <td>
+                            <div>15 Aralık 2024</div>
+                            <small class="text-muted">14:30</small>
+                        </td>
+                        <td><span class="badge bg-success">Yayında</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-info" title="Görüntüle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" title="Düzenle">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Sil">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://picsum.photos/50/50?random=2" alt="" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-1">JavaScript ES6+ Özellikleri</h6>
+                                    <small class="text-muted">Yeni JavaScript özelliklerini keşfedin...</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-warning">Frontend</span></td>
+                        <td>Berkay Kanca</td>
+                        <td>1.8K</td>
+                        <td>
+                            <div>14 Aralık 2024</div>
+                            <small class="text-muted">10:15</small>
+                        </td>
+                        <td><span class="badge bg-warning">Taslak</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-info" title="Görüntüle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" title="Düzenle">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Sil">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://picsum.photos/50/50?random=3" alt="" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-1">React Hooks Kullanım Kılavuzu</h6>
+                                    <small class="text-muted">React Hooks ile modern geliştirme...</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-info">React</span></td>
+                        <td>Berkay Kanca</td>
+                        <td>3.2K</td>
+                        <td>
+                            <div>13 Aralık 2024</div>
+                            <small class="text-muted">16:45</small>
+                        </td>
+                        <td><span class="badge bg-success">Yayında</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-info" title="Görüntüle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" title="Düzenle">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Sil">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://picsum.photos/50/50?random=4" alt="" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-1">Python Django Framework</h6>
+                                    <small class="text-muted">Web geliştirme için Django kullanımı...</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-success">Backend</span></td>
+                        <td>Berkay Kanca</td>
+                        <td>987</td>
+                        <td>
+                            <div>12 Aralık 2024</div>
+                            <small class="text-muted">09:20</small>
+                        </td>
+                        <td><span class="badge bg-success">Yayında</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-info" title="Görüntüle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" title="Düzenle">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Sil">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img src="https://picsum.photos/50/50?random=5" alt="" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-1">Flutter ile Mobil Uygulama</h6>
+                                    <small class="text-muted">Cross-platform mobil uygulama geliştirme...</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-secondary">Mobil</span></td>
+                        <td>Berkay Kanca</td>
+                        <td>1.5K</td>
+                        <td>
+                            <div>11 Aralık 2024</div>
+                            <small class="text-muted">13:10</small>
+                        </td>
+                        <td><span class="badge bg-warning">Taslak</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-info" title="Görüntüle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" title="Düzenle">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Sil">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- Pagination -->
+    <div class="dashboard-card-body border-top">
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="text-muted">1-10 arası gösteriliyor (152 yazı)</span>
+            <nav>
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Önceki</a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Sonraki</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div> 
