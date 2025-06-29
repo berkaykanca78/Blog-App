@@ -1,0 +1,477 @@
+@{
+    ViewBag.Title = "Ayarlar";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="dashboard-header mb-4">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1 class="dashboard-title">Ayarlar</h1>
+            <p class="text-muted">Blog ayarlarını yönetin</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-success" id="saveAllSettings">
+                <i class="fas fa-save me-2"></i>Tüm Ayarları Kaydet
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Sol Menü -->
+    <div class="col-lg-3 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-body p-0">
+                <div class="nav flex-column nav-pills" id="settingsTab" role="tablist">
+                    <a class="nav-link active" id="general-tab" data-bs-toggle="pill" href="#general" role="tab">
+                        <i class="fas fa-cog me-2"></i>Genel Ayarlar
+                    </a>
+                    <a class="nav-link" id="site-tab" data-bs-toggle="pill" href="#site" role="tab">
+                        <i class="fas fa-globe me-2"></i>Site Ayarları
+                    </a>
+                    <a class="nav-link" id="email-tab" data-bs-toggle="pill" href="#email" role="tab">
+                        <i class="fas fa-envelope me-2"></i>Email Ayarları
+                    </a>
+                    <a class="nav-link" id="social-tab" data-bs-toggle="pill" href="#social" role="tab">
+                        <i class="fas fa-share-alt me-2"></i>Sosyal Medya
+                    </a>
+                    <a class="nav-link" id="security-tab" data-bs-toggle="pill" href="#security" role="tab">
+                        <i class="fas fa-shield-alt me-2"></i>Güvenlik
+                    </a>
+                    <a class="nav-link" id="backup-tab" data-bs-toggle="pill" href="#backup" role="tab">
+                        <i class="fas fa-database me-2"></i>Yedekleme
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sağ Content -->
+    <div class="col-lg-9">
+        <div class="tab-content" id="settingsTabContent">
+            <!-- Genel Ayarlar -->
+            <div class="tab-pane fade show active" id="general" role="tabpanel">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h5 class="card-title mb-0">Genel Ayarlar</h5>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="siteName" class="form-label">Site Adı</label>
+                                        <input type="text" class="form-control" id="siteName" value="Blog App">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="siteUrl" class="form-label">Site URL</label>
+                                        <input type="url" class="form-control" id="siteUrl" value="https://blogapp.com">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="siteDescription" class="form-label">Site Açıklaması</label>
+                                <textarea class="form-control" id="siteDescription" rows="3">Modern ve kullanıcı dostu blog platformu. Teknoloji, yazılım ve kişisel gelişim üzerine içerikler.</textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="siteLanguage" class="form-label">Site Dili</label>
+                                        <select class="form-select" id="siteLanguage">
+                                            <option value="tr" selected>Türkçe</option>
+                                            <option value="en">English</option>
+                                            <option value="de">Deutsch</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="timezone" class="form-label">Zaman Dilimi</label>
+                                        <select class="form-select" id="timezone">
+                                            <option value="Europe/Istanbul" selected>Europe/Istanbul</option>
+                                            <option value="UTC">UTC</option>
+                                            <option value="America/New_York">America/New_York</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="maintenanceMode">
+                                    <label class="form-check-label" for="maintenanceMode">
+                                        Bakım modu
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Site Ayarları -->
+            <div class="tab-pane fade" id="site" role="tabpanel">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h5 class="card-title mb-0">Site Ayarları</h5>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="postsPerPage" class="form-label">Sayfa Başına Yazı Sayısı</label>
+                                        <input type="number" class="form-control" id="postsPerPage" value="10" min="1" max="50">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="commentsPerPage" class="form-label">Sayfa Başına Yorum Sayısı</label>
+                                        <input type="number" class="form-control" id="commentsPerPage" value="20" min="1" max="100">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tema Ayarları</label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="theme" id="lightTheme" value="light" checked>
+                                            <label class="form-check-label" for="lightTheme">
+                                                Açık Tema
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="theme" id="darkTheme" value="dark">
+                                            <label class="form-check-label" for="darkTheme">
+                                                Koyu Tema
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="theme" id="autoTheme" value="auto">
+                                            <label class="form-check-label" for="autoTheme">
+                                                Otomatik
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="allowComments" checked>
+                                    <label class="form-check-label" for="allowComments">
+                                        Yorumlara izin ver
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="moderateComments" checked>
+                                    <label class="form-check-label" for="moderateComments">
+                                        Yorumları onaya gönder
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="allowRegistration" checked>
+                                    <label class="form-check-label" for="allowRegistration">
+                                        Üye kaydına izin ver
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Ayarları -->
+            <div class="tab-pane fade" id="email" role="tabpanel">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h5 class="card-title mb-0">Email Ayarları</h5>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="smtpHost" class="form-label">SMTP Host</label>
+                                        <input type="text" class="form-control" id="smtpHost" value="smtp.gmail.com">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="smtpPort" class="form-label">SMTP Port</label>
+                                        <input type="number" class="form-control" id="smtpPort" value="587">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="smtpUsername" class="form-label">Kullanıcı Adı</label>
+                                        <input type="email" class="form-control" id="smtpUsername" value="noreply@blogapp.com">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="smtpPassword" class="form-label">Şifre</label>
+                                        <input type="password" class="form-control" id="smtpPassword" value="••••••••">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="enableSSL" checked>
+                                    <label class="form-check-label" for="enableSSL">
+                                        SSL/TLS kullan
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-outline-primary" id="testEmail">
+                                    <i class="fas fa-paper-plane me-2"></i>Test Email Gönder
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sosyal Medya -->
+            <div class="tab-pane fade" id="social" role="tabpanel">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h5 class="card-title mb-0">Sosyal Medya Ayarları</h5>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="facebookUrl" class="form-label">
+                                    <i class="fab fa-facebook text-primary me-2"></i>Facebook
+                                </label>
+                                <input type="url" class="form-control" id="facebookUrl" placeholder="https://facebook.com/username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="twitterUrl" class="form-label">
+                                    <i class="fab fa-twitter text-info me-2"></i>Twitter
+                                </label>
+                                <input type="url" class="form-control" id="twitterUrl" placeholder="https://twitter.com/username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="instagramUrl" class="form-label">
+                                    <i class="fab fa-instagram text-danger me-2"></i>Instagram
+                                </label>
+                                <input type="url" class="form-control" id="instagramUrl" placeholder="https://instagram.com/username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="linkedinUrl" class="form-label">
+                                    <i class="fab fa-linkedin text-primary me-2"></i>LinkedIn
+                                </label>
+                                <input type="url" class="form-control" id="linkedinUrl" placeholder="https://linkedin.com/in/username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="githubUrl" class="form-label">
+                                    <i class="fab fa-github text-dark me-2"></i>GitHub
+                                </label>
+                                <input type="url" class="form-control" id="githubUrl" placeholder="https://github.com/username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="youtubeUrl" class="form-label">
+                                    <i class="fab fa-youtube text-danger me-2"></i>YouTube
+                                </label>
+                                <input type="url" class="form-control" id="youtubeUrl" placeholder="https://youtube.com/channel/username">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Güvenlik -->
+            <div class="tab-pane fade" id="security" role="tabpanel">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h5 class="card-title mb-0">Güvenlik Ayarları</h5>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <form>
+                            <div class="mb-4">
+                                <h6>Şifre Politikası</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="requireStrongPassword" checked>
+                                    <label class="form-check-label" for="requireStrongPassword">
+                                        Güçlü şifre zorunluluğu
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="enableTwoFactor">
+                                    <label class="form-check-label" for="enableTwoFactor">
+                                        İki faktörlü doğrulama
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h6>Oturum Ayarları</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="sessionTimeout" class="form-label">Oturum Zaman Aşımı (dakika)</label>
+                                            <input type="number" class="form-control" id="sessionTimeout" value="30" min="5" max="1440">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="maxLoginAttempts" class="form-label">Maksimum Giriş Denemesi</label>
+                                            <input type="number" class="form-control" id="maxLoginAttempts" value="5" min="1" max="10">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <h6>IP Kısıtlamaları</h6>
+                                <div class="mb-3">
+                                    <label for="blockedIPs" class="form-label">Yasaklı IP Adresleri</label>
+                                    <textarea class="form-control" id="blockedIPs" rows="3" placeholder="Her satıra bir IP adresi girin (örn: 192.168.1.1)"></textarea>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="enableFirewall">
+                                    <label class="form-check-label" for="enableFirewall">
+                                        Güvenlik duvarını etkinleştir
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yedekleme -->
+            <div class="tab-pane fade" id="backup" role="tabpanel">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-header">
+                        <h5 class="card-title mb-0">Yedekleme Ayarları</h5>
+                    </div>
+                    <div class="dashboard-card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="backupFrequency" class="form-label">Yedekleme Sıklığı</label>
+                                        <select class="form-select" id="backupFrequency">
+                                            <option value="daily" selected>Günlük</option>
+                                            <option value="weekly">Haftalık</option>
+                                            <option value="monthly">Aylık</option>
+                                            <option value="manual">Manuel</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="backupTime" class="form-label">Yedekleme Saati</label>
+                                        <input type="time" class="form-control" id="backupTime" value="03:00">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="backupRetention" class="form-label">Yedek Saklama Süresi (gün)</label>
+                                        <input type="number" class="form-control" id="backupRetention" value="30" min="1" max="365">
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="enableAutoBackup" checked>
+                                        <label class="form-check-label" for="enableAutoBackup">
+                                            Otomatik yedeklemeyi etkinleştir
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="backup-actions">
+                                    <h6>Hızlı İşlemler</h6>
+                                    <div class="d-grid gap-2">
+                                        <button class="btn btn-primary" id="createBackup">
+                                            <i class="fas fa-download me-2"></i>Şimdi Yedekle
+                                        </button>
+                                        <button class="btn btn-success" id="restoreBackup">
+                                            <i class="fas fa-upload me-2"></i>Yedek Geri Yükle
+                                        </button>
+                                        <button class="btn btn-info" id="downloadBackup">
+                                            <i class="fas fa-cloud-download-alt me-2"></i>Yedek İndir
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="backup-status mt-4">
+                                    <h6>Son Yedekleme</h6>
+                                    <div class="alert alert-success">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        <strong>Başarılı</strong><br>
+                                        <small>15 Aralık 2024, 03:00</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Test email button
+    document.getElementById('testEmail').addEventListener('click', function() {
+        alert('Test email gönderildi!');
+    });
+
+    // Backup buttons
+    document.getElementById('createBackup').addEventListener('click', function() {
+        if(confirm('Yedekleme işlemi başlatılsın mı?')) {
+            alert('Yedekleme başlatıldı. İşlem tamamlandığında bildirim alacaksınız.');
+        }
+    });
+
+    document.getElementById('restoreBackup').addEventListener('click', function() {
+        if(confirm('Yedek geri yükleme işlemi başlatılsın mı? Bu işlem mevcut verileri değiştirebilir.')) {
+            alert('Yedek geri yükleme başlatıldı.');
+        }
+    });
+
+    document.getElementById('downloadBackup').addEventListener('click', function() {
+        alert('Yedek dosyası indiriliyor...');
+    });
+
+    // Save all settings
+    document.getElementById('saveAllSettings').addEventListener('click', function() {
+        alert('Tüm ayarlar başarıyla kaydedildi!');
+    });
+});
+</script>
+
+<style>
+.nav-pills .nav-link {
+    color: #6c757d;
+    border-radius: 0;
+    border-bottom: 1px solid #e9ecef;
+    padding: 1rem 1.5rem;
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #f8f9fa;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.backup-actions, .backup-status {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+}
+</style> 

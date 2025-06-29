@@ -214,6 +214,11 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Dashboard\Posts.cshtml" />
     <Content Include="Views\Dashboard\Categories.cshtml" />
+    <Content Include="Views\Dashboard\Comments.cshtml" />
+    <Content Include="Views\Dashboard\Settings.cshtml" />
+    <Content Include="Views\Dashboard\Statistics.cshtml" />
+    <Content Include="Views\Dashboard\Tags.cshtml" />
+    <Content Include="Views\Dashboard\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

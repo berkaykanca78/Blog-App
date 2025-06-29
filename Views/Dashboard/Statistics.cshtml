@@ -1,0 +1,462 @@
+@{
+    ViewBag.Title = "İstatistikler";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="dashboard-header mb-4">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1 class="dashboard-title">İstatistikler</h1>
+            <p class="text-muted">Blog istatistiklerinizi görüntüleyin</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <div class="btn-group">
+                <button class="btn btn-outline-primary active">Bu Ay</button>
+                <button class="btn btn-outline-primary">Son 3 Ay</button>
+                <button class="btn btn-outline-primary">Bu Yıl</button>
+            </div>
+            <button class="btn btn-success ms-2">
+                <i class="fas fa-download me-2"></i>Rapor İndir
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Ana İstatistik Kartları -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-primary">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>24.5K</h3>
+                    <p>Toplam Görüntüleme</p>
+                    <small class="text-success">
+                        <i class="fas fa-arrow-up"></i> %12.5 artış
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-success">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>1,856</h3>
+                    <p>Benzersiz Ziyaretçi</p>
+                    <small class="text-success">
+                        <i class="fas fa-arrow-up"></i> %8.3 artış
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-warning">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>342</h3>
+                    <p>Yeni Yorum</p>
+                    <small class="text-danger">
+                        <i class="fas fa-arrow-down"></i> %3.1 azalış
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-info">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>967</h3>
+                    <p>Beğeni</p>
+                    <small class="text-success">
+                        <i class="fas fa-arrow-up"></i> %15.2 artış
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Grafikler -->
+<div class="row mb-4">
+    <!-- Ziyaretçi Grafigi -->
+    <div class="col-lg-8 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h5 class="card-title mb-0">Ziyaretçi Analizi</h5>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                        Son 30 Gün
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Son 7 Gün</a></li>
+                        <li><a class="dropdown-item" href="#">Son 30 Gün</a></li>
+                        <li><a class="dropdown-item" href="#">Son 90 Gün</a></li>
+                        <li><a class="dropdown-item" href="#">Bu Yıl</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="visitorChart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Kategoriler -->
+    <div class="col-lg-4 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h5 class="card-title mb-0">Popüler Kategoriler</h5>
+            </div>
+            <div class="dashboard-card-body">
+                <canvas id="categoryChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detaylı İstatistikler -->
+<div class="row mb-4">
+    <!-- En Popüler Yazılar -->
+    <div class="col-lg-6 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h5 class="card-title mb-0">En Popüler Yazılar</h5>
+                <a href="#" class="text-decoration-none">Tümünü Gör</a>
+            </div>
+            <div class="dashboard-card-body">
+                <div class="popular-posts">
+                    <div class="post-item d-flex align-items-center mb-3">
+                        <div class="post-rank bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 30px; height: 30px; font-size: 14px; font-weight: bold;">1</div>
+                        <img src="https://picsum.photos/50/50?random=1" alt="" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">ASP.NET Core ile Web Geliştirme</h6>
+                            <div class="d-flex text-muted small">
+                                <span class="me-3"><i class="fas fa-eye me-1"></i>2.5K</span>
+                                <span><i class="fas fa-comments me-1"></i>42</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-item d-flex align-items-center mb-3">
+                        <div class="post-rank bg-success text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 30px; height: 30px; font-size: 14px; font-weight: bold;">2</div>
+                        <img src="https://picsum.photos/50/50?random=2" alt="" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">JavaScript ES6+ Özellikleri</h6>
+                            <div class="d-flex text-muted small">
+                                <span class="me-3"><i class="fas fa-eye me-1"></i>1.8K</span>
+                                <span><i class="fas fa-comments me-1"></i>28</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-item d-flex align-items-center mb-3">
+                        <div class="post-rank bg-warning text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 30px; height: 30px; font-size: 14px; font-weight: bold;">3</div>
+                        <img src="https://picsum.photos/50/50?random=3" alt="" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">React Hooks Kullanım Kılavuzu</h6>
+                            <div class="d-flex text-muted small">
+                                <span class="me-3"><i class="fas fa-eye me-1"></i>1.6K</span>
+                                <span><i class="fas fa-comments me-1"></i>35</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-item d-flex align-items-center mb-3">
+                        <div class="post-rank bg-info text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 30px; height: 30px; font-size: 14px; font-weight: bold;">4</div>
+                        <img src="https://picsum.photos/50/50?random=4" alt="" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">CSS Flexbox Rehberi</h6>
+                            <div class="d-flex text-muted small">
+                                <span class="me-3"><i class="fas fa-eye me-1"></i>1.4K</span>
+                                <span><i class="fas fa-comments me-1"></i>19</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-item d-flex align-items-center">
+                        <div class="post-rank bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 30px; height: 30px; font-size: 14px; font-weight: bold;">5</div>
+                        <img src="https://picsum.photos/50/50?random=5" alt="" class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">NodeJS API Geliştirme</h6>
+                            <div class="d-flex text-muted small">
+                                <span class="me-3"><i class="fas fa-eye me-1"></i>1.2K</span>
+                                <span><i class="fas fa-comments me-1"></i>24</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trafik Kaynakları -->
+    <div class="col-lg-6 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h5 class="card-title mb-0">Trafik Kaynakları</h5>
+            </div>
+            <div class="dashboard-card-body">
+                <div class="traffic-sources">
+                    <div class="source-item d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="source-icon bg-primary rounded me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                <i class="fab fa-google text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Google Search</h6>
+                                <small class="text-muted">Organik arama</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold">12,354</div>
+                            <div class="progress mt-1" style="height: 4px; width: 60px;">
+                                <div class="progress-bar bg-primary" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="source-item d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="source-icon bg-info rounded me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                <i class="fas fa-link text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Direkt Trafik</h6>
+                                <small class="text-muted">Doğrudan ziyaret</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold">8,924</div>
+                            <div class="progress mt-1" style="height: 4px; width: 60px;">
+                                <div class="progress-bar bg-info" style="width: 47%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="source-item d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="source-icon bg-success rounded me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                <i class="fab fa-facebook text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Facebook</h6>
+                                <small class="text-muted">Sosyal medya</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold">3,267</div>
+                            <div class="progress mt-1" style="height: 4px; width: 60px;">
+                                <div class="progress-bar bg-success" style="width: 17%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="source-item d-flex justify-content-between align-items-center mb-3">
+                        <div class="d-flex align-items-center">
+                            <div class="source-icon bg-dark rounded me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                <i class="fab fa-github text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">GitHub</h6>
+                                <small class="text-muted">Referans</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold">1,892</div>
+                            <div class="progress mt-1" style="height: 4px; width: 60px;">
+                                <div class="progress-bar bg-dark" style="width: 10%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="source-item d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <div class="source-icon bg-warning rounded me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h6 class="mb-0">Email</h6>
+                                <small class="text-muted">Newsletter</small>
+                            </div>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold">1,124</div>
+                            <div class="progress mt-1" style="height: 4px; width: 60px;">
+                                <div class="progress-bar bg-warning" style="width: 6%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Performans Metrikleri -->
+<div class="row">
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h5 class="card-title mb-0">Sayfa Yükleme Süresi</h5>
+            </div>
+            <div class="dashboard-card-body text-center">
+                <div class="metric-value">
+                    <h2 class="text-success mb-0">1.24s</h2>
+                    <p class="text-muted">Ortalama süre</p>
+                </div>
+                <div class="metric-status">
+                    <span class="badge bg-success">Mükemmel</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h5 class="card-title mb-0">Bounce Rate</h5>
+            </div>
+            <div class="dashboard-card-body text-center">
+                <div class="metric-value">
+                    <h2 class="text-warning mb-0">32%</h2>
+                    <p class="text-muted">Terk oranı</p>
+                </div>
+                <div class="metric-status">
+                    <span class="badge bg-warning">İyi</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h5 class="card-title mb-0">Ortalama Oturum Süresi</h5>
+            </div>
+            <div class="dashboard-card-body text-center">
+                <div class="metric-value">
+                    <h2 class="text-info mb-0">4:32</h2>
+                    <p class="text-muted">Dakika:Saniye</p>
+                </div>
+                <div class="metric-status">
+                    <span class="badge bg-info">Çok İyi</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+// Ziyaretçi Grafigi
+const visitorCtx = document.getElementById('visitorChart').getContext('2d');
+const visitorChart = new Chart(visitorCtx, {
+    type: 'line',
+    data: {
+        labels: ['1 Ara', '5 Ara', '10 Ara', '15 Ara', '20 Ara', '25 Ara', '30 Ara'],
+        datasets: [{
+            label: 'Ziyaretçiler',
+            data: [120, 190, 300, 500, 200, 300, 450],
+            borderColor: '#007bff',
+            backgroundColor: 'rgba(0, 123, 255, 0.1)',
+            tension: 0.4,
+            fill: true
+        }, {
+            label: 'Sayfa Görüntüleme',
+            data: [180, 250, 400, 650, 280, 420, 580],
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            tension: 0.4,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// Kategori Grafigi
+const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+const categoryChart = new Chart(categoryCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Teknoloji', 'Frontend', 'Backend', 'Mobil', 'DevOps'],
+        datasets: [{
+            data: [35, 25, 20, 12, 8],
+            backgroundColor: [
+                '#007bff',
+                '#28a745',
+                '#ffc107',
+                '#dc3545',
+                '#17a2b8'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+            }
+        }
+    }
+});
+</script>
+
+<style>
+.post-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.post-item:last-child {
+    border-bottom: none;
+}
+
+.source-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.source-item:last-child {
+    border-bottom: none;
+}
+
+.metric-value h2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.text-success { color: #28a745 !important; }
+.text-warning { color: #ffc107 !important; }
+.text-info { color: #17a2b8 !important; }
+.text-danger { color: #dc3545 !important; }
+</style> 

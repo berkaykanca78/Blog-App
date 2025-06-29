@@ -1,0 +1,402 @@
+@{
+    ViewBag.Title = "Yorumlar";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="dashboard-header mb-4">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1 class="dashboard-title">Yorumlar</h1>
+            <p class="text-muted">Blog yorumlarını yönetin</p>
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-success">
+                <i class="fas fa-check me-2"></i>Toplu Onayla
+            </button>
+            <button class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-filter me-2"></i>Filtrele
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- İstatistik Kartları -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-primary">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>1,247</h3>
+                    <p>Toplam Yorum</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-success">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>1,156</h3>
+                    <p>Onaylı</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-warning">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>67</h3>
+                    <p>Beklemede</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-danger">
+            <div class="stat-card-body">
+                <div class="stat-icon">
+                    <i class="fas fa-ban"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>24</h3>
+                    <p>Spam</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Arama ve Filtre -->
+<div class="dashboard-card mb-4">
+    <div class="dashboard-card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Yorum içeriği ara...">
+            </div>
+            <div class="col-md-3">
+                <select class="form-select">
+                    <option>Tüm Durumlar</option>
+                    <option>Onaylı</option>
+                    <option>Beklemede</option>
+                    <option>Spam</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <input type="date" class="form-control">
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary w-100">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Yorumlar Tablosu -->
+<div class="dashboard-card">
+    <div class="dashboard-card-header">
+        <h5 class="card-title mb-0">Yorumlar</h5>
+        <div class="d-flex align-items-center">
+            <span class="text-muted me-3">1,247 yorum</span>
+            <select class="form-select form-select-sm" style="width: auto;">
+                <option>15 satır</option>
+                <option>25 satır</option>
+                <option>50 satır</option>
+            </select>
+        </div>
+    </div>
+    <div class="dashboard-card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">
+                            <input type="checkbox" class="form-check-input">
+                        </th>
+                        <th>Yorum</th>
+                        <th>Yazı</th>
+                        <th>Yazar</th>
+                        <th>Tarih</th>
+                        <th>Durum</th>
+                        <th style="width: 150px;">İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td>
+                            <div class="comment-content">
+                                <p class="mb-1">Harika bir yazı olmuş! ASP.NET Core konusunda çok detaylı bilgiler var. Özellikle middleware kısmı çok açıklayıcı.</p>
+                                <div class="comment-meta">
+                                    <img src="https://ui-avatars.com/api/?name=Ahmet+Yilmaz&background=007bff&color=fff&size=24" 
+                                         alt="" class="rounded-circle me-2" style="width: 24px; height: 24px;">
+                                    <span class="text-muted">Ahmet Yılmaz</span>
+                                    <span class="text-muted ms-2">ahmet@@email.com</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="#" class="text-decoration-none">
+                                <strong>ASP.NET Core ile Web Geliştirme</strong>
+                            </a>
+                        </td>
+                        <td>Berkay Kanca</td>
+                        <td>
+                            <div>15 Aralık 2024</div>
+                            <small class="text-muted">14:30</small>
+                        </td>
+                        <td><span class="badge bg-success">Onaylı</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-success" title="Onayla">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" title="Düzenle">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-warning" title="Spam">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Sil">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="table-warning">
+                        <td>
+                            <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td>
+                            <div class="comment-content">
+                                <p class="mb-1">Bu konuda daha fazla örnek verebilir misiniz? Özellikle pratikte nasıl uygulanacağı konusunda...</p>
+                                <div class="comment-meta">
+                                    <img src="https://ui-avatars.com/api/?name=Elif+Kaya&background=28a745&color=fff&size=24" 
+                                         alt="" class="rounded-circle me-2" style="width: 24px; height: 24px;">
+                                    <span class="text-muted">Elif Kaya</span>
+                                    <span class="text-muted ms-2">elif@@email.com</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="#" class="text-decoration-none">
+                                <strong>JavaScript ES6+ Özellikleri</strong>
+                            </a>
+                        </td>
+                        <td>Berkay Kanca</td>
+                        <td>
+                            <div>14 Aralık 2024</div>
+                            <small class="text-muted">16:45</small>
+                        </td>
+                        <td><span class="badge bg-warning">Beklemede</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-success" title="Onayla">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" title="Düzenle">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-warning" title="Spam">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Sil">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td>
+                            <div class="comment-content">
+                                <p class="mb-1">Teşekkürler! React Hooks konusunda gerçekten faydalı bilgiler paylaştınız. useState ve useEffect örnekleri çok net.</p>
+                                <div class="comment-meta">
+                                    <img src="https://ui-avatars.com/api/?name=Mehmet+Demir&background=dc3545&color=fff&size=24" 
+                                         alt="" class="rounded-circle me-2" style="width: 24px; height: 24px;">
+                                    <span class="text-muted">Mehmet Demir</span>
+                                    <span class="text-muted ms-2">mehmet@@email.com</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="#" class="text-decoration-none">
+                                <strong>React Hooks Kullanım Kılavuzu</strong>
+                            </a>
+                        </td>
+                        <td>Berkay Kanca</td>
+                        <td>
+                            <div>13 Aralık 2024</div>
+                            <small class="text-muted">09:20</small>
+                        </td>
+                        <td><span class="badge bg-success">Onaylı</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-success" title="Onayla">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" title="Düzenle">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-warning" title="Spam">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Sil">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="table-danger">
+                        <td>
+                            <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td>
+                            <div class="comment-content">
+                                <p class="mb-1">Bu site çok kötü, hiç beğenmedim. Başka yerlerden daha iyi örnekler bulabilirsiniz...</p>
+                                <div class="comment-meta">
+                                    <img src="https://ui-avatars.com/api/?name=Spam+User&background=6c757d&color=fff&size=24" 
+                                         alt="" class="rounded-circle me-2" style="width: 24px; height: 24px;">
+                                    <span class="text-muted">Spam User</span>
+                                    <span class="text-muted ms-2">spam@@fake.com</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="#" class="text-decoration-none">
+                                <strong>CSS Flexbox Rehberi</strong>
+                            </a>
+                        </td>
+                        <td>Berkay Kanca</td>
+                        <td>
+                            <div>12 Aralık 2024</div>
+                            <small class="text-muted">23:15</small>
+                        </td>
+                        <td><span class="badge bg-danger">Spam</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-success" title="Onayla">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" title="Düzenle">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-warning" title="Spam">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Sil">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr class="table-warning">
+                        <td>
+                            <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td>
+                            <div class="comment-content">
+                                <p class="mb-1">Merhaba, bu konu hakkında video içerik de hazırlamayı düşünüyor musunuz?</p>
+                                <div class="comment-meta">
+                                    <img src="https://ui-avatars.com/api/?name=Fatma+Ozkan&background=ffc107&color=000&size=24" 
+                                         alt="" class="rounded-circle me-2" style="width: 24px; height: 24px;">
+                                    <span class="text-muted">Fatma Özkan</span>
+                                    <span class="text-muted ms-2">fatma@@email.com</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="#" class="text-decoration-none">
+                                <strong>NodeJS API Geliştirme</strong>
+                            </a>
+                        </td>
+                        <td>Berkay Kanca</td>
+                        <td>
+                            <div>11 Aralık 2024</div>
+                            <small class="text-muted">11:30</small>
+                        </td>
+                        <td><span class="badge bg-warning">Beklemede</span></td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-success" title="Onayla">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="btn btn-outline-primary" title="Düzenle">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-outline-warning" title="Spam">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                                <button class="btn btn-outline-danger" title="Sil">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sayfalama -->
+        <div class="d-flex justify-content-between align-items-center p-3">
+            <div class="text-muted">
+                1,247 yorumdan 1-15 arası gösteriliyor
+            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination mb-0">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Önceki</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">...</a></li>
+                    <li class="page-item"><a class="page-link" href="#">83</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Sonraki</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<style>
+.comment-content p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.comment-meta {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+}
+
+.table-warning {
+    background-color: rgba(255, 193, 7, 0.1) !important;
+}
+
+.table-danger {
+    background-color: rgba(220, 53, 69, 0.1) !important;
+}
+</style> 
